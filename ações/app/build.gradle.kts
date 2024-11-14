@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.arfib"
+    namespace = "com.example.applestocks"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.arfib"
-        minSdk = 25
+        applicationId = "com.example.applestocks"
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
