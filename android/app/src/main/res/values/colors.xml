@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hartpink">#FF5672</color>
+    <color name="electroyellow">#FFD557</color>
+    <color name="leadgray">#8C8C8C</color>
+    <color name="atrial">#313131</color>
+
 </resources>
