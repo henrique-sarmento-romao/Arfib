@@ -20,10 +20,14 @@
 \maketitle
 
 \begin{abstract}
-    E
-\end{abstract}
-
-\tableofcontents
+    Atrial fibrillation is one of the most prevalent cardiovascular conditions worldwide.
+     To address the management of this condition, an application—Arfib—will be developed to support the monitoring and management of atrial fibrillation patients. 
+     A key feature of the app is the ability for patients to upload real-time ECG measurements via the VitalJacket device. 
+     Additionally, doctors have access to their patients' data, including ECG measurements, logged symptoms, and medication adherence, allowing for better-informed clinical decisions and improved patient care.
+    
+    \end{abstract}
+%[comment] [bessa] faltam referencias aqui talvez
+    \tableofcontents
 
 \chapter{Requirements}
 An app is being developed for atrial fibrilation monitoring.
@@ -35,16 +39,27 @@ A patient has to have the ability to make new measurements as well as consult ol
 Each measurement should be analyzed, storing that information with the measurement result.
 
 \textit{[Patient Symptoms]}
+%[COMMENT] [BESSA] symptoms???
 
 Patients can also track their medication in the app.
 They should be able to log the medication that they need to take in each day, and see in which days they need to take which medications.
 For each medication certain information needs to be available to see and edit, if needed, and patients can add new medication filling out the required information.
 Patients should be able to see all medications in a simple view.
 
-There is a blog inside the app, in which authorized personel can publish different posts.
+There is a blog inside the app, in which authorized personel -doctors- can publish different posts.
 There should be an interface in which patients can see the blog posts and read each one in a dedicated page.
 
 \textit{[Doctor Interface]}
+
+
+Doctors have access to comprehensive information about all their patients through the application. 
+They can view a list of their patients and, by selecting a specific patient, gain access to detailed records, including measurements, logged symptoms, and logged medications. 
+Additionally, doctors have the capability to suggest medications directly through the application. 
+This feature is particularly beneficial in cases where a prescribed medication has not yet been added by the patient.
+
+To further support patient engagement and education, doctors can also contribute to the blog by publishing posts on relevant topics. 
+They are able to create new posts as well as edit existing ones, ensuring their patients remain informed about key updates and health-related information.
+
 
 
 \newpage
@@ -213,78 +228,76 @@ This use case allows a doctor to suggest a new medication for a given patient.
     \item Alert patient of suggestion.
 \end{enumerate}
 % [COMMENT][HENRIQUE] aqui não estou a ver nenhum alternative flow
-
-\vspace{1em}
-\section{Symptoms}
-\subsection{Log Symptom}
-\paragraph{Brief Description}
-Text
-
-\begin{multicols}{2}
-    \paragraph{Basic Flow}
-    \begin{enumerate}
-        \item .
-    \end{enumerate}
-    \columnbreak
-
-    \paragraph{Alternative Flows}
-    \begin{enumerate}[label=A\arabic*.]
-        \item .
-    \end{enumerate}
-\end{multicols}
-
 \vspace{1em}
 \subsection{See Symptoms}
 \paragraph{Brief Description}
-Text
+Patients can review their previously logged symptoms in a manner similar to how doctors access a patient’s symptom history. 
+This feature offers two views: a calendar view, which provides an overview of all symptoms logged on each day, and a symptom-specific view, which focuses on a single symptom, displaying a calendar with its occurrences and corresponding intensity levels.
 
 \begin{multicols}{2}
     \paragraph{Basic Flow}
     \begin{enumerate}
-        \item .
+        \item Select patient's symptoms page.
+        \item Select desired view (calendar view or symptom-specific view).
+        \item Display symptoms logs.
     \end{enumerate}
     \columnbreak
 
     \paragraph{Alternative Flows}
     \begin{enumerate}[label=A\arabic*.]
-        \item .
-    \end{enumerate}
+        \item Switch to a different view (e.g., from calendar view to symptom-specific view).
+        \item Select a different symptom while in symptom-specific view.
+        \item Select a different day while in calendar view.
+\end{enumerate}
 \end{multicols}
+
+%[COMNENT] [BESSA] nao sei se esta mt bem o alternate
 
 \vspace{1em}
 \section{Blog}
 \subsection{See Post}
 \paragraph{Brief Description}
-Text
+This use case allows both doctors and patients to select a post from a catalog and view its detailed information.
 
 \begin{multicols}{2}
     \paragraph{Basic Flow}
     \begin{enumerate}
-        \item .
+        \item Open blog page.
+        \item Choose the desired post.
+        \item Display the post in detail.
     \end{enumerate}
     \columnbreak
 
     \paragraph{Alternative Flows}
     \begin{enumerate}[label=A\arabic*.]
-        \item .
+        \item Select a different post.
+        \item Exit the blog page.
+        \item Error message if the post does not load.
     \end{enumerate}
 \end{multicols}
 
 \vspace{1em}
 \subsection{Publish Post}
 \paragraph{Brief Description}
-Text
+This use case allows doctors to publish a post on the application's blog, concerning topics relevant to atrial fibrilation.
 
 \begin{multicols}{2}
     \paragraph{Basic Flow}
     \begin{enumerate}
-        \item .
+        \item Select blog's page.
+        \item Enter edit mode.
+        \item ompose the post by writing the title and content.
+        \item Confirm the publication.
+        \item Exit edit mode after publishing.
+        \item Notify the doctor's patients of a new post.
     \end{enumerate}
     \columnbreak
 
     \paragraph{Alternative Flows}
     \begin{enumerate}[label=A\arabic*.]
-        \item .
+        \item Add images to the post.
+        \item Cancel the publishment.
+        \item Error message during upload.
     \end{enumerate}
 \end{multicols}
 
