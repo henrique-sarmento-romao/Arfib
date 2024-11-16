@@ -6,9 +6,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/logo_pink"
         android:supportsRtl="true"
         android:theme="@style/Theme.Arfib"
         tools:targetApi="31">
@@ -18,8 +16,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".PatientRegister">
+        </activity>
+
+
+        <activity android:name=".PatientLogin">
         </activity>
     </application>
 
