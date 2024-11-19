@@ -1,0 +1,28 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id chip
+id chip10
+id chip11
+id chip12
+id chip2
+id chip3
+id chip5
+id chip6
+id chip7
+id chip8
+id chip9
+id main
+id textView
+layout activity_main
+layout activity_plot
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.AppleStocks
+style Theme.AppleStocks
+xml backup_rules
+xml data_extraction_rules

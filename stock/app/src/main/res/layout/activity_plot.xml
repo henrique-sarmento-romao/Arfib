@@ -14,4 +14,10 @@
         android:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

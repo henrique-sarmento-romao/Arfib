@@ -36,4 +36,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
+    implementation(libs.okhttp) // OkHttp for network requests
+    implementation(libs.gson)  // Gson for JSON parsing
+    implementation(libs.mpandroidchart)
 }
