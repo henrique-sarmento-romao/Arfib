@@ -1,5 +1,8 @@
 package com.example.applestocks;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.components.AxisBase;
 
+import android.graphics.Color;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
@@ -130,7 +133,13 @@ public class PlotActivity extends AppCompatActivity{
 
         // Format X-axis with dates
         XAxis xAxis = lineChart.getXAxis();
-        xAxis.setValueFormatter((value, axis) -> dates.get((int) value));
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                // Ensure dates is a List<String> with date strings corresponding to each index
+                return dates.get((int) value); // Assuming 'dates' is a List of strings
+            }
+        });
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setLabelRotationAngle(45);
