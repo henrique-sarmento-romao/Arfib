@@ -2,32 +2,25 @@ package com.example.applestocks;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.components.AxisBase;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import okhttp3.*;
-import com.google.gson.*;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -36,12 +29,35 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
-public class PlotActivity extends AppCompatActivity{
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.TimeZone;
+
+public class PlotActivity extends AppCompatActivity {
+    TextView Txt, Arrays;
+    LineChart Plot;
+    String url;
+
+    // Get the URL from the Intent
+    String selectedChoice = getIntent().getStringExtra("selecChoice");
+    String selectedNumber = getIntent().getStringExtra("selecNumber");
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_plot);
+
+        Txt = findViewById(R.id.textView);
+        Plot = findViewById(R.id.lineChart);
+        Arrays = findViewById(R.id.jsonValues);
 
         // Set up Edge-to-Edge insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.plot), (v, insets) -> {
@@ -56,52 +72,55 @@ public class PlotActivity extends AppCompatActivity{
         getSupportActionBar().setTitle("Plot");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
-        String url = getIntent().getStringExtra("link");
+        // Build the HTTP request URL
+        String url = "https://api.marketdata.app/v1/stocks/candles/" + selectedChoice + "/AAPL?countback=" + selectedNumber + "&dateformat=timestamp";
 
-        fetchAndPlotData(url);
+        Txt.setText("Fetching data from: " + url);
 
+        callExtService();
     }
 
-    public void fetchAndPlotData(String url) {
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace(); // Handle error
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String jsonData = response.body().string();
-                    processJsonData(jsonData);
-                }
-            }
-        });
+    public void callExtService() {
+        Thread thr = new Thread(new FetchData(url));
+        thr.start();
     }
 
-    public void processJsonData(String jsonData) {
+    private void writeJson(final String json) {
+        runOnUiThread(() -> Txt.setText(json));
+    }
+
+    private void processJsonData(String jsonData) {
         try {
             JSONObject jsonObject = new JSONObject(jsonData);
 
             // Parse time and close arrays
-            JSONArray timeArray = jsonObject.getJSONArray("time");
-            JSONArray closeArray = jsonObject.getJSONArray("close");
+            JSONArray timeArray = jsonObject.getJSONArray("t");
+            JSONArray closeArray = jsonObject.getJSONArray("c");
 
             ArrayList<String> dates = new ArrayList<>();
             ArrayList<Float> closes = new ArrayList<>();
 
+            HashMap<String, String> dateFormatMap = new HashMap<>();
+            dateFormatMap.put("H", "yyyy-MM-dd HH:mm:ss Z");
+            dateFormatMap.put("D", "yyyy-MM-dd");
+
+            String format = dateFormatMap.get(selectedChoice);
+            if (format == null) {
+                throw new IllegalArgumentException("Invalid Format: " + selectedChoice);
+            }
+
             for (int i = 0; i < timeArray.length(); i++) {
-                // Convert timestamp to a readable date format
-                long timestamp = timeArray.getLong(i);
-                String date = new java.text.SimpleDateFormat("yyyy-MM-dd")
-                        .format(new java.util.Date(timestamp * 1000));
-                dates.add(date);
+                // Parse ISO 8601 date-time string
+                String isoDate = timeArray.getString(i);
+                SimpleDateFormat isoFormat = new SimpleDateFormat(format, Locale.US);
+                isoFormat.setTimeZone(TimeZone.getTimeZone("UTC")); // Parse as UTC first
+                Date date = isoFormat.parse(isoDate);
+
+                // Format to desired output (e.g., "yyyy-MM-dd")
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                String formattedDate = outputFormat.format(date);
+
+                dates.add(formattedDate);
 
                 // Get closing price
                 closes.add((float) closeArray.getDouble(i));
@@ -109,15 +128,16 @@ public class PlotActivity extends AppCompatActivity{
 
             // Pass data to the plotting function
             runOnUiThread(() -> plotData(dates, closes));
-
-        } catch (Exception e) {
+        } catch (JSONException e) {
             e.printStackTrace();
+        } catch (ParseException f) {
+            f.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            writeJson("Error: Invalid format selection: " + e.getMessage());
         }
     }
 
-    public void plotData(ArrayList<String> dates, ArrayList<Float> closes) {
-        LineChart lineChart = findViewById(R.id.lineChart);
-
+    private void plotData(ArrayList<String> dates, ArrayList<Float> closes) {
         // Prepare data entries for the chart
         ArrayList<Entry> entries = new ArrayList<>();
         for (int i = 0; i < closes.size(); i++) {
@@ -129,21 +149,83 @@ public class PlotActivity extends AppCompatActivity{
         dataSet.setValueTextColor(Color.BLACK);
 
         LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
+        Plot.setData(lineData);
 
         // Format X-axis with dates
-        XAxis xAxis = lineChart.getXAxis();
+        XAxis xAxis = Plot.getXAxis();
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                // Ensure dates is a List<String> with date strings corresponding to each index
-                return dates.get((int) value); // Assuming 'dates' is a List of strings
+                int index = Math.round(value);
+                return (index >= 0 && index < dates.size()) ? dates.get(index) : "";
             }
         });
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setLabelRotationAngle(45);
 
-        lineChart.invalidate(); // Refresh chart
+        Plot.invalidate(); // Refresh chart
+    }
+
+    private String readStream(InputStream in) {
+        BufferedReader reader = null;
+        StringBuilder respBuilder = new StringBuilder();
+        try {
+            reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                respBuilder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return respBuilder.toString();
+    }
+
+    private class FetchData implements Runnable {
+        private final String url;
+
+        FetchData(String url) {
+            this.url = url;
+        }
+
+        @Override
+        public void run() {
+            HttpURLConnection urlConnection = null;
+
+            try {
+                URL endpoint = new URL(url);
+                urlConnection = (HttpURLConnection) endpoint.openConnection();
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setUseCaches(false);
+
+                int responseCode = urlConnection.getResponseCode();
+                if (responseCode == 200) {
+                    String response = readStream(urlConnection.getInputStream());
+                    writeJson(response);
+
+                    // Pass JSON data for processing
+                    processJsonData(response);
+
+                } else {
+                    writeJson("Error: HTTP response code " + responseCode);
+                }
+            } catch (Exception e) {
+                writeJson("Error: " + e.getMessage());
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+        }
     }
 }
