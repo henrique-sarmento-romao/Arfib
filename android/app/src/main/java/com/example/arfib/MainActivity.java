@@ -1,59 +1,45 @@
 package com.example.arfib;
 
-import android.os.Bundle;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        //Searches for patient_button through id
         Button patient_button = findViewById(R.id.patient_button);
-
-        patient_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PatientLogin.class);
-                startActivity(intent);
-            }
+        patient_button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            intent.putExtra("chosen", "p");
+            startActivity(intent);
         });
 
         Button doctor_but = findViewById(R.id.doctor_button);
-
-        doctor_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PatientLogin.class);
-                startActivity(intent);
-            }
+        doctor_but.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            intent.putExtra("chosen", "d");
+            startActivity(intent);
         });
 
-        TextView register= findViewById(R.id.register_button);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PatientRegister.class);
-                startActivity(intent);
-            }
+        Button nurse_but = findViewById(R.id.nurse_button);
+        nurse_but.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            intent.putExtra("chosen", "n");
+            startActivity(intent);
+        });
+
+        TextView register = findViewById(R.id.register_button);
+        register.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PatientRegister.class);
+            startActivity(intent);
         });
     }
 }

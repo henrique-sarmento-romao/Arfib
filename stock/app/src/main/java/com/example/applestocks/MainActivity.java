@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 int selectedNumber = Integer.parseInt(spinnerNumber.getSelectedItem().toString());
 
                 // Build the HTTP request URL
-                String http_request = "https://api.marketdata.app/v1/stocks/candles/%7b" + selectedChoice + "%7d/%7bAAPL%7d?countback=%7b" + selectedNumber + "%7d&dateformat=timestamp";
+                String http_request = "https://api.marketdata.app/v1/stocks/candles/{" + selectedChoice + "}/{AAPL}?countback={" + selectedNumber + "}&dateformat=timestamp";
 
                 // Create the Intent to send data to PlotActivity
                 Intent intent = new Intent(MainActivity.this, PlotActivity.class);

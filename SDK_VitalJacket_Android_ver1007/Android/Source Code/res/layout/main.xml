@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.69" >
+
+        <Button
+            android:id="@+id/buttonSetRTC"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Set RTC" />
+
+        <Button
+            android:id="@+id/buttonConnect"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonSetRTC"
+            android:layout_alignParentLeft="true"
+            android:text="Connect" />
+
+        <Button
+            android:id="@+id/buttonDisconnect"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonSetRTC"
+            android:layout_toRightOf="@+id/buttonConnect"
+            android:text="Disconnect" />
+
+        <Button
+            android:id="@+id/buttonGetRTC"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/buttonDisconnect"
+            android:layout_alignBottom="@+id/buttonDisconnect"
+            android:layout_toRightOf="@+id/buttonDisconnect"
+            android:text="Get RTC" />
+
+        <TextView
+            android:id="@+id/lblLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/buttonDisconnect"
+            android:text="LOG:" />
+
+        <TextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblLog"
+            android:text="- - -" />
+
+        <TextView
+            android:id="@+id/lblPulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblStatus"
+            android:text="PULSE: - - " />
+
+        <TextView
+            android:id="@+id/lblButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblPulse"
+            android:text="PUSH-BUTTON: - - - " />
+
+        <Button
+            android:id="@+id/buttonRequestData"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonGetRTC"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/buttonSetRTC"
+            android:text="Request Info" />
+
+        <TextView
+            android:id="@+id/lblData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblButton"
+            android:text="Received: - - - " />
+
+        <TextView
+            android:id="@+id/lblRTC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblData"
+            android:text="RTC: - - - " />
+
+        <TextView
+            android:id="@+id/lblBAT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblRTC"
+            android:layout_toLeftOf="@+id/buttonDisconnect"
+            android:text="BAT: - - " />
+
+        <TextView
+            android:id="@+id/lblSDCARD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/lblBAT"
+            android:layout_alignBottom="@+id/lblBAT"
+            android:layout_alignLeft="@+id/buttonDisconnect"
+            android:layout_alignParentRight="true"
+            android:text="SD CARD: - - " />
+
+        <TextView
+            android:id="@+id/lblACC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblBAT"
+            android:text="ACC: - - -" />
+
+        <TextView
+            android:id="@+id/lblECG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblACC"
+            android:text="ECG: - - " />
+
+        <TextView
+            android:id="@+id/lblHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lblECG"
+            android:text="HR: - - " />
+
+        <Button
+            android:id="@+id/buttonSearch"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/buttonSetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonDisconnect"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/buttonDisconnect"
+            android:layout_alignTop="@+id/buttonSetRTC"
+            android:text="Set RadioEvent" />
+
+        <Button
+            android:id="@+id/buttonGetDeviceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonGetRTC"
+            android:layout_alignLeft="@+id/buttonGetRTC"
+            android:layout_alignRight="@+id/buttonGetRTC"
+            android:text="Get DeviceId" />
+
+        <TextView
+            android:id="@+id/lblDeviceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblPulse"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/buttonGetDeviceId"
+            android:text="Device Id: - - - - - - - - - -" />
+
+        <TextView
+            android:id="@+id/textRadioEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblDeviceId"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="." />
+
+        <TextView
+            android:id="@+id/lblTimeSpan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/buttonDisconnect"
+            android:layout_below="@+id/lblHR"
+            android:text="SPAN: - - -" />
+        
+        <Button
+            android:id="@+id/buttonGetAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonGetDeviceId"
+            android:layout_alignLeft="@+id/buttonGetDeviceId"
+            android:layout_alignRight="@+id/buttonGetDeviceId"
+            android:text="Get ACC" />
+
+    </RelativeLayout>
+
+</LinearLayout>

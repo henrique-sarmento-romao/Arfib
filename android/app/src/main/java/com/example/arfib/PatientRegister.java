@@ -25,7 +25,7 @@ public class PatientRegister extends AppCompatActivity {
             return insets;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_hp);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");  // Set empty title
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_hp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/hartpink"

@@ -56,9 +56,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/leadgray"
             android:text="Doctor"
+            android:textColor="@android:color/white"
+            android:textColorLink="@color/hartpink"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/nurse_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0"
+            android:backgroundTint="@color/leadgray"
+            android:text="Nurse"
             android:textColor="@android:color/white"
             android:textColorLink="@color/hartpink"
             android:textSize="20sp" />
