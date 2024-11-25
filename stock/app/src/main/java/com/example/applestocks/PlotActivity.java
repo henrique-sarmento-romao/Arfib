@@ -10,9 +10,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +30,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -36,18 +39,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 public class PlotActivity extends AppCompatActivity {
-    TextView Txt, Arrays;
+    TextView MinClose, MaxClose;
     LineChart Plot;
     String url;
 
-    // Get the URL from the Intent
-    String selectedChoice = getIntent().getStringExtra("selecChoice");
-    String selectedNumber = getIntent().getStringExtra("selecNumber");
-
+    String selectedChoice;
+    int selectedNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,13 @@ public class PlotActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_plot);
 
-        Txt = findViewById(R.id.textView);
+        MinClose = findViewById(R.id.minimumClose);
+        MaxClose = findViewById(R.id.maximumClose);
+
         Plot = findViewById(R.id.lineChart);
-        Arrays = findViewById(R.id.jsonValues);
+
+        selectedChoice = getIntent().getStringExtra("selecChoice");
+        selectedNumber = getIntent().getIntExtra("selecNumber",2);
 
         // Set up Edge-to-Edge insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.plot), (v, insets) -> {
@@ -73,9 +79,9 @@ public class PlotActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         // Build the HTTP request URL
-        String url = "https://api.marketdata.app/v1/stocks/candles/" + selectedChoice + "/AAPL?countback=" + selectedNumber + "&dateformat=timestamp";
+        url = "https://api.marketdata.app/v1/stocks/candles/" + selectedChoice + "/AAPL?countback=" + selectedNumber + "&dateformat=timestamp";
 
-        Txt.setText("Fetching data from: " + url);
+        Plot.setNoDataText("Loading data...");
 
         callExtService();
     }
@@ -83,10 +89,6 @@ public class PlotActivity extends AppCompatActivity {
     public void callExtService() {
         Thread thr = new Thread(new FetchData(url));
         thr.start();
-    }
-
-    private void writeJson(final String json) {
-        runOnUiThread(() -> Txt.setText(json));
     }
 
     private void processJsonData(String jsonData) {
@@ -97,8 +99,8 @@ public class PlotActivity extends AppCompatActivity {
             JSONArray timeArray = jsonObject.getJSONArray("t");
             JSONArray closeArray = jsonObject.getJSONArray("c");
 
-            ArrayList<String> dates = new ArrayList<>();
-            ArrayList<Float> closes = new ArrayList<>();
+            List<Float> timestamps = new ArrayList<>();
+            List<Float> closes = new ArrayList<>();
 
             HashMap<String, String> dateFormatMap = new HashMap<>();
             dateFormatMap.put("H", "yyyy-MM-dd HH:mm:ss Z");
@@ -109,60 +111,115 @@ public class PlotActivity extends AppCompatActivity {
                 throw new IllegalArgumentException("Invalid Format: " + selectedChoice);
             }
 
+            float close;
+
             for (int i = 0; i < timeArray.length(); i++) {
+                // Get closing price
+                close = (float) closeArray.getDouble(i);
+                closes.add(close);
+
                 // Parse ISO 8601 date-time string
                 String isoDate = timeArray.getString(i);
-                SimpleDateFormat isoFormat = new SimpleDateFormat(format, Locale.US);
+                SimpleDateFormat isoFormat = new SimpleDateFormat(format, Locale.getDefault());
                 isoFormat.setTimeZone(TimeZone.getTimeZone("UTC")); // Parse as UTC first
                 Date date = isoFormat.parse(isoDate);
-
-                // Format to desired output (e.g., "yyyy-MM-dd")
-                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-                String formattedDate = outputFormat.format(date);
-
-                dates.add(formattedDate);
-
-                // Get closing price
-                closes.add((float) closeArray.getDouble(i));
+                long timestamp = date.getTime();
+                float scaledTimestamp = timestamp / 1000f;
+                timestamps.add(scaledTimestamp);
             }
 
             // Pass data to the plotting function
-            runOnUiThread(() -> plotData(dates, closes));
-        } catch (JSONException e) {
+            runOnUiThread(() -> plotData(timestamps, closes));
+
+        } catch (JSONException | ParseException e) {
             e.printStackTrace();
-        } catch (ParseException f) {
-            f.printStackTrace();
         } catch (IllegalArgumentException e) {
-            writeJson("Error: Invalid format selection: " + e.getMessage());
+            runOnUiThread(() -> {
+                Toast.makeText(PlotActivity.this, "Error: Invalid format selection: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         }
     }
 
-    private void plotData(ArrayList<String> dates, ArrayList<Float> closes) {
+    private void plotData(List<Float> dates, List<Float> closes) {
         // Prepare data entries for the chart
         ArrayList<Entry> entries = new ArrayList<>();
+
+        float close, maxClose, minClose;
+        maxClose = closes.get(1);
+        minClose = closes.get(1);
+
         for (int i = 0; i < closes.size(); i++) {
-            entries.add(new Entry(i, closes.get(i)));
+            close =  closes.get(i);
+            entries.add(new Entry(dates.get(i), closes.get(i)));
+
+            if (close > maxClose) {
+                maxClose = close;
+            } else if (close < minClose) {
+                minClose = close;
+            }
+        }
+
+        MaxClose.setText(String.valueOf(maxClose));
+        MinClose.setText(String.valueOf(minClose));
+
+        ArrayList<Entry> maxBar = new ArrayList<>();
+        ArrayList<Entry> minBar = new ArrayList<>();
+
+        for (int i = 0; i < closes.size(); i++) {
+            maxBar.add(new Entry(dates.get(i), maxClose));
+            minBar.add(new Entry(dates.get(i), minClose));
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "AAPL Closing Prices");
-        dataSet.setColor(Color.BLUE);
-        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setColor(Color.parseColor("#A340F2"));
+        dataSet.setLineWidth(2f);
+        dataSet.setCircleRadius(4f);
+        dataSet.setCircleColor(Color.parseColor("#A340F2"));
+        dataSet.setDrawValues(false);
 
-        LineData lineData = new LineData(dataSet);
-        Plot.setData(lineData);
+        LineDataSet maxDataSet = new LineDataSet(maxBar, "Maximum Closing Price");
+        maxDataSet.setColor(Color.GRAY);
+        maxDataSet.setLineWidth(2f);
+        maxDataSet.enableDashedLine(30,30,0);
+        maxDataSet.setDrawValues(false);
+        maxDataSet.setDrawCircles(false);
+
+        LineDataSet minDataSet = new LineDataSet(minBar, "Minimum Closing Price");
+        minDataSet.setColor(Color.GRAY);
+        minDataSet.setLineWidth(2f);
+        minDataSet.enableDashedLine(30,30,0);
+        minDataSet.setDrawValues(false);
+        minDataSet.setDrawCircles(false);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(dataSet);
+            dataSets.add(maxDataSet);
+            dataSets.add(minDataSet);
+
+        LineData lineData = new LineData(dataSets);
+            Plot.setData(lineData);
 
         // Format X-axis with dates
         XAxis xAxis = Plot.getXAxis();
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                int index = Math.round(value);
-                return (index >= 0 && index < dates.size()) ? dates.get(index) : "";
+                // If the value is in seconds, convert it to milliseconds
+                long timestamp = (long) (value * 1000f);  // Convert the float timestamp to milliseconds
+
+                // Create a Date object using the timestamp
+                Date date = new Date(timestamp);
+
+                // Define a simple date format (you can modify the format as needed)
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Format as "Year-Month-Day"
+
+                // Return the formatted date string
+                return dateFormat.format(date);
             }
         });
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelRotationAngle(45);
+        xAxis.setLabelRotationAngle(0);
 
         Plot.invalidate(); // Refresh chart
     }
@@ -211,16 +268,19 @@ public class PlotActivity extends AppCompatActivity {
                 int responseCode = urlConnection.getResponseCode();
                 if (responseCode == 200) {
                     String response = readStream(urlConnection.getInputStream());
-                    writeJson(response);
 
                     // Pass JSON data for processing
                     processJsonData(response);
 
                 } else {
-                    writeJson("Error: HTTP response code " + responseCode);
+                    runOnUiThread(() -> {
+                        Toast.makeText(PlotActivity.this, "Error: HTTP response code " + responseCode, Toast.LENGTH_SHORT).show();
+                    });
                 }
             } catch (Exception e) {
-                writeJson("Error: " + e.getMessage());
+                runOnUiThread(() -> {
+                    Toast.makeText(PlotActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
