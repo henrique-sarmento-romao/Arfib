@@ -5,9 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.AppleStocks" parent="Base.Theme.AppleStocks" >
-        <item name="colorPrimary">#D59F9FFF</item>
+    <style name="Theme.AppleStocks" parent="Theme.AppCompat.Light.DarkActionBar" >
+        <item name="colorPrimary">#B66BFF</item>
         <item name="colorPrimaryDark">#A340F2</item>
-</style>
+        <item name="colorAccent">@color/white</item>
+
+    </style>
 
 </resources>

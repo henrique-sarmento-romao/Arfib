@@ -2,20 +2,14 @@ package com.example.applestocks;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.components.AxisBase;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
-import androidx.activity.EdgeToEdge;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 
 import org.json.JSONException;
@@ -56,7 +50,6 @@ public class PlotActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_plot);
 
         MinClose = findViewById(R.id.minimumClose);
@@ -67,11 +60,6 @@ public class PlotActivity extends AppCompatActivity {
         selectedChoice = getIntent().getStringExtra("selecChoice");
         selectedNumber = getIntent().getIntExtra("selecNumber",2);
 
-        // Set up Toolbar
-        Toolbar toolbar = findViewById(R.id.action_bar_2);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Plot");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         // Build the HTTP request URL
         url = "https://api.marketdata.app/v1/stocks/candles/" + selectedChoice + "/AAPL?countback=" + selectedNumber + "&dateformat=timestamp";
@@ -222,7 +210,7 @@ public class PlotActivity extends AppCompatActivity {
         xAxis.setLabelRotationAngle(0);
         xAxis.setTextColor(Color.WHITE);
         xAxis.setAvoidFirstLastClipping(true);
-        xAxis.setSpaceMax(1f); // Add extra space to prevent last label from being clipped
+        xAxis.setSpaceMax(4f); // Add extra space to prevent last label from being clipped
 
 
         YAxis rightAxis = Plot.getAxisRight();
