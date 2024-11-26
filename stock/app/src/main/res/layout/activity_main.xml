@@ -45,42 +45,52 @@
             android:textColor="@color/white"
             android:textSize="17sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:padding="8dp"
-            android:text="Choose H or D"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-
-        <Spinner
-            android:id="@+id/spinner_choice"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:textColor="@color/white"
-            tools:textColor="@color/white" />
+            android:background="@drawable/round_button"
+            android:orientation="vertical"
+            android:padding="6dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"
-            android:padding="8dp"
-            android:text="Choose a Number (2-10)"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:padding="8dp"
+                android:text="Choose H or D"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spinner_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:textColor="@color/white" /> <!-- Submit Button -->
+            <Spinner
+                android:id="@+id/spinner_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                tools:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:padding="8dp"
+                android:text="Choose a Number (2-10)"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+
+        <!-- Submit Button -->
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"

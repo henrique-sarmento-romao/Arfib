@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerChoice.setAdapter(choiceAdapter);
 
         ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(this,
-                R.layout.spinner_item, new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
+           R.layout.spinner_item, new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
         numberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerNumber.setAdapter(numberAdapter);
 
