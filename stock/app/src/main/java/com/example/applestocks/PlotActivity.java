@@ -168,11 +168,12 @@ public class PlotActivity extends AppCompatActivity {
         LineDataSet dataSet = new LineDataSet(entries, "AAPL Closing Prices");
         dataSet.setColor(Color.parseColor("#A340F2"));
         dataSet.setLineWidth(2f);
-        dataSet.setCircleRadius(4f);
+        dataSet.setCircleRadius(5f);
         dataSet.setCircleColor(Color.parseColor("#A340F2"));
+        dataSet.setCircleHoleColor(Color.BLACK);
         dataSet.setDrawValues(false);
 
-        LineDataSet maxDataSet = new LineDataSet(maxBar, "Maximum Closing Price");
+        LineDataSet maxDataSet = new LineDataSet(maxBar, "Maximum Price");
         maxDataSet.setColor(Color.GRAY);
         maxDataSet.setLineWidth(2f);
         maxDataSet.enableDashedLine(30,30,0);
@@ -180,7 +181,7 @@ public class PlotActivity extends AppCompatActivity {
         maxDataSet.setDrawCircles(false);
 
 
-        LineDataSet minDataSet = new LineDataSet(minBar, "Minimum Closing Price");
+        LineDataSet minDataSet = new LineDataSet(minBar, "Minimum Price");
         minDataSet.setColor(Color.GRAY);
         minDataSet.setLineWidth(2f);
         minDataSet.enableDashedLine(30,30,0);
@@ -200,7 +201,7 @@ public class PlotActivity extends AppCompatActivity {
         xAxis.setEnabled(true);
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis) {
+            public String getFormattedValue(float value) {
                 // If the value is in seconds, convert it to milliseconds
                 long timestamp = (long) (value * 1000f);  // Convert the float timestamp to milliseconds
 
@@ -208,24 +209,30 @@ public class PlotActivity extends AppCompatActivity {
                 Date date = new Date(timestamp);
 
                 // Define a simple date format (you can modify the format as needed)
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // Format as "Year-Month-Day"
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault()); // Format as "Year-Month-Day"
 
                 // Return the formatted date string
                 return dateFormat.format(date);
             }
         });
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(2, true);
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelRotationAngle(45);
-        xAxis.setTextColor(android.R.color.white);
+        xAxis.setLabelRotationAngle(0);
+        xAxis.setTextColor(Color.WHITE);
         xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setSpaceMax(1f); // Add extra space to prevent last label from being clipped
+
 
         YAxis rightAxis = Plot.getAxisRight();
         rightAxis.setTextColor(Color.WHITE);
 
         Legend legend = Plot.getLegend();
-
         legend.setTextColor(Color.WHITE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        Plot.setExtraOffsets(0, 50, 10, 15); // Add padding to the chart
         Plot.getDescription().setEnabled(true);
         Plot.getDescription().setText("Stock Quotes Over Time");
         Plot.getDescription().setTextColor(Color.WHITE);
