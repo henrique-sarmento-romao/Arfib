@@ -1,8 +1,11 @@
 package com.example.applestocks;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -22,32 +25,28 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Set up Edge-to-Edge insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        Button button_submit=findViewById(R.id.btn_submit);
-        Spinner spinnerChoice = findViewById(R.id.spinner_choice);
-        Spinner spinnerNumber = findViewById(R.id.spinner_number);
-        // Set up Toolbar
         Toolbar toolbar = findViewById(R.id.action_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Apple Stocks");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
 
+        Button button_submit=findViewById(R.id.btn_submit);
+        Spinner spinnerChoice = findViewById(R.id.spinner_choice);
+        Spinner spinnerNumber = findViewById(R.id.spinner_number);
+        // Set up Toolbar
+
+
+
 
         ArrayAdapter<String> choiceAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, new String[]{"H", "D"});
-        choiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, new String[]{"H", "D"});
+        choiceAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerChoice.setAdapter(choiceAdapter);
 
         ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
-        numberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, new Integer[]{2, 3, 4, 5, 6, 7, 8, 9, 10});
+        numberAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerNumber.setAdapter(numberAdapter);
 
         spinnerChoice.setSelection(0); // Default to "H" (index 0)
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String selectedChoice = spinnerChoice.getSelectedItem().toString();
-                int selectedNumber = Integer.parseInt(spinnerNumber.getSelectedItem().toString());
+                int selectedNumber = (Integer) spinnerNumber.getSelectedItem();
 
                 // Create the Intent to send data to PlotActivity
                 Intent intent = new Intent(MainActivity.this, PlotActivity.class);

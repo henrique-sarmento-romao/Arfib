@@ -1,4 +1,6 @@
 package com.example.applestocks;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.components.AxisBase;
 
@@ -64,13 +66,6 @@ public class PlotActivity extends AppCompatActivity {
 
         selectedChoice = getIntent().getStringExtra("selecChoice");
         selectedNumber = getIntent().getIntExtra("selecNumber",2);
-
-        // Set up Edge-to-Edge insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.plot), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         // Set up Toolbar
         Toolbar toolbar = findViewById(R.id.action_bar_2);
@@ -184,6 +179,7 @@ public class PlotActivity extends AppCompatActivity {
         maxDataSet.setDrawValues(false);
         maxDataSet.setDrawCircles(false);
 
+
         LineDataSet minDataSet = new LineDataSet(minBar, "Minimum Closing Price");
         minDataSet.setColor(Color.GRAY);
         minDataSet.setLineWidth(2f);
@@ -201,6 +197,7 @@ public class PlotActivity extends AppCompatActivity {
 
         // Format X-axis with dates
         XAxis xAxis = Plot.getXAxis();
+        xAxis.setEnabled(true);
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -211,7 +208,7 @@ public class PlotActivity extends AppCompatActivity {
                 Date date = new Date(timestamp);
 
                 // Define a simple date format (you can modify the format as needed)
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Format as "Year-Month-Day"
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // Format as "Year-Month-Day"
 
                 // Return the formatted date string
                 return dateFormat.format(date);
@@ -219,7 +216,19 @@ public class PlotActivity extends AppCompatActivity {
         });
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelRotationAngle(0);
+        xAxis.setLabelRotationAngle(45);
+        xAxis.setTextColor(android.R.color.white);
+        xAxis.setAvoidFirstLastClipping(true);
+
+        YAxis rightAxis = Plot.getAxisRight();
+        rightAxis.setTextColor(Color.WHITE);
+
+        Legend legend = Plot.getLegend();
+
+        legend.setTextColor(Color.WHITE);
+        Plot.getDescription().setEnabled(true);
+        Plot.getDescription().setText("Stock Quotes Over Time");
+        Plot.getDescription().setTextColor(Color.WHITE);
 
         Plot.invalidate(); // Refresh chart
     }
