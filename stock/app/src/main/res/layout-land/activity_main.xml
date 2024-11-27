@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,13 +9,12 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="16sp">
+        android:padding="16sp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
-            android:text="Welcome!"
+            android:text="Welcome! 👋"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -33,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:gravity="center"
             android:text="On this app, you can evaluate Apple company stock quotes for the last period of your choice."
             android:textColor="@color/white"
             android:textSize="17sp" />
@@ -42,60 +41,85 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
             android:text="Select between hourly or daily views and specify a range from 2 to 10."
             android:textColor="@color/white"
             android:textSize="17sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:padding="8dp"
-            android:text="Choose H or D"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/round_button">
 
-        <Spinner
-            android:id="@+id/spinner_choice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:textColor="@color/white"
-            android:dropDownSelector="@android:color/white"
-        />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose H or D"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner_choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:dropDownSelector="@android:color/white"
+                    android:padding="2dp"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose a Number (2-10)"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:dropDownSelector="@android:color/white"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
         <!-- Number Selection -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="4dp"
-            android:padding="8dp"
-            android:text="Choose a Number (2-10)"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spinner_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:textColor="@color/white"
-            android:dropDownSelector="@android:color/white"  />
 
         <!-- Submit Button -->
 
 
         <Button
             android:id="@+id/btn_submit"
-            android:layout_width="match_parent"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="6dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/submit_button"
             android:text="Submit"
             android:textSize="17sp"
             android:textColor="@color/white" />

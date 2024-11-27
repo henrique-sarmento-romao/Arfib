@@ -8,6 +8,7 @@
     <style name="Theme.AppleStocks" parent="Theme.AppCompat.Light.DarkActionBar" >
         <item name="colorPrimary">#B66BFF</item>
         <item name="colorPrimaryDark">#A340F2</item>
+        <item name="colorOnPrimary">#3e066b</item>
         <item name="colorAccent">@color/white</item>
 
     </style>

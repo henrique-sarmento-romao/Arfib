@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/plot"
@@ -10,15 +9,14 @@
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/plotTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="6sp"
-        android:text="Apple Stock Quotes"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:paddingTop="16sp"/>
 
     <com.github.mikephil.charting.charts.LineChart
@@ -56,7 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/white" />
+                    android:text="Loading..."
+                    android:textColor="@color/yellow" />
             </LinearLayout>
 
             <!-- "Maximum Close" Section -->
@@ -80,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/white" />
+                    android:text="Loading..."
+                    android:textColor="@color/yellow" />
             </LinearLayout>
         </LinearLayout>
 </LinearLayout>

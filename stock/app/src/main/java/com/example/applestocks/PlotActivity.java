@@ -5,11 +5,13 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import android.graphics.Color;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 
 import org.json.JSONException;
@@ -40,7 +42,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class PlotActivity extends AppCompatActivity {
-    TextView MinClose, MaxClose;
+    TextView MinClose, MaxClose, Title;
     LineChart Plot;
     String url;
 
@@ -52,20 +54,18 @@ public class PlotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
 
+        // Define views
+        Title = findViewById(R.id.plotTitle);
         MinClose = findViewById(R.id.minimumClose);
         MaxClose = findViewById(R.id.maximumClose);
-
         Plot = findViewById(R.id.lineChart);
 
+        // Build the HTTP request URL
         selectedChoice = getIntent().getStringExtra("selecChoice");
         selectedNumber = getIntent().getIntExtra("selecNumber",2);
-
-
-        // Build the HTTP request URL
         url = "https://api.marketdata.app/v1/stocks/candles/" + selectedChoice + "/AAPL?countback=" + selectedNumber + "&dateformat=timestamp";
 
         Plot.setNoDataText("Loading data...");
-
         callExtService();
     }
 
@@ -142,8 +142,15 @@ public class PlotActivity extends AppCompatActivity {
             }
         }
 
+        HashMap<String, String> timePeriod = new HashMap<>();
+        timePeriod.put("H", "Hours"); timePeriod.put("D", "Days");
+
+        String title = "Closing Quotes Over Last " + String.valueOf(selectedNumber) + " " + timePeriod.get(selectedChoice);
+        Title.setText(title);
         MaxClose.setText(String.valueOf(maxClose));
+        MaxClose.setTextColor(Color.WHITE);
         MinClose.setText(String.valueOf(minClose));
+        MinClose.setTextColor(Color.WHITE);
 
         ArrayList<Entry> maxBar = new ArrayList<>();
         ArrayList<Entry> minBar = new ArrayList<>();
@@ -154,15 +161,22 @@ public class PlotActivity extends AppCompatActivity {
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "AAPL Closing Prices");
-        dataSet.setColor(Color.parseColor("#A340F2"));
+        int purple = getResources().getColor(R.color.lightPurple);
+        int black = getResources().getColor(R.color.black);
+        int grey = getResources().getColor(R.color.grey);
+        dataSet.setColor(purple);
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(5f);
-        dataSet.setCircleColor(Color.parseColor("#A340F2"));
-        dataSet.setCircleHoleColor(Color.BLACK);
+        dataSet.setCircleHoleRadius(3f);
+        dataSet.setCircleColor(purple);
+        dataSet.setCircleHoleColor(black);
         dataSet.setDrawValues(false);
+        dataSet.setDrawFilled(true);
+        Drawable fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_fill);
+        dataSet.setFillDrawable(fillDrawable);
 
         LineDataSet maxDataSet = new LineDataSet(maxBar, "Maximum Price");
-        maxDataSet.setColor(Color.GRAY);
+        maxDataSet.setColor(grey);
         maxDataSet.setLineWidth(2f);
         maxDataSet.enableDashedLine(30,30,0);
         maxDataSet.setDrawValues(false);
@@ -170,7 +184,7 @@ public class PlotActivity extends AppCompatActivity {
 
 
         LineDataSet minDataSet = new LineDataSet(minBar, "Minimum Price");
-        minDataSet.setColor(Color.GRAY);
+        minDataSet.setColor(grey);
         minDataSet.setLineWidth(2f);
         minDataSet.enableDashedLine(30,30,0);
         minDataSet.setDrawValues(false);
@@ -183,6 +197,9 @@ public class PlotActivity extends AppCompatActivity {
 
         LineData lineData = new LineData(dataSets);
             Plot.setData(lineData);
+
+        Plot.setExtraLeftOffset(16f); // Adjust padding for the left
+        Plot.setExtraRightOffset(16f); // Adjust padding for the right
 
         // Format X-axis with dates
         XAxis xAxis = Plot.getXAxis();
@@ -221,7 +238,7 @@ public class PlotActivity extends AppCompatActivity {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         Plot.setExtraOffsets(0, 50, 10, 15); // Add padding to the chart
-        Plot.getDescription().setEnabled(true);
+        Plot.getDescription().setEnabled(false);
         Plot.getDescription().setText("Stock Quotes Over Time");
         Plot.getDescription().setTextColor(Color.WHITE);
 
@@ -272,10 +289,7 @@ public class PlotActivity extends AppCompatActivity {
                 int responseCode = urlConnection.getResponseCode();
                 if (responseCode == 200) {
                     String response = readStream(urlConnection.getInputStream());
-
-                    // Pass JSON data for processing
-                    processJsonData(response);
-
+                    processJsonData(response); // Pass JSON data for processing
                 } else {
                     runOnUiThread(() -> {
                         Toast.makeText(PlotActivity.this, "Error: HTTP response code " + responseCode, Toast.LENGTH_SHORT).show();
