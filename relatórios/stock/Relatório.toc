@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Use Cases}{2}{section.2}%
+\contentsline {section}{\numberline {3}Architecture}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Action Bar}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Main Activity}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Plot Activity}{3}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}HTTP Request}{3}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Data Processing}{3}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Data Plotting}{3}{subsubsection.3.3.3}%
+\contentsline {section}{\numberline {4}Interface}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Main Activity}{4}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Portrait}{4}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Landscape}{5}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Plot Activity}{5}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Plot}{5}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Loading Messages}{5}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Landscape}{5}{subsubsection.4.2.3}%
+\contentsline {section}{\numberline {5}User Experience}{5}{section.5}%
