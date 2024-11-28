@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{cite}
 \usepackage{subcaption}
+\usepackage{tikz}
 
 \title{\Huge \textbf{AppleStocks}\\\vspace{0.2em} \Large A Simple Application for Apple Stock Quotes Monitoring}
 \author{
@@ -58,10 +59,49 @@ When the user pushes the "Submit" button and sees the Plot Activity.
 \end{figure}
 
 
-
+\clearpage
 \section{Architecture}
 To make the application more user-friendly and the interface less crowded, the application was divided into two activities: the Main Activity, where the user configures their preferences, and the Plot Activity, where the results are displayed.
 Common to both activities, there is an action bar displaying the name of the app. 
+An overview of the app architecture can be seen in \autoref{fig:diagram}.
+
+\begin{figure}[ht]
+    \vspace{1em}
+    \centering
+    \scalebox{0.8}{
+    \begin{tikzpicture}       
+        \draw[draw=black] (0, 0) rectangle (5, -1) node[pos=.5] {Main Activity};
+        \draw[draw=black] (0, -1) rectangle (5, -6);
+        \node at (2.5,-1.8) {\texttt{onCreate()}};
+
+        \draw[draw=black] (0.2, -2.7) rectangle (4.8, -3.5) node[pos=.5] {Button};
+        \draw[draw=black] (0.2, -3.5) rectangle (4.8, -5.8) node[pos=.5, align=left] {\texttt{setOnClikListener()} \\ \texttt{onClick()} \\ \quad \texttt{new Intent()}};
+
+        \draw[draw=black] (10, 0) rectangle (15, -1) node[pos=.5] {Plot Activity};
+        \draw[draw=black] (10, -1) rectangle (15, -6) node[pos=.5, align=left] {\texttt{onCreate()} \\ \texttt{processJsonData()} \\ \texttt{plotData()}};
+
+        \draw[->] (4.8, -4.6) -- (10, -4.6) node[above, midway] {\texttt{startActivity(intent)}};
+        \draw[->] (15, -2.2) -- (18, -2.2) node[above, midway] {\texttt{FetchData()}};
+        \draw[->] (18, -4.2) -- (15, -4.4) node[above, midway] {\texttt{readStream()}};
+
+        % Draw the server body in isometric view (parallelograms)
+        \coordinate (A) at (18,-1.7);
+        \draw[fill=lightgray!20] (A) -- ++(2,1) -- ++(1,-0.25) -- ++(-2,-1) -- cycle; 
+        \draw[fill=lightgray!20] (A) -- ++(1,-0.25) -- ++(0,-3) -- ++(-1,0.25) -- cycle;
+        \draw[fill=lightgray!20] (A)++(1,-0.25) -- ++(2,1) -- ++(0,-3) -- ++(-2,-1) -- cycle;
+        
+        \draw[fill=lightgray] (A)++(0.1,-0.6) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;  
+        \draw[fill=lightgray] (A)++(0.1,-0.6)++(0,-0.2) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;
+        \draw[fill=lightgray] (A)++(0.1,-0.6)++(0,-0.4) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;
+        \draw[fill=lightgray] (A)++(0.1,-0.6)++(0,-2) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;      
+
+    \end{tikzpicture}
+    }
+    \vspace{1em}
+
+    \caption{Application Architecture Diagram.}
+    \label{fig:diagram}
+\end{figure}
 
 \subsection{Main Activity}
 \label{sec:Main Activity Java}
