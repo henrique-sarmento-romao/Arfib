@@ -36,19 +36,19 @@
         <activity android:name=".Login">
         </activity>
 
-        <activity android:name=".HomePageDoctor">
+        <activity android:name=".Professional.HomeDoctor">
         </activity>
 
-        <activity android:name=".HomePageNurse">
+        <activity android:name=".Professional.HomeNurse">
         </activity>
 
-        <activity android:name=".HomePagePatient">
+        <activity android:name=".HomePatient">
         </activity>
 
-        <activity android:name=".BluetoothActivity">
+        <activity android:name=".Measurements.BluetoothActivity">
         </activity>
 
-        <activity android:name=".AvailableDevices">
+        <activity android:name=".Measurements.AvailableDevices">
         </activity>
 
     </application>

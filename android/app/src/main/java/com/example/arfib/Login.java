@@ -3,9 +3,11 @@ package com.example.arfib;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.EditorInfo;
+
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.google.android.material.textfield.TextInputEditText;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
@@ -22,11 +24,11 @@ public class Login extends AppCompatActivity {
         pw.setOnEditorActionListener((textView, id, keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_SEND) {
                 if ("p".equals(chosen)) {
-                    startActivity(new Intent(Login.this, HomePagePatient.class));
+                    startActivity(new Intent(Login.this, HomePatient.class));
                 } else if ("d".equals(chosen)) {
-                    startActivity(new Intent(Login.this, HomePageDoctor.class));
+                    startActivity(new Intent(Login.this, HomeDoctor.class));
                 } else if ("n".equals(chosen)) {
-                    startActivity(new Intent(Login.this, HomePageNurse.class));
+                    startActivity(new Intent(Login.this, HomeNurse.class));
                 }
                 return true; // Event handled
             }

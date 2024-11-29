@@ -1,4 +1,4 @@
-package com.example.arfib;
+package com.example.arfib.Measurements;
 
 import Bio.Library.namespace.BioLib;
 import android.Manifest;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.example.arfib.R;
+
 import java.util.Set;
 
 public class BluetoothActivity extends AppCompatActivity {

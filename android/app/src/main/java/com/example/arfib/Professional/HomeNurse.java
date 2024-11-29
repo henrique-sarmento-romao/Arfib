@@ -1,12 +1,12 @@
-package com.example.arfib;
+package com.example.arfib.Professional;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-public class HomePageNurse extends AppCompatActivity {
+import com.example.arfib.R;
+
+public class HomeNurse extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         Button patient_button = findViewById(R.id.patient_button);
         patient_button.setOnClickListener(v -> {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView register = findViewById(R.id.register_button);
         register.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PatientRegister.class);
+            Intent intent = new Intent(MainActivity.this, Register.class);
             startActivity(intent);
         });
     }

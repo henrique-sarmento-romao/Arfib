@@ -68,27 +68,33 @@ An overview of the app architecture can be seen in \autoref{fig:diagram}.
 \begin{figure}[ht]
     \vspace{1em}
     \centering
-    \scalebox{0.8}{
+    \scalebox{0.9}{
     \begin{tikzpicture}       
         \draw[draw=black] (0, 0) rectangle (5, -1) node[pos=.5] {Main Activity};
         \draw[draw=black] (0, -1) rectangle (5, -6);
-        \node at (2.5,-1.8) {\texttt{onCreate()}};
+        \node at (2,-1.8) {\texttt{onCreate()}};
 
         \draw[draw=black] (0.2, -2.7) rectangle (4.8, -3.5) node[pos=.5] {Button};
-        \draw[draw=black] (0.2, -3.5) rectangle (4.8, -5.8) node[pos=.5, align=left] {\texttt{setOnClikListener()} \\ \texttt{onClick()} \\ \quad \texttt{new Intent()}};
+        \draw[draw=black] (0.2, -3.5) rectangle (4.8, -5.8) node[pos=.5, align=left] {\texttt{setOnClickListener()} \\ \texttt{onClick()} \\ \quad \texttt{new Intent()}};
 
         \draw[draw=black] (10, 0) rectangle (15, -1) node[pos=.5] {Plot Activity};
-        \draw[draw=black] (10, -1) rectangle (15, -6) node[pos=.5, align=left] {\texttt{onCreate()} \\ \texttt{processJsonData()} \\ \texttt{plotData()}};
+        \draw[draw=black] (10, -1) rectangle (15, -6) node[pos=.5, align=left] {\texttt{onCreate()}};
+
+        \draw[draw=black] (10, -8) rectangle (15, -9) node[pos=.5] {FetchData};
+        \draw[draw=black] (10, -9) rectangle (15, -14) node[pos=.5, align=left] {\texttt{processJsonData()} \\ \texttt{plotData()}};
+        \node at (12.5,-14.5) {Thread};
 
         \draw[->] (4.8, -4.6) -- (10, -4.6) node[above, midway] {\texttt{startActivity(intent)}};
-        \draw[->] (15, -2.2) -- (18, -2.2) node[above, midway] {\texttt{FetchData()}};
-        \draw[->] (18, -4.2) -- (15, -4.4) node[above, midway] {\texttt{readStream()}};
+        \draw[->] (12.5, -6) -- (12.5, -8) node[left, midway] {\texttt{callExtService()}};
+        \draw[->] (10, -11) -- (4, -11) node[above, midway] {HTTP Connection};
+        \draw[->] (4, -11.5) -- (10, -11.5) node[below, midway] {\texttt{readStream()}};
 
         % Draw the server body in isometric view (parallelograms)
-        \coordinate (A) at (18,-1.7);
+        \coordinate (A) at (1,-10.2);
         \draw[fill=lightgray!20] (A) -- ++(2,1) -- ++(1,-0.25) -- ++(-2,-1) -- cycle; 
         \draw[fill=lightgray!20] (A) -- ++(1,-0.25) -- ++(0,-3) -- ++(-1,0.25) -- cycle;
         \draw[fill=lightgray!20] (A)++(1,-0.25) -- ++(2,1) -- ++(0,-3) -- ++(-2,-1) -- cycle;
+        \node at (2.5,-14) {Server};
         
         \draw[fill=lightgray] (A)++(0.1,-0.6) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;  
         \draw[fill=lightgray] (A)++(0.1,-0.6)++(0,-0.2) -- ++(0.8,-0.2) -- ++(0,-0.1) -- ++(-0.8,0.2) -- cycle;
@@ -145,6 +151,7 @@ It is also necessary to format the x-axis, otherwise the values seen would be th
 To this intent, the value is formatted to return a simple date string, and only the first and last values are shown, for a simpler graph analysis.
 The maximum and minimum values are also shown outside the plot.
 
+\clearpage
 \section{Interface}
 The application has a black background with purple accents, as darker colors are more associated with the stock tracking and the stock market. The theme used was \texttt{Theme.AppCompat.Light.DarkActionBar}.
 
@@ -300,6 +307,7 @@ The only differences are the placement of the maximum and minimum close values, 
     \label{fig:plot land}
 \end{figure}
 
+\clearpage
 \section{User Experience}
 When presenting the interface, some key points for the user experience were already discussed, but the following aspects can be noted.
 
