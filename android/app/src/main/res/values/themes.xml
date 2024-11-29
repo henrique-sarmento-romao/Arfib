@@ -5,5 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Arfib" parent="Base.Theme.Arfib" />
+    <style name="Theme.Arfib" parent="Theme.AppCompat.Light.DarkActionBar" >
+        <item name="colorPrimary">@color/hartpink</item>
+        <item name="colorPrimaryDark">#FF5672</item>
+    </style>
 </resources>

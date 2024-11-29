@@ -13,11 +13,9 @@ public class HomePagePatient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.homepagepatient);
-        Toolbar toolbar = findViewById(R.id.toolbar_hp);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");  // Set empty title
+
+        getSupportActionBar().setTitle("Nurse");  // Set empty title
 
 
         Button button = findViewById(R.id.button);

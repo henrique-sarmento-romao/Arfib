@@ -5,21 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_hn"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/hartpink"
-        android:titleTextColor="#fff"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Nurse"
-            android:textColor="@color/white"
-            android:textSize="34sp"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="12dp" />
-    </androidx.appcompat.widget.Toolbar>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,11 +14,8 @@ public class HomePageDoctor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.homepagedoctor);
-        Toolbar toolbar = findViewById(R.id.toolbar_hd);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");  // Set empty title
+        getSupportActionBar().setTitle("Doctor");  // Set empty title
 
     }
 }
