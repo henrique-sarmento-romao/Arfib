@@ -1,17 +1,20 @@
 package com.example.arfib;
 
-import Bio.Library.namespace.BioLib;
-
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -19,6 +22,7 @@ public class AvailableDevices extends Activity {
 
     public static final String SELECT_DEVICE_ADDRESS = "device_address";
     public static final int CHANGE_MACADDRESS = 100;
+    private static final int REQUEST_BLUETOOTH_CONNECT = 1;
 
     private ListView mainListView;
     private ArrayAdapter<String> listAdapter;
@@ -39,53 +43,61 @@ public class AvailableDevices extends Activity {
         setContentView(R.layout.search);
 
         buttonOK = findViewById(R.id.cmdOK);
-        buttonOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra(SELECT_DEVICE_ADDRESS, selectedValue);
+        buttonOK.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.putExtra(SELECT_DEVICE_ADDRESS, selectedValue);
 
-                // Set result and finish this Activity
-                setResult(CHANGE_MACADDRESS, intent);
-                finish();
+            setResult(CHANGE_MACADDRESS, intent);
+            finish();
+        });
+
+        mainListView = findViewById(R.id.lstDevices);
+        ArrayList<String> lstDevices = new ArrayList<>();
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lstDevices);
+        mainListView.setAdapter(listAdapter);
+
+        mainListView.setOnItemClickListener((parent, item, position, id) -> {
+            selectedValue = listAdapter.getItem(position);
+            if (selectedValue != null) {
+                String[] aux = selectedValue.split("   ");
+                selectedValue = aux[0];
             }
         });
 
-        try {
-            mainListView = findViewById(R.id.lstDevices);
-            ArrayList<String> lstDevices = new ArrayList<>();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth is not supported on this device.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            // Create ArrayAdapter using the list of devices
-            listAdapter = new ArrayAdapter<>(this, android.R.layout.list_content, lstDevices);
+       listPairedDevices();
+    }
 
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (mBluetoothAdapter != null) {
-                if (mBluetoothAdapter.isEnabled()) {
-                    // Listing paired devices
-                    Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
-                    for (BluetoothDevice device : devices) {
-                        listAdapter.add(device.getAddress() + "   " + device.getName());
-                    }
-                }
+    private void listPairedDevices() {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            Toast.makeText(this, "Bluetooth is disabled. Please enable it.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
+        if (devices != null && !devices.isEmpty()) {
+            for (BluetoothDevice device : devices) {
+                listAdapter.add(device.getAddress() + "   " + device.getName());
             }
-
-            mainListView.setAdapter(listAdapter);
-
-            mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View item, int position, long id) {
-                    selectedValue = listAdapter.getItem(position);
-
-                    if (selectedValue != null) {
-                        String[] aux = selectedValue.split("   ");
-                        selectedValue = aux[0];
-                    }
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else {
+            Toast.makeText(this, "No paired Bluetooth devices found.", Toast.LENGTH_SHORT).show();
         }
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_BLUETOOTH_CONNECT) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                listPairedDevices();
+            } else {
+                Toast.makeText(this, "Permission denied. Cannot list Bluetooth devices.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
