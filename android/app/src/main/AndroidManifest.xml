@@ -24,31 +24,66 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".PatientRegister">
-        </activity>
-
-
-        <activity android:name=".Login">
-        </activity>
-
-        <activity android:name=".Professional.HomeDoctor">
-        </activity>
-
-        <activity android:name=".Professional.HomeNurse">
         </activity>
 
         <activity android:name=".HomePatient">
         </activity>
-
-        <activity android:name=".Measurements.BluetoothActivity">
+        <activity android:name=".Login">
+        </activity>
+        <activity android:name=".Notifications">
+        </activity>
+        <activity android:name=".Register">
         </activity>
 
+        <activity android:name=".Blog.Details">
+        </activity>
+        <activity android:name=".Blog.Home">
+        </activity>
+        <activity android:name=".Blog.AddNew">
+        </activity>
+
+        <activity android:name=".Measurements.Log">
+        </activity>
         <activity android:name=".Measurements.AvailableDevices">
+        </activity>
+        <activity android:name=".Measurements.BluetoothActivity">
+        </activity>
+        <activity android:name=".Measurements.Detailed">
+        </activity>
+        <activity android:name=".Measurements.Home">
+        </activity>
+        <activity android:name=".Measurements.Measuring">
+        </activity>
+
+        <activity android:name=".Medications.AddNew">
+        </activity>
+        <activity android:name=".Medications.Details">
+        </activity>
+        <activity android:name=".Medications.Home">
+        </activity>
+        <activity android:name=".Medications.List">
+        </activity>
+        <activity android:name=".Medications.Log">
+        </activity>
+
+        <activity android:name=".Professional.HomeDoctor">
+        </activity>
+        <activity android:name=".Professional.HomeNurse">
+        </activity>
+        <activity android:name=".Professional.PatientList">
+        </activity>
+        <activity android:name=".Professional.Patient">
+        </activity>
+
+        <activity android:name=".Symptoms.Calendar">
+        </activity>
+        <activity android:name=".Symptoms.Home">
+        </activity>
+        <activity android:name=".Symptoms.List">
+        </activity>
+        <activity android:name=".Symptoms.Log">
         </activity>
 
     </application>

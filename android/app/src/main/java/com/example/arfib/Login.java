@@ -16,7 +16,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginlayout); // Ensure this points to a valid layout file
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().hide();
+
         Intent intent = getIntent();
         String chosen = intent.getStringExtra("chosen");
 

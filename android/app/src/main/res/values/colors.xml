@@ -6,5 +6,7 @@
     <color name="electroyellow">#FFD557</color>
     <color name="leadgray">#8C8C8C</color>
     <color name="atrial">#313131</color>
+    <color name="drugblue">#87A7F9</color>
+    <color name="symptompurple">#9865DF</color>
 
 </resources>
