@@ -27,6 +27,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private TextView textStatus, textHR, textSignal;
     private Button buttonConnect, buttonRequest;
     private TextView textECG;
+    private TextView textECG2;
     private byte[][] ecg = null;
     private int nBytes = 0;
 
@@ -64,6 +65,7 @@ public class BluetoothActivity extends AppCompatActivity {
         textHR = findViewById(R.id.textViewHR);
         textSignal = findViewById(R.id.textViewSignal);
         textECG = findViewById(R.id.textECG);
+        textECG2 = findViewById(R.id.textECG2);
         buttonConnect = findViewById(R.id.buttonConnect);
 
 
@@ -192,6 +194,8 @@ public class BluetoothActivity extends AppCompatActivity {
                         int nLeads = ecg.length;
                         nBytes = ecg[0].length;
                         textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
+                        textECG2.setText(ecg);
+
                     } catch (Exception ex)
                     {
                         textECG.setText("ERROR in ecg stream");
