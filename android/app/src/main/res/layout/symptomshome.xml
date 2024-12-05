@@ -70,8 +70,6 @@
 
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -92,44 +90,101 @@
 
         <!-- Calendário Horizontal -->
         <HorizontalScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:background="@color/leadgray">
+            android:background="@color/leadgray"
+            android:fillViewport="true"> <!-- Garante que o conteúdo preencha a largura total -->
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
 
                 <!-- Botões de dias -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/today_4"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_dayselector"
                     android:padding="8dp"
-                    android:layout_marginEnd="6dp"
-                    android:text="Mon\n28"
+                    android:gravity="center"
+                    android:minWidth="60dp"
+                    android:minHeight="60dp"
                     android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/today_3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_dayselector"
                     android:padding="8dp"
-                    android:layout_marginEnd="6dp"
-                    android:text="Tue\n29"
+                    android:gravity="center"
+                    android:minWidth="60dp"
+                    android:minHeight="60dp"
                     android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
-                <!-- Adicione mais dias conforme necessário -->
+                <TextView
+                    android:id="@+id/today_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dayselector"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:minWidth="60dp"
+                    android:minHeight="60dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/today_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dayselector"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:minWidth="60dp"
+                    android:minHeight="60dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/today"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dayselector"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:minWidth="60dp"
+                    android:minHeight="60dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </HorizontalScrollView>
+
+
+
 
         <!-- Lista de Eventos -->
         <LinearLayout
@@ -172,6 +227,7 @@
             <!-- Adicione mais eventos conforme necessário -->
 
         </LinearLayout>
+
     </LinearLayout>
 
 
