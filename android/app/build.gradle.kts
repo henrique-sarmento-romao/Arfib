@@ -36,5 +36,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.gson)
+    implementation(libs.mpandroidchart)
     implementation(files("libs\\biolib.sdk.jar"))
+
 }

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.arfib.R;
+import android.graphics.Color;
 
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import java.util.ArrayList;
+import com.github.mikephil.charting.data.Entry;
+
+
+import java.lang.ref.WeakReference;
 import java.util.Set;
 
 public class BluetoothActivity extends AppCompatActivity {
@@ -25,28 +40,19 @@ public class BluetoothActivity extends AppCompatActivity {
     private BluetoothDevice selectedDevice;
     private BioLib biolib;
     private TextView textStatus, textHR, textSignal;
-    private Button buttonConnect, buttonRequest;
+    private Button buttonConnect;
     private TextView textECG;
     private TextView textECG2;
-    private byte[][] ecg = null;
+    private byte[][] ecg = new byte[0][0]; // Initialized as an empty array
     private int nBytes = 0;
+    private LineChart ecgChart;
 
     private static final int REQUEST_ENABLE_BT = 1;
     private static final String TARGET_DEVICE_MAC = "00:23:FE:00:0B:50"; // Replace with your device MAC address
 
-    // Permissions arrays
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
-            Manifest.permission.BLUETOOTH_SCAN,
-            Manifest.permission.BLUETOOTH_CONNECT,
-            Manifest.permission.BLUETOOTH_PRIVILEGED
-    };
-
-    private static String[] PERMISSIONS_LOCATION = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
@@ -67,10 +73,7 @@ public class BluetoothActivity extends AppCompatActivity {
         textECG = findViewById(R.id.textECG);
         textECG2 = findViewById(R.id.textECG2);
         buttonConnect = findViewById(R.id.buttonConnect);
-
-
-        // Initial status text
-
+        ecgChart = findViewById(R.id.chartECG);
 
         // Check for necessary permissions
         checkPermissions();
@@ -78,7 +81,6 @@ public class BluetoothActivity extends AppCompatActivity {
         try {
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (bluetoothAdapter == null) {
-                // Handle case where Bluetooth is not supported on the device
                 Toast.makeText(this, "Bluetooth is not supported on this device.", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -105,10 +107,33 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         });
 
-
+        // Configure the ECG chart
+        configureChart(ecgChart);
     }
 
+    private void configureChart(LineChart chart) {
+        chart.getDescription().setEnabled(false); // Disable description
+        chart.setExtraOffsets(10, 10, 10, 10); // Extra margins
+        chart.setDrawGridBackground(false); // No grid background
+        chart.setTouchEnabled(true); // Allow touch
+        chart.setDragEnabled(true); // Allow drag
+        chart.setScaleEnabled(true); // Allow zoom
+        chart.setPinchZoom(true); // Enable pinch-to-zoom
 
+        // Configure axes
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawGridLines(false);
+
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setTextColor(Color.BLACK);
+        leftAxis.setDrawGridLines(true);
+        chart.getAxisRight().setEnabled(false); // Disable right axis
+
+        Legend legend = chart.getLegend();
+        legend.setEnabled(false); // Hide legend
+    }
 
     private void checkPermissions() {
         int permission1 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -147,7 +172,7 @@ public class BluetoothActivity extends AppCompatActivity {
         try {
             if (selectedDevice != null) {
                 biolib = new BioLib(this, mHandler);
-                biolib.Connect(selectedDevice.getAddress(), 30); // Timeout value assumed to be 5 seconds
+                biolib.Connect(selectedDevice.getAddress(), 30); // Timeout value assumed to be 30 seconds
                 textStatus.setText("Connecting to " + selectedDevice.getName() + "...");
             } else {
                 textStatus.setText("Selected device is null.");
@@ -157,76 +182,91 @@ public class BluetoothActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void updateChart(LineChart chart, ArrayList<Entry> data) {
+        LineDataSet dataSet = new LineDataSet(data, "ECG Data");
+        dataSet.setColor(Color.CYAN);
+        dataSet.setLineWidth(2f);
+        dataSet.setDrawCircles(false); // Sem círculos nos pontos
+        dataSet.setDrawValues(false); // Sem valores nos pontos
+        dataSet.setMode(LineDataSet.Mode.LINEAR); // Linear para dados ECG
 
-    private final Handler mHandler = new Handler() {
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+        chart.invalidate(); // Atualizar o gráfico
+    }
+
+    private final MyHandler mHandler = new MyHandler(this);
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<BluetoothActivity> activityReference;
+
+        // Constructor receives a reference to the Activity
+        MyHandler(BluetoothActivity activity) {
+            super(Looper.getMainLooper()); // Explicitly associate with the main Looper
+            activityReference = new WeakReference<>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            BluetoothActivity activity = activityReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return; // The Activity has been destroyed, do nothing
+            }
+
             switch (msg.what) {
                 case BioLib.STATE_CONNECTED:
-                    textStatus.setText("Connected to " + selectedDevice.getName());
+                    activity.textStatus.setText("Connected to " + activity.selectedDevice.getName());
                     break;
 
                 case BioLib.UNABLE_TO_CONNECT_DEVICE:
-                    textStatus.setText("Unable to connect to device.");
+                    activity.textStatus.setText("Unable to connect to device.");
                     break;
 
                 case BioLib.MESSAGE_DISCONNECT_TO_DEVICE:
-                    textStatus.setText("Device disconnected.");
+                    activity.textStatus.setText("Device disconnected.");
                     break;
 
                 case BioLib.MESSAGE_DATA_UPDATED:
                     BioLib.Output out = (BioLib.Output) msg.obj;
-                    textHR.setText("HR: " + out.pulse + " bpm     Nb. Leads: " + biolib.GetNumberOfChannels());
+                    activity.textHR.setText("HR: " + out.pulse + " bpm     Nb. Leads: " + activity.biolib.GetNumberOfChannels());
                     break;
 
                 case BioLib.MESSAGE_PEAK_DETECTION:
-                    BioLib.QRS qrs = (BioLib.QRS)msg.obj;
-                    textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
+                    BioLib.QRS qrs = (BioLib.QRS) msg.obj;
+                    activity.textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
                     break;
-                default:
-                    super.handleMessage(msg);
 
                 case BioLib.MESSAGE_ECG_STREAM:
-                    try
-                    {
-                        textECG.setText("ECG received");
-                        ecg = (byte[][]) msg.obj;
-                        int nLeads = ecg.length;
-                        nBytes = ecg[0].length;
-                        textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
-                        textECG2.setText(ecg);
+                    try {
+                        if (msg.obj != null && msg.obj instanceof byte[][]) {
+                            activity.ecg = (byte[][]) msg.obj;
+                            int nLeads = activity.ecg.length;
+                            int nBytes = activity.ecg[0].length;
 
-                    } catch (Exception ex)
-                    {
-                        textECG.setText("ERROR in ecg stream");
+                            activity.textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
+                            // Convertendo os dados para o gráfico
+                            ArrayList<Entry> ecgEntries = new ArrayList<>();
+                            for (int i = 0; i < Math.min(nBytes, 300); i++) { // Limite de 300 pontos
+                                int value = activity.ecg[0][i] & 0xFF; // Pegando o primeiro lead (ajustável)
+                                ecgEntries.add(new Entry(i, value));
+                            }
+
+                            // Atualizar o gráfico
+                            activity.updateChart(activity.ecgChart, ecgEntries);
+                        } else {
+                            activity.textECG.setText("Error: ECG data not received or unexpected format.");
+                        }
+                    } catch (Exception ex) {
+                        activity.textECG.setText("Error: " + ex.getMessage());
                     }
                     break;
 
-            }
-        }
-    };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ENABLE_BT) {
-            if (resultCode == RESULT_OK) {
-                textStatus.setText("Bluetooth enabled.");
-            } else {
-                textStatus.setText("Bluetooth enabling failed.");
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                    Toast.makeText(this, "Permission " + permissions[i] + " denied.", Toast.LENGTH_SHORT).show();
-                }
+                default:
+                    super.handleMessage(msg);
             }
         }
     }
 }
+
+
