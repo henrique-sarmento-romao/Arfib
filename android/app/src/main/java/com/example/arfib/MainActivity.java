@@ -1,6 +1,8 @@
 package com.example.arfib;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,28 +20,38 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
+
+        if(isLoggedIn){
+            startActivity(new Intent(MainActivity.this, Login.class));
+        }
+
         Button patient_button = findViewById(R.id.patient_button);
         patient_button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            intent.putExtra("chosen", "p");
-            startActivity(intent);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("profile", "patient");
+            editor.apply();
+            startActivity(new Intent(MainActivity.this, Login.class));
         });
 
         Button doctor_but = findViewById(R.id.doctor_button);
         doctor_but.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            intent.putExtra("chosen", "d");
-            startActivity(intent);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("profile", "doctor");
+            editor.apply();
+            startActivity(new Intent(MainActivity.this, Login.class));
         });
 
         Button nurse_but = findViewById(R.id.nurse_button);
         nurse_but.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            intent.putExtra("chosen", "n");
-            startActivity(intent);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("profile", "nurse");
+            editor.apply();
+            startActivity(new Intent(MainActivity.this, Login.class));
         });
 
-        TextView register = findViewById(R.id.register_button);
+        Button register = findViewById(R.id.register_button);
         register.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Register.class);
             startActivity(intent);

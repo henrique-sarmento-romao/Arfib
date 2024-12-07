@@ -1,7 +1,9 @@
 package com.example.arfib;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,6 +21,7 @@ import com.example.arfib.Measurements.Home;
 
 
 public class HomePatient extends AppCompatActivity {
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +29,11 @@ public class HomePatient extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
         getSupportActionBar().setIcon(R.drawable.ic_menu_icon);
 
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String username = sharedPref.getString("username", "");
+
+        TextView welcome = findViewById(R.id.welcome);
+        welcome.setText("👋 Welcome, "+username+"!");
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
@@ -35,8 +41,17 @@ public class HomePatient extends AppCompatActivity {
             startActivity(bluetoothIntent);
         });
 
-        TextView welcome = findViewById(R.id.welcome);
-        welcome.setText("👋 Welcome, "+username+"!");
+        Button logout = findViewById(R.id.logoutButton);
+        logout.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.remove("username"); // Remove the username
+            editor.remove("is_logged_in"); // Remove the is_logged_in flag
+            editor.apply();
+            Intent backMainActivity = new Intent(HomePatient.this, MainActivity.class);
+            startActivity(backMainActivity);
+        });
+
+
     }
 
     @Override
@@ -60,17 +75,14 @@ public class HomePatient extends AppCompatActivity {
             return true;
         } else if (id == R.id.measurements) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Measurements.Home.class);
-            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.symptoms) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Symptoms.Home.class);
-            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.medications) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Medications.Home.class);
-            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.blog) {

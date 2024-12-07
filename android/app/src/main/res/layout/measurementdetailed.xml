@@ -59,7 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="top"
+        android:layout_marginTop="100dp"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/date"
@@ -71,7 +73,8 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/measurement_box" />
 
         <TextView

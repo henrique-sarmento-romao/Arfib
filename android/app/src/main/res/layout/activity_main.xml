@@ -12,18 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/hartpink"
-    >
+        android:background="@color/hartpink">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="200dp"
             android:layout_gravity="center|center_horizontal"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="0"
             app:srcCompat="@drawable/logo" />
 
@@ -32,11 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="0.5dp"
+            android:layout_marginBottom="1dp"
             android:text="I'm a"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="normal" />
 
         <Button
@@ -45,11 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:backgroundTint="@color/leadgray"
+            android:background="@drawable/round_dark_button"
             android:text="Patient"
             android:textColor="@android:color/white"
             android:textColorLink="@color/hartpink"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
 
         <Button
             android:id="@+id/doctor_button"
@@ -57,11 +57,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:backgroundTint="@color/leadgray"
+            android:background="@drawable/round_dark_button"
             android:text="Doctor"
             android:textColor="@android:color/white"
             android:textColorLink="@color/hartpink"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
 
         <Button
             android:id="@+id/nurse_button"
@@ -71,24 +72,41 @@
             android:layout_marginRight="60dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0"
-            android:backgroundTint="@color/leadgray"
+            android:background="@drawable/round_dark_button"
             android:text="Nurse"
             android:textColor="@android:color/white"
             android:textColorLink="@color/hartpink"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp" />
 
         <TextView
-            android:id="@+id/register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="0.5dp"
             android:layout_weight="0"
-            android:text="Are you new? Register here!"
+            android:text="Are you new?"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="normal" />
+            android:textSize="30dp"
+            android:textStyle="normal"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0"
+            android:background="@drawable/round_dark_button"
+            android:text="Register Here"
+            android:textColor="@android:color/white"
+            android:textColorLink="@color/hartpink"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="false"/>
 
 
     </LinearLayout>

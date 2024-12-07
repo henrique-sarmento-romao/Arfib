@@ -1,6 +1,8 @@
 package com.example.arfib.Measurements;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -40,8 +42,10 @@ public class Detailed extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.electroyellow));
         }
 
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String username = sharedPref.getString("username", "");
+
         Intent previousIntent = getIntent();
-        String username = previousIntent.getStringExtra("username");
         String date = previousIntent.getStringExtra("date");
 
         ImageButton homeButton = findViewById(R.id.homeButton);

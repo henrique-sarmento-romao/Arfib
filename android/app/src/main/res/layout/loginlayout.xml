@@ -6,6 +6,7 @@
     android:id="@+id/loginlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/hartpink">
 
     <LinearLayout
@@ -13,18 +14,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="200dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/logo" />
 
         <TextView
@@ -34,40 +33,42 @@
             android:text="Welcome!"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="30sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nif_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:hint="NIF"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:background="@drawable/round_button"
+                android:gravity="center"
+                android:hint="Username"
                 android:imeOptions="actionNext"
-                android:inputType="number"
-                android:padding="10dp" />
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="10dp">
+            android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pw_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/white"
+                android:padding="15dp"
+                android:background="@drawable/round_button"
+                android:gravity="center"
                 android:hint="Password"
                 android:imeOptions="actionSend"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

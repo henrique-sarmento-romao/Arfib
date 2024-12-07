@@ -5,6 +5,7 @@ import string
 import numpy as np
 import os
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 from variables import names, surnames, symptoms, medications
 
@@ -22,6 +23,7 @@ Symptom = pd.DataFrame({"name":[], "description":[]})
 Symptom_Log = pd.DataFrame({"date_time":[], "intensity":[], "patient":[], "symptom":[]})
 Medication = pd.DataFrame({"name":[], "effect":[]})
 Prescription = pd.DataFrame({"patient":[], "medication":[], "frequency":[], "start_date":[], "end_date":[]})
+Medication_Log = pd.DataFrame({"patient":[], "medication":[], "date_time":[], "taken":[]})
 
 # -- USER -------------------------------
 num_User = num_Patient + num_Doctor + num_Nurse
@@ -127,6 +129,32 @@ for patient in patient_list:
 
         Prescription.loc[len(Prescription)] = [patient, medication, frequency, start_date, end_date]
 
+
+for patient in patient_list:
+    medications = Prescription[Prescription["patient"] == patient]
+    if len(medications) == 0:
+        continue
+    
+    for i in range(len(medications)):  # Looping through all rows
+        medication = medications["medication"].iloc[i]  # Use iloc for positional access
+        frequency = medications["frequency"].iloc[i]
+        
+        timestamp = medications["start_date"].iloc[i]
+        date_string = timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")
+        start_date = datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S.%f")
+        start_date = start_date.replace(hour=8, minute=0, second=0, microsecond=0)
+
+        end_date = medications["end_date"].iloc[i]
+        if end_date is None:
+            end_date = start_date + relativedelta(months=6)  # Set a default end date
+        
+        date = start_date
+        while date < end_date:
+            taken = random.random() > 0.05  # Simulate medication taken with a 5% chance
+            Medication_Log.loc[len(Medication_Log)] = [patient, medication, date, taken]  # Corrected date_time to date
+            date += relativedelta(hours=int(frequency))  # Add frequency (in hours)
+
+
 folder = "database/CSVs/"
 User.to_csv(folder+"User.csv", index=False)
 Doctor.to_csv(folder+"Doctor.csv", index=False)
@@ -137,6 +165,7 @@ Symptom.to_csv(folder+"Symptom.csv", index=False)
 Symptom_Log.to_csv(folder+"Symptom_Log.csv", index=False)
 Medication.to_csv(folder+"Medication.csv", index=False)
 Prescription.to_csv(folder+"Prescription.csv", index=False)
+Medication_Log.to_csv(folder+"Medication_Log.csv", index=False)
 
 conn = sqlite3.connect('database/database.db')
 User.to_sql('User', conn, if_exists='replace', index=False)
@@ -148,4 +177,5 @@ Symptom.to_sql('Symptom', conn, if_exists='replace', index=False)
 Symptom_Log.to_sql('Symptom_Log', conn, if_exists='replace', index=False)
 Medication.to_sql('Medication', conn, if_exists='replace', index=False)
 Prescription.to_sql('Prescription', conn, if_exists='replace', index=False)
+Medication_Log.to_sql('Medication_Log', conn, if_exists='replace', index=False)
 conn.close()

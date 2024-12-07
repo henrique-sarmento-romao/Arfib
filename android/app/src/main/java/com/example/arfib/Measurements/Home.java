@@ -1,6 +1,8 @@
 package com.example.arfib.Measurements;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteAbortException;
 import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.ColorDrawable;
@@ -24,7 +26,6 @@ import com.example.arfib.R;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +48,8 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measurementhome);
 
-        Intent previousIntent = getIntent();
-        String username = previousIntent.getStringExtra("username");
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String username = sharedPref.getString("username", "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Measurements");
@@ -75,12 +76,6 @@ public class Home extends AppCompatActivity {
             Intent intent = new Intent(Home.this, Log.class);
             startActivity(intent);
         });
-
-        //Button measurement = findViewById(R.id.button);
-        //measurement.setOnClickListener(v -> {
-            //Intent intent = new Intent(Home.this, Detailed.class);
-           // startActivity(intent);
-        //});
 
         dbHelper = new DatabaseHelper(this);
 
