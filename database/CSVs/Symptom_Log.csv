@@ -1,0 +1,1395 @@
+date_time,intensity,patient,symptom
+2024-11-11 10:38:14.519028,3,alice.freitas72,Dizziness
+2024-10-24 07:47:08.464822,1,alice.freitas72,Chest Pain
+2024-10-29 22:16:50.350037,2,alice.freitas72,Breathlessness
+2024-11-29 19:32:13.970238,4,alice.freitas72,Breathlessness
+2024-10-10 22:32:44.719172,3,alice.freitas72,Dizziness
+2024-11-30 01:14:35.704999,4,alice.freitas72,Chest Pain
+2024-12-01 02:09:24.514158,2,alice.freitas72,Chest Pain
+2024-11-29 22:55:19.092792,3,alice.freitas72,Fatigue
+2024-11-30 19:54:19.097009,4,alice.freitas72,Fatigue
+2024-10-22 03:47:13.649495,3,alice.freitas72,Fatigue
+2024-10-08 16:49:56.026876,3,alice.freitas72,Chest Pain
+2024-10-21 12:58:59.792098,4,alice.freitas72,Breathlessness
+2024-11-30 21:59:07.436753,2,alice.freitas72,Chest Pain
+2024-10-17 05:05:03.212476,4,alice.freitas72,Fatigue
+2024-10-26 05:51:25.452314,1,alice.freitas72,Dizziness
+2024-10-21 22:45:53.142995,2,alice.freitas72,Breathlessness
+2024-11-24 12:47:09.171156,1,alice.freitas72,Fatigue
+2024-10-23 22:17:33.181986,4,alice.freitas72,Breathlessness
+2024-11-17 00:30:02.043403,3,alice.freitas72,Fatigue
+2024-11-13 15:42:17.300068,2,alice.freitas72,Fatigue
+2024-11-09 17:12:23.666857,4,alice.freitas72,Dizziness
+2024-12-05 08:04:11.344991,1,alice.freitas72,Fatigue
+2024-11-11 18:39:36.582606,1,alice.freitas72,Fatigue
+2024-11-28 10:27:28.869574,4,alice.freitas72,Dizziness
+2024-11-11 10:10:57.043042,1,alice.freitas72,Chest Pain
+2024-10-17 05:26:40.675940,4,alice.freitas72,Breathlessness
+2024-10-29 01:47:48.196150,2,alice.freitas72,Breathlessness
+2024-11-15 17:42:15.102763,2,alice.freitas72,Breathlessness
+2024-11-20 00:28:47.530296,4,alice.freitas72,Breathlessness
+2024-12-05 04:31:21.259076,2,alice.freitas72,Fatigue
+2024-10-26 19:44:52.387703,2,alice.freitas72,Breathlessness
+2024-10-18 08:29:47.414593,1,alice.freitas72,Dizziness
+2024-11-14 11:11:10.368371,1,alice.freitas72,Chest Pain
+2024-11-10 12:08:40.803900,2,alice.freitas72,Chest Pain
+2024-11-23 14:03:04.739593,1,danielribeiro86,Fatigue
+2024-11-27 06:30:20.879516,2,danielribeiro86,Dizziness
+2024-10-24 11:19:48.362053,1,danielribeiro86,Breathlessness
+2024-10-13 18:27:49.938251,4,danielribeiro86,Fatigue
+2024-10-11 08:03:02.839295,3,danielribeiro86,Chest Pain
+2024-10-26 16:53:43.815544,3,danielribeiro86,Breathlessness
+2024-11-06 13:50:25.509331,3,danielribeiro86,Fatigue
+2024-11-03 12:29:33.391488,1,danielribeiro86,Chest Pain
+2024-11-15 04:25:20.349870,3,danielribeiro86,Fatigue
+2024-11-21 15:41:02.621060,1,danielribeiro86,Dizziness
+2024-10-23 01:59:30.886973,1,danielribeiro86,Fatigue
+2024-12-03 19:45:20.744061,1,danielribeiro86,Breathlessness
+2024-11-05 03:37:17.757774,4,danielribeiro86,Dizziness
+2024-11-20 18:01:42.300409,3,danielribeiro86,Dizziness
+2024-10-10 13:36:11.454274,4,danielribeiro86,Fatigue
+2024-10-14 18:10:30.658674,1,danielribeiro86,Chest Pain
+2024-11-01 16:16:39.027156,3,danielribeiro86,Dizziness
+2024-11-11 19:13:19.005254,1,danielribeiro86,Breathlessness
+2024-11-21 13:29:01.207845,4,danielribeiro86,Chest Pain
+2024-11-23 16:48:21.169538,1,danielribeiro86,Breathlessness
+2024-11-19 07:22:35.900203,1,danielribeiro86,Dizziness
+2024-10-12 14:26:53.463365,1,danielribeiro86,Fatigue
+2024-11-02 04:05:35.101353,2,danielribeiro86,Fatigue
+2024-10-25 01:13:15.724568,2,danielribeiro86,Breathlessness
+2024-11-07 10:29:24.896671,2,danielribeiro86,Chest Pain
+2024-11-05 19:34:04.265355,4,danielribeiro86,Chest Pain
+2024-11-12 17:53:16.000327,4,danielribeiro86,Dizziness
+2024-12-04 10:43:18.631069,1,danielribeiro86,Dizziness
+2024-10-31 22:26:41.688598,1,danielribeiro86,Chest Pain
+2024-11-28 18:43:32.024242,3,danielribeiro86,Dizziness
+2024-10-13 18:33:58.845641,1,danielribeiro86,Chest Pain
+2024-11-17 22:28:26.468462,3,danielribeiro86,Fatigue
+2024-10-27 09:58:25.436211,3,danielribeiro86,Breathlessness
+2024-10-12 05:52:46.061987,3,danielribeiro86,Dizziness
+2024-11-30 15:55:12.837660,4,danielribeiro86,Breathlessness
+2024-10-22 16:08:09.061513,3,maria.batista5,Breathlessness
+2024-12-04 18:21:03.949022,4,maria.batista5,Breathlessness
+2024-10-17 00:09:12.624014,1,maria.batista5,Dizziness
+2024-11-09 04:54:59.445006,2,maria.batista5,Fatigue
+2024-11-14 22:55:37.329781,4,maria.batista5,Breathlessness
+2024-11-01 03:27:03.278717,2,maria.batista5,Breathlessness
+2024-11-04 00:53:20.952479,3,maria.batista5,Dizziness
+2024-11-23 17:31:01.979050,3,maria.batista5,Chest Pain
+2024-12-01 21:42:04.232264,2,maria.batista5,Breathlessness
+2024-10-14 14:29:02.759838,4,maria.batista5,Chest Pain
+2024-12-02 06:45:20.503552,1,maria.batista5,Breathlessness
+2024-11-16 07:52:46.390878,3,maria.batista5,Chest Pain
+2024-11-22 16:00:17.063207,4,maria.batista5,Dizziness
+2024-12-02 07:54:35.187977,2,maria.batista5,Dizziness
+2024-10-30 13:09:13.223687,2,maria.batista5,Fatigue
+2024-10-09 16:56:25.194214,3,maria.batista5,Dizziness
+2024-11-04 04:05:13.744192,1,maria.batista5,Fatigue
+2024-11-09 10:06:34.183063,1,maria.batista5,Chest Pain
+2024-10-27 03:25:56.644658,3,maria.batista5,Breathlessness
+2024-10-23 12:59:12.022006,4,maria.batista5,Chest Pain
+2024-12-01 16:41:04.950233,3,maria.batista5,Breathlessness
+2024-12-05 04:41:47.515023,4,maria.batista5,Dizziness
+2024-10-17 18:04:35.189579,3,maria.batista5,Dizziness
+2024-11-09 16:24:29.518341,1,maria.batista5,Chest Pain
+2024-11-11 13:46:08.521482,2,maria.batista5,Dizziness
+2024-11-12 16:26:03.443561,2,maria.batista5,Fatigue
+2024-11-10 01:12:41.593870,3,maria.batista5,Breathlessness
+2024-10-21 09:49:31.109328,4,maria.batista5,Fatigue
+2024-10-31 21:34:06.153576,2,maria.batista5,Fatigue
+2024-10-13 04:40:48.349242,1,maria.batista5,Dizziness
+2024-11-22 18:13:57.468072,1,maria.batista5,Chest Pain
+2024-10-15 18:15:53.485864,4,maria.batista5,Dizziness
+2024-11-01 02:49:50.755982,1,maria.batista5,Breathlessness
+2024-10-20 01:45:12.114139,1,manuelsousa30,Dizziness
+2024-10-31 18:42:18.922122,2,manuelsousa30,Chest Pain
+2024-10-22 00:09:27.463028,1,manuelsousa30,Fatigue
+2024-11-20 03:49:35.424595,3,manuelsousa30,Dizziness
+2024-11-07 08:25:59.700285,3,manuelsousa30,Fatigue
+2024-11-24 12:56:20.239269,2,manuelsousa30,Fatigue
+2024-10-21 09:36:39.963344,1,manuelsousa30,Breathlessness
+2024-10-23 10:21:37.619625,1,manuelsousa30,Fatigue
+2024-11-16 17:20:11.086366,2,manuelsousa30,Breathlessness
+2024-10-27 21:02:29.708020,1,manuelsousa30,Fatigue
+2024-10-22 17:25:03.625166,3,manuelsousa30,Fatigue
+2024-10-28 19:59:56.400715,1,manuelsousa30,Dizziness
+2024-10-23 01:18:13.488276,2,manuelsousa30,Chest Pain
+2024-10-17 09:13:43.475799,1,manuelsousa30,Dizziness
+2024-11-28 17:38:34.077781,1,manuelsousa30,Breathlessness
+2024-12-04 01:21:01.165618,4,manuelsousa30,Fatigue
+2024-10-17 10:26:17.269568,2,manuelsousa30,Chest Pain
+2024-11-25 17:49:19.010718,4,manuelsousa30,Breathlessness
+2024-10-17 13:50:37.589131,3,manuelsousa30,Breathlessness
+2024-12-03 03:58:06.236634,2,manuelsousa30,Chest Pain
+2024-11-18 16:56:37.689433,3,manuelsousa30,Breathlessness
+2024-11-27 01:07:21.710066,1,manuelsousa30,Breathlessness
+2024-10-08 05:44:33.511551,1,manuelsousa30,Chest Pain
+2024-11-24 15:38:15.505636,2,manuelsousa30,Fatigue
+2024-11-08 13:06:50.443019,1,manuelsousa30,Chest Pain
+2024-11-12 04:31:38.379731,1,manuelsousa30,Breathlessness
+2024-10-15 11:58:45.967764,4,manuelsousa30,Breathlessness
+2024-11-30 05:34:37.646748,2,manuelsousa30,Dizziness
+2024-11-18 14:51:43.915891,2,manuelsousa30,Fatigue
+2024-10-26 15:01:37.309023,2,manuelsousa30,Dizziness
+2024-10-18 09:37:38.524646,1,manuelsousa30,Fatigue
+2024-11-05 16:21:37.224383,2,manuelsousa30,Chest Pain
+2024-11-21 10:13:02.277293,1,manuelsousa30,Fatigue
+2024-11-04 18:26:57.516602,3,manuelsousa30,Chest Pain
+2024-11-19 23:24:00.899158,4,manuelsousa30,Chest Pain
+2024-11-10 20:36:14.291610,3,diana.figueiredo48,Dizziness
+2024-12-03 21:20:56.211460,4,diana.figueiredo48,Dizziness
+2024-11-02 18:33:42.914872,4,diana.figueiredo48,Fatigue
+2024-11-16 16:06:56.546622,3,diana.figueiredo48,Fatigue
+2024-12-01 03:07:37.363998,4,diana.figueiredo48,Breathlessness
+2024-11-09 20:05:28.352025,1,diana.figueiredo48,Dizziness
+2024-11-19 15:57:42.261503,1,diana.figueiredo48,Breathlessness
+2024-12-01 17:37:48.911983,3,diana.figueiredo48,Breathlessness
+2024-10-13 04:45:58.761059,2,diana.figueiredo48,Dizziness
+2024-10-16 17:13:33.400350,1,diana.figueiredo48,Chest Pain
+2024-11-16 09:13:58.734003,1,diana.figueiredo48,Dizziness
+2024-10-28 01:10:45.322104,3,diana.figueiredo48,Fatigue
+2024-12-04 15:52:11.272980,4,diana.figueiredo48,Fatigue
+2024-10-25 14:52:12.437152,2,diana.figueiredo48,Dizziness
+2024-10-17 23:03:55.523925,3,diana.figueiredo48,Dizziness
+2024-11-12 05:47:53.068940,4,diana.figueiredo48,Fatigue
+2024-11-05 22:18:11.413455,3,diana.figueiredo48,Dizziness
+2024-11-30 23:04:53.715722,2,diana.figueiredo48,Fatigue
+2024-11-18 19:27:02.181583,4,diana.figueiredo48,Fatigue
+2024-12-05 19:46:57.638690,2,diana.figueiredo48,Fatigue
+2024-10-23 06:09:56.178509,1,diana.figueiredo48,Chest Pain
+2024-11-18 00:17:13.250096,1,diana.figueiredo48,Dizziness
+2024-10-21 06:49:42.423442,3,diana.figueiredo48,Fatigue
+2024-11-09 11:51:45.722332,4,diana.figueiredo48,Chest Pain
+2024-11-10 02:58:45.173379,3,diana.figueiredo48,Breathlessness
+2024-11-19 05:01:21.115946,4,diana.figueiredo48,Dizziness
+2024-11-06 21:03:57.447101,4,diana.figueiredo48,Dizziness
+2024-10-22 16:02:10.652355,3,diana.figueiredo48,Breathlessness
+2024-12-04 09:20:02.288005,1,diana.figueiredo48,Chest Pain
+2024-12-04 02:21:20.099840,3,diana.figueiredo48,Dizziness
+2024-11-24 23:34:16.934704,1,diana.figueiredo48,Breathlessness
+2024-10-30 07:25:21.366377,3,diana.figueiredo48,Dizziness
+2024-11-06 20:56:41.241902,4,diana.figueiredo48,Dizziness
+2024-11-06 19:47:12.282948,4,diana.figueiredo48,Chest Pain
+2024-11-28 09:59:28.707095,2,diana.figueiredo48,Chest Pain
+2024-11-04 13:06:36.391870,1,diana.figueiredo48,Chest Pain
+2024-11-25 18:47:58.293196,1,diana.figueiredo48,Fatigue
+2024-11-19 04:14:31.505821,2,diana.figueiredo48,Dizziness
+2024-11-26 05:02:00.016922,2,diana.figueiredo48,Dizziness
+2024-10-15 12:21:33.909057,4,josé.barros68,Dizziness
+2024-10-16 21:09:22.008501,2,josé.barros68,Fatigue
+2024-10-23 06:17:40.204678,2,josé.barros68,Fatigue
+2024-10-28 11:17:12.566532,2,josé.barros68,Fatigue
+2024-11-19 18:03:56.184620,4,josé.barros68,Fatigue
+2024-11-25 17:16:52.172680,3,josé.barros68,Chest Pain
+2024-11-30 03:25:54.378542,4,josé.barros68,Dizziness
+2024-11-11 06:35:15.263884,1,josé.barros68,Dizziness
+2024-11-15 03:23:06.782030,3,josé.barros68,Fatigue
+2024-10-09 14:02:00.066014,1,josé.barros68,Dizziness
+2024-11-09 21:54:04.083306,2,josé.barros68,Fatigue
+2024-11-17 18:17:42.404735,4,josé.barros68,Breathlessness
+2024-10-17 19:44:33.271659,2,josé.barros68,Breathlessness
+2024-11-04 11:34:14.120038,3,josé.barros68,Fatigue
+2024-12-04 05:18:59.765345,3,josé.barros68,Chest Pain
+2024-10-28 01:12:44.251949,1,josé.barros68,Fatigue
+2024-10-31 11:10:56.167726,1,josé.barros68,Chest Pain
+2024-10-13 21:04:18.937433,4,josé.barros68,Chest Pain
+2024-10-12 22:11:25.328831,2,josé.barros68,Dizziness
+2024-11-07 21:16:55.874460,3,josé.barros68,Fatigue
+2024-11-17 22:50:51.749129,2,josé.barros68,Dizziness
+2024-11-30 22:51:10.002559,1,josé.barros68,Chest Pain
+2024-11-18 22:40:59.537266,1,josé.barros68,Dizziness
+2024-11-25 16:21:39.144573,3,josé.barros68,Chest Pain
+2024-12-01 06:24:43.193896,3,josé.barros68,Fatigue
+2024-11-01 07:59:58.175918,3,josé.barros68,Chest Pain
+2024-11-07 17:13:05.847106,4,josé.barros68,Fatigue
+2024-11-12 10:45:10.173659,2,josé.barros68,Chest Pain
+2024-12-02 23:06:34.532627,2,josé.barros68,Breathlessness
+2024-11-18 13:47:11.473110,3,josé.barros68,Breathlessness
+2024-10-12 16:13:39.036738,3,josé.barros68,Dizziness
+2024-10-21 07:10:40.660372,1,josé.barros68,Fatigue
+2024-11-02 22:41:42.737608,3,josé.barros68,Chest Pain
+2024-11-16 17:44:39.229025,3,josé.barros68,Fatigue
+2024-10-17 16:13:39.423360,1,josé.barros68,Chest Pain
+2024-10-09 02:14:28.053831,3,josé.barros68,Fatigue
+2024-11-28 20:22:23.562674,1,joão_mendes5,Breathlessness
+2024-10-12 03:14:18.712112,4,joão_mendes5,Fatigue
+2024-10-09 14:37:17.961994,1,joão_mendes5,Dizziness
+2024-11-01 04:33:26.489497,2,joão_mendes5,Fatigue
+2024-11-13 07:53:13.264610,1,joão_mendes5,Fatigue
+2024-11-24 17:05:17.269671,2,joão_mendes5,Chest Pain
+2024-11-06 17:26:49.184690,1,joão_mendes5,Fatigue
+2024-10-31 12:20:21.105874,4,joão_mendes5,Fatigue
+2024-11-20 09:34:32.039363,1,joão_mendes5,Breathlessness
+2024-11-28 02:50:33.557052,2,joão_mendes5,Chest Pain
+2024-12-02 11:10:11.018781,2,joão_mendes5,Chest Pain
+2024-11-15 21:05:08.095461,3,joão_mendes5,Fatigue
+2024-10-17 12:43:21.309081,1,joão_mendes5,Chest Pain
+2024-10-08 04:28:55.955506,4,joão_mendes5,Fatigue
+2024-10-08 09:11:50.991139,2,joão_mendes5,Fatigue
+2024-12-04 22:55:24.717873,3,joão_mendes5,Breathlessness
+2024-12-05 21:22:06.979344,4,joão_mendes5,Fatigue
+2024-10-13 13:51:11.729267,2,joão_mendes5,Dizziness
+2024-10-13 21:59:41.649481,3,joão_mendes5,Breathlessness
+2024-11-02 11:40:28.299257,1,joão_mendes5,Breathlessness
+2024-10-16 02:08:04.324224,1,joão_mendes5,Fatigue
+2024-11-24 10:45:03.811052,4,joão_mendes5,Fatigue
+2024-11-07 17:08:15.651031,3,joão_mendes5,Breathlessness
+2024-11-19 08:53:38.002942,4,joão_mendes5,Fatigue
+2024-10-29 22:30:45.381133,2,joão_mendes5,Fatigue
+2024-11-09 15:30:10.237868,3,joão_mendes5,Breathlessness
+2024-11-21 21:57:44.912349,3,joão_mendes5,Fatigue
+2024-10-27 18:20:47.400732,2,joão_mendes5,Fatigue
+2024-11-20 06:40:14.517919,4,joão_mendes5,Chest Pain
+2024-10-28 18:13:41.533347,1,joão_mendes5,Fatigue
+2024-11-03 06:35:58.551634,2,joão_mendes5,Fatigue
+2024-10-14 07:56:51.530644,4,joão_mendes5,Breathlessness
+2024-10-25 10:31:56.471184,1,joão_mendes5,Chest Pain
+2024-10-23 06:22:07.513726,2,joão_mendes5,Dizziness
+2024-10-28 16:01:41.535630,2,joão_mendes5,Chest Pain
+2024-11-06 20:02:40.757587,2,joão_mendes5,Chest Pain
+2024-10-11 13:30:49.200603,4,joão_mendes5,Chest Pain
+2024-12-05 17:01:17.753894,1,joão_mendes5,Chest Pain
+2024-10-17 02:50:35.051821,4,joão_mendes5,Chest Pain
+2024-11-30 11:53:22.882656,2,pedro.moraes25,Breathlessness
+2024-11-28 04:19:48.112628,3,pedro.moraes25,Fatigue
+2024-10-18 20:27:32.506497,4,pedro.moraes25,Chest Pain
+2024-10-22 22:28:20.533579,4,pedro.moraes25,Breathlessness
+2024-10-11 00:21:08.446428,4,pedro.moraes25,Breathlessness
+2024-11-01 13:19:34.357205,1,pedro.moraes25,Fatigue
+2024-10-26 02:15:49.061273,2,pedro.moraes25,Dizziness
+2024-11-28 09:44:10.805704,2,pedro.moraes25,Dizziness
+2024-11-19 03:52:52.957110,1,pedro.moraes25,Dizziness
+2024-11-01 22:02:12.460578,3,pedro.moraes25,Dizziness
+2024-10-27 07:11:58.906103,2,pedro.moraes25,Dizziness
+2024-10-28 02:02:36.210981,4,pedro.moraes25,Fatigue
+2024-11-17 00:18:20.630275,1,pedro.moraes25,Fatigue
+2024-10-25 08:01:31.920919,4,pedro.moraes25,Dizziness
+2024-10-31 09:55:54.061035,2,pedro.moraes25,Dizziness
+2024-11-17 23:55:47.282651,1,pedro.moraes25,Breathlessness
+2024-11-15 05:18:56.889257,2,pedro.moraes25,Fatigue
+2024-11-01 13:59:09.958162,3,pedro.moraes25,Chest Pain
+2024-10-15 03:00:25.171302,4,pedro.moraes25,Chest Pain
+2024-12-05 07:11:20.187611,4,pedro.moraes25,Dizziness
+2024-10-20 16:02:08.869807,3,pedro.moraes25,Fatigue
+2024-11-28 15:03:02.284793,2,pedro.moraes25,Breathlessness
+2024-11-24 13:54:04.946878,4,pedro.moraes25,Breathlessness
+2024-11-22 03:36:08.568877,3,pedro.moraes25,Dizziness
+2024-11-07 13:01:44.412362,1,pedro.moraes25,Fatigue
+2024-11-30 01:53:08.117314,4,pedro.moraes25,Breathlessness
+2024-11-30 01:14:16.245012,1,pedro.moraes25,Dizziness
+2024-10-12 19:54:39.275863,1,pedro.moraes25,Breathlessness
+2024-11-29 17:09:11.207532,1,pedro.moraes25,Breathlessness
+2024-11-04 14:42:29.435443,2,pedro.moraes25,Dizziness
+2024-11-06 04:37:29.985503,3,pedro.moraes25,Breathlessness
+2024-11-27 23:57:49.462431,1,pedro.moraes25,Dizziness
+2024-12-04 02:49:15.612546,4,pedro.moraes25,Fatigue
+2024-12-02 03:36:14.787503,1,pedro.moraes25,Chest Pain
+2024-10-09 13:20:40.870483,3,pedro.moraes25,Breathlessness
+2024-10-22 07:56:34.797773,3,pedro.moraes25,Breathlessness
+2024-11-09 19:26:43.405950,3,pedro.moraes25,Chest Pain
+2024-12-01 16:26:45.504395,1,cristina_moraes,Breathlessness
+2024-11-28 14:37:38.058929,4,cristina_moraes,Dizziness
+2024-11-03 08:28:02.899890,3,cristina_moraes,Chest Pain
+2024-10-09 05:42:28.435755,2,cristina_moraes,Breathlessness
+2024-10-29 17:34:04.774744,1,cristina_moraes,Chest Pain
+2024-10-12 00:01:32.141324,2,cristina_moraes,Fatigue
+2024-11-14 07:14:36.255890,2,cristina_moraes,Breathlessness
+2024-10-19 19:00:16.596243,2,cristina_moraes,Chest Pain
+2024-10-17 09:13:28.618724,4,cristina_moraes,Chest Pain
+2024-11-08 17:35:07.926484,1,cristina_moraes,Breathlessness
+2024-11-30 13:34:05.549603,2,cristina_moraes,Chest Pain
+2024-10-15 17:08:12.972321,4,cristina_moraes,Breathlessness
+2024-10-20 11:28:13.063400,1,cristina_moraes,Breathlessness
+2024-11-23 20:45:08.351542,3,cristina_moraes,Chest Pain
+2024-11-05 03:54:15.581893,2,cristina_moraes,Chest Pain
+2024-12-04 21:48:46.680353,3,cristina_moraes,Fatigue
+2024-11-23 08:33:47.415137,2,cristina_moraes,Chest Pain
+2024-10-19 08:38:24.815483,2,cristina_moraes,Breathlessness
+2024-11-18 02:47:25.303807,3,cristina_moraes,Breathlessness
+2024-11-24 05:10:04.134937,2,cristina_moraes,Chest Pain
+2024-10-09 21:09:11.874159,1,cristina_moraes,Dizziness
+2024-11-14 15:11:53.771380,3,cristina_moraes,Breathlessness
+2024-10-19 04:21:08.476930,1,cristina_moraes,Breathlessness
+2024-10-24 06:30:52.384497,1,cristina_moraes,Dizziness
+2024-11-26 06:40:07.103845,1,cristina_moraes,Breathlessness
+2024-11-27 08:15:21.415807,2,cristina_moraes,Chest Pain
+2024-10-22 23:54:57.304144,4,cristina_moraes,Dizziness
+2024-10-14 18:36:48.472631,3,cristina_moraes,Fatigue
+2024-11-02 23:39:37.006285,4,cristina_moraes,Breathlessness
+2024-10-16 23:21:44.190905,3,cristina_moraes,Dizziness
+2024-11-09 15:58:53.005343,2,cristina_moraes,Fatigue
+2024-11-28 00:08:24.338862,2,cristina_moraes,Breathlessness
+2024-10-15 06:10:13.256130,1,cristina_moraes,Chest Pain
+2024-11-17 07:36:58.242864,1,cristina_moraes,Dizziness
+2024-10-27 10:51:43.137747,2,ricardobatista56,Chest Pain
+2024-11-15 15:27:38.034987,4,ricardobatista56,Chest Pain
+2024-11-08 14:05:42.541592,3,ricardobatista56,Dizziness
+2024-11-13 18:11:54.522990,3,ricardobatista56,Breathlessness
+2024-10-12 12:09:46.203057,4,ricardobatista56,Breathlessness
+2024-10-22 08:53:45.637753,4,ricardobatista56,Fatigue
+2024-10-24 00:53:56.924611,4,ricardobatista56,Chest Pain
+2024-11-03 06:09:12.027169,2,ricardobatista56,Breathlessness
+2024-11-22 11:56:29.314993,2,ricardobatista56,Dizziness
+2024-11-10 08:32:51.155391,1,ricardobatista56,Fatigue
+2024-10-15 11:23:16.666170,3,ricardobatista56,Breathlessness
+2024-10-26 17:28:20.260808,2,ricardobatista56,Chest Pain
+2024-10-24 09:49:11.950743,1,ricardobatista56,Fatigue
+2024-10-11 19:08:37.487115,2,ricardobatista56,Dizziness
+2024-10-22 07:41:40.780732,2,ricardobatista56,Fatigue
+2024-10-23 07:28:07.180124,1,ricardobatista56,Breathlessness
+2024-10-17 22:52:51.875859,2,ricardobatista56,Breathlessness
+2024-11-30 14:37:18.549132,2,ricardobatista56,Dizziness
+2024-11-18 19:51:07.109228,4,ricardobatista56,Breathlessness
+2024-12-01 12:33:24.122504,2,ricardobatista56,Fatigue
+2024-11-05 12:43:48.635846,1,ricardobatista56,Dizziness
+2024-10-20 10:49:51.634716,4,ricardobatista56,Fatigue
+2024-11-21 02:45:52.750603,1,ricardobatista56,Chest Pain
+2024-11-21 11:39:37.617492,3,ricardobatista56,Dizziness
+2024-10-11 18:52:23.733183,3,ricardobatista56,Dizziness
+2024-10-15 15:24:18.504987,1,ricardobatista56,Dizziness
+2024-11-27 01:31:11.173036,2,ricardobatista56,Fatigue
+2024-11-27 03:20:23.904627,4,ricardobatista56,Breathlessness
+2024-10-09 22:16:14.165361,2,ricardobatista56,Dizziness
+2024-11-14 13:14:55.364420,2,ricardobatista56,Chest Pain
+2024-11-24 23:12:17.674385,4,ricardobatista56,Breathlessness
+2024-10-20 16:05:43.145185,2,ricardobatista56,Fatigue
+2024-10-26 16:21:13.052129,4,ricardobatista56,Fatigue
+2024-12-05 23:55:37.899357,1,ricardobatista56,Chest Pain
+2024-10-14 06:54:00.795607,2,francisco_monteiro10,Chest Pain
+2024-11-03 08:52:43.917999,2,francisco_monteiro10,Chest Pain
+2024-11-25 00:09:53.560370,3,francisco_monteiro10,Dizziness
+2024-10-24 17:23:33.737447,1,francisco_monteiro10,Dizziness
+2024-11-19 07:59:58.477998,3,francisco_monteiro10,Dizziness
+2024-11-13 06:43:37.133377,3,francisco_monteiro10,Chest Pain
+2024-10-12 12:02:18.820739,4,francisco_monteiro10,Chest Pain
+2024-11-26 22:58:01.610549,1,francisco_monteiro10,Breathlessness
+2024-11-21 19:44:24.328705,3,francisco_monteiro10,Fatigue
+2024-10-30 09:56:19.052277,1,francisco_monteiro10,Chest Pain
+2024-11-10 11:36:21.548089,3,francisco_monteiro10,Chest Pain
+2024-11-18 14:33:32.417319,2,francisco_monteiro10,Fatigue
+2024-10-20 20:10:00.647504,4,francisco_monteiro10,Chest Pain
+2024-10-16 15:51:58.615120,4,francisco_monteiro10,Fatigue
+2024-10-25 12:11:50.969457,2,francisco_monteiro10,Chest Pain
+2024-11-27 17:08:43.282324,2,francisco_monteiro10,Fatigue
+2024-11-18 17:08:35.046790,3,francisco_monteiro10,Fatigue
+2024-10-17 17:30:57.200831,2,francisco_monteiro10,Breathlessness
+2024-11-14 13:50:08.609210,3,francisco_monteiro10,Chest Pain
+2024-11-02 19:12:52.129944,3,francisco_monteiro10,Fatigue
+2024-11-11 22:25:38.837612,3,francisco_monteiro10,Breathlessness
+2024-10-26 03:32:20.514929,1,francisco_monteiro10,Breathlessness
+2024-11-27 19:59:00.785448,3,francisco_monteiro10,Breathlessness
+2024-11-10 10:53:20.428481,2,francisco_monteiro10,Chest Pain
+2024-10-19 12:32:17.084700,4,francisco_monteiro10,Fatigue
+2024-10-15 02:24:07.412009,1,francisco_monteiro10,Breathlessness
+2024-11-24 01:14:05.637969,2,francisco_monteiro10,Chest Pain
+2024-11-03 04:04:43.460700,1,francisco_monteiro10,Dizziness
+2024-10-23 03:05:47.073023,2,francisco_monteiro10,Chest Pain
+2024-10-15 16:11:06.690262,2,francisco_monteiro10,Breathlessness
+2024-12-01 12:27:10.040283,2,francisco_monteiro10,Dizziness
+2024-10-10 06:15:16.127031,3,francisco_monteiro10,Fatigue
+2024-10-08 13:00:36.937002,1,francisco_monteiro10,Chest Pain
+2024-10-30 05:11:52.041370,1,francisco_monteiro10,Breathlessness
+2024-10-09 22:38:46.891382,1,francisco_monteiro10,Fatigue
+2024-10-22 03:31:38.002514,2,francisco_monteiro10,Breathlessness
+2024-10-22 06:04:55.095432,1,francisco_monteiro10,Chest Pain
+2024-11-04 06:57:33.237934,4,david.dias92,Dizziness
+2024-11-10 09:37:17.282833,3,david.dias92,Fatigue
+2024-10-18 04:40:23.438782,3,david.dias92,Fatigue
+2024-11-27 07:46:22.013550,2,david.dias92,Chest Pain
+2024-10-16 14:02:49.504590,3,david.dias92,Fatigue
+2024-10-22 10:30:42.109595,2,david.dias92,Breathlessness
+2024-11-19 13:38:41.048476,2,david.dias92,Chest Pain
+2024-11-09 05:09:39.605413,1,david.dias92,Chest Pain
+2024-10-17 01:13:30.885051,3,david.dias92,Breathlessness
+2024-11-04 05:34:46.839263,2,david.dias92,Chest Pain
+2024-11-05 08:12:45.683781,2,david.dias92,Dizziness
+2024-11-25 11:44:54.994110,4,david.dias92,Fatigue
+2024-11-06 20:46:56.225655,2,david.dias92,Breathlessness
+2024-10-24 09:25:14.587986,1,david.dias92,Breathlessness
+2024-10-31 20:32:42.079206,1,david.dias92,Chest Pain
+2024-11-21 16:22:14.494308,1,david.dias92,Fatigue
+2024-11-17 23:57:05.361107,3,david.dias92,Chest Pain
+2024-11-14 20:01:33.793797,1,david.dias92,Fatigue
+2024-11-21 06:22:30.392295,2,david.dias92,Breathlessness
+2024-10-09 18:35:11.206936,4,david.dias92,Chest Pain
+2024-10-19 00:45:45.954171,4,david.dias92,Breathlessness
+2024-10-19 03:46:13.799600,4,david.dias92,Dizziness
+2024-10-27 12:00:07.507804,2,david.dias92,Dizziness
+2024-11-19 00:56:03.142586,1,david.dias92,Breathlessness
+2024-10-24 04:14:17.466408,4,david.dias92,Breathlessness
+2024-10-15 18:29:40.774876,2,david.dias92,Fatigue
+2024-11-08 17:41:12.699810,3,david.dias92,Breathlessness
+2024-10-31 05:04:28.368908,2,david.dias92,Fatigue
+2024-11-06 01:22:47.052641,3,david.dias92,Fatigue
+2024-11-20 19:24:20.803764,4,david.dias92,Breathlessness
+2024-11-01 18:30:55.048630,2,david.dias92,Breathlessness
+2024-11-09 16:13:57.328662,1,david.dias92,Dizziness
+2024-10-29 09:42:02.401241,1,andrésilva15,Fatigue
+2024-11-24 22:50:06.728199,4,andrésilva15,Dizziness
+2024-11-22 01:44:03.802383,2,andrésilva15,Dizziness
+2024-10-30 18:42:31.427583,3,andrésilva15,Fatigue
+2024-11-21 05:36:27.645323,2,andrésilva15,Breathlessness
+2024-10-21 18:15:52.200486,2,andrésilva15,Chest Pain
+2024-11-08 22:51:34.339367,4,andrésilva15,Breathlessness
+2024-11-19 01:25:11.125754,4,andrésilva15,Dizziness
+2024-10-16 07:16:35.170264,3,andrésilva15,Breathlessness
+2024-11-23 10:14:23.846262,4,andrésilva15,Dizziness
+2024-11-25 15:32:12.273952,3,andrésilva15,Chest Pain
+2024-11-25 04:47:28.075763,4,andrésilva15,Breathlessness
+2024-11-19 11:56:47.700447,2,andrésilva15,Fatigue
+2024-10-17 17:50:38.309165,4,andrésilva15,Chest Pain
+2024-10-15 19:40:50.519913,1,andrésilva15,Fatigue
+2024-11-03 19:53:13.999041,3,andrésilva15,Breathlessness
+2024-11-14 09:58:10.346797,3,andrésilva15,Fatigue
+2024-11-13 23:49:36.224285,2,andrésilva15,Breathlessness
+2024-11-07 05:10:34.397176,4,andrésilva15,Breathlessness
+2024-11-26 02:46:01.473640,4,andrésilva15,Fatigue
+2024-10-23 17:36:28.919797,1,andrésilva15,Breathlessness
+2024-11-17 22:59:35.480041,3,andrésilva15,Fatigue
+2024-10-09 08:16:54.468943,2,andrésilva15,Breathlessness
+2024-12-04 19:39:46.556493,2,andrésilva15,Chest Pain
+2024-10-20 19:59:00.207363,3,andrésilva15,Breathlessness
+2024-10-11 07:23:58.944268,1,andrésilva15,Breathlessness
+2024-10-13 02:34:33.185106,3,andrésilva15,Chest Pain
+2024-12-03 14:36:54.816626,2,andrésilva15,Chest Pain
+2024-11-06 08:02:45.611889,2,andrésilva15,Breathlessness
+2024-11-08 09:49:11.053426,3,andrésilva15,Breathlessness
+2024-10-30 14:39:24.598623,3,andrésilva15,Chest Pain
+2024-11-29 06:32:01.281077,2,andrésilva15,Dizziness
+2024-10-17 18:28:45.751793,4,andrésilva15,Chest Pain
+2024-10-21 05:41:05.741667,3,andrésilva15,Breathlessness
+2024-10-25 07:32:09.339762,1,andrésilva15,Breathlessness
+2024-12-05 02:47:21.717493,4,leonorfigueiredo,Fatigue
+2024-11-06 07:06:38.166685,3,leonorfigueiredo,Fatigue
+2024-11-08 05:32:44.249423,2,leonorfigueiredo,Chest Pain
+2024-10-25 02:30:21.925766,2,leonorfigueiredo,Chest Pain
+2024-11-19 11:35:09.873123,2,leonorfigueiredo,Fatigue
+2024-12-03 07:08:02.158539,3,leonorfigueiredo,Chest Pain
+2024-10-07 20:12:29.084462,3,leonorfigueiredo,Breathlessness
+2024-10-09 03:45:52.323768,3,leonorfigueiredo,Fatigue
+2024-11-08 11:37:38.886633,4,leonorfigueiredo,Chest Pain
+2024-12-02 20:01:15.931293,2,leonorfigueiredo,Chest Pain
+2024-12-05 02:31:52.908067,2,leonorfigueiredo,Breathlessness
+2024-10-27 07:57:36.612725,1,leonorfigueiredo,Dizziness
+2024-11-02 05:00:27.340159,4,leonorfigueiredo,Breathlessness
+2024-11-19 18:11:46.866922,2,leonorfigueiredo,Chest Pain
+2024-10-15 10:06:10.293694,4,leonorfigueiredo,Breathlessness
+2024-10-24 18:00:06.414707,1,leonorfigueiredo,Dizziness
+2024-11-24 04:32:18.107697,3,leonorfigueiredo,Breathlessness
+2024-10-12 13:25:32.307225,1,leonorfigueiredo,Chest Pain
+2024-10-08 22:05:28.757112,3,leonorfigueiredo,Dizziness
+2024-12-02 23:59:51.668365,1,leonorfigueiredo,Fatigue
+2024-11-28 19:36:11.588309,1,leonorfigueiredo,Fatigue
+2024-11-30 02:52:08.963293,1,leonorfigueiredo,Breathlessness
+2024-10-23 04:35:17.009622,1,leonorfigueiredo,Dizziness
+2024-11-05 16:09:06.867399,2,leonorfigueiredo,Chest Pain
+2024-11-16 09:50:35.184965,3,leonorfigueiredo,Chest Pain
+2024-10-31 12:34:12.604153,3,leonorfigueiredo,Fatigue
+2024-10-25 00:40:12.295950,2,leonorfigueiredo,Breathlessness
+2024-11-20 04:27:34.474354,2,leonorfigueiredo,Dizziness
+2024-10-10 09:27:11.452999,4,leonorfigueiredo,Breathlessness
+2024-11-16 02:30:43.132894,2,leonorfigueiredo,Chest Pain
+2024-11-20 03:27:54.329797,2,leonorfigueiredo,Breathlessness
+2024-10-18 15:00:50.311629,4,leonorfigueiredo,Fatigue
+2024-11-20 13:20:38.950314,4,leonorfigueiredo,Chest Pain
+2024-11-20 15:26:25.372288,3,leonorfigueiredo,Dizziness
+2024-10-27 03:25:25.126359,3,leonorfigueiredo,Breathlessness
+2024-11-22 05:30:04.583671,1,isabel.fernandes,Dizziness
+2024-11-08 05:47:05.618879,3,isabel.fernandes,Dizziness
+2024-11-13 22:55:38.836260,3,isabel.fernandes,Breathlessness
+2024-10-18 17:45:34.170630,4,isabel.fernandes,Breathlessness
+2024-10-20 16:47:23.596386,1,isabel.fernandes,Breathlessness
+2024-11-25 02:44:41.603560,2,isabel.fernandes,Dizziness
+2024-10-31 21:14:01.460383,3,isabel.fernandes,Fatigue
+2024-10-15 00:22:31.801492,4,isabel.fernandes,Fatigue
+2024-10-15 07:19:50.619818,1,isabel.fernandes,Chest Pain
+2024-10-20 02:41:05.410150,1,isabel.fernandes,Chest Pain
+2024-11-10 02:44:06.616761,3,isabel.fernandes,Dizziness
+2024-11-13 00:25:56.282633,4,isabel.fernandes,Chest Pain
+2024-10-26 16:19:49.127196,4,isabel.fernandes,Dizziness
+2024-11-04 10:42:30.810148,3,isabel.fernandes,Chest Pain
+2024-11-09 18:13:29.474361,2,isabel.fernandes,Chest Pain
+2024-10-29 10:17:04.538250,2,isabel.fernandes,Dizziness
+2024-11-07 07:56:17.190358,3,isabel.fernandes,Fatigue
+2024-11-17 01:18:53.913785,3,isabel.fernandes,Dizziness
+2024-10-22 17:11:38.788623,4,isabel.fernandes,Chest Pain
+2024-10-30 04:16:02.630177,2,isabel.fernandes,Fatigue
+2024-12-03 02:39:51.348317,4,isabel.fernandes,Fatigue
+2024-11-02 20:42:00.265511,3,isabel.fernandes,Chest Pain
+2024-11-23 15:06:14.332347,2,isabel.fernandes,Breathlessness
+2024-10-23 20:06:33.569774,1,isabel.fernandes,Breathlessness
+2024-10-11 05:48:46.845730,2,isabel.fernandes,Dizziness
+2024-11-07 19:41:59.890507,3,isabel.fernandes,Dizziness
+2024-11-02 14:49:31.784182,1,isabel.fernandes,Dizziness
+2024-10-19 06:40:03.142705,3,isabel.fernandes,Fatigue
+2024-11-04 10:24:57.341738,4,isabel.fernandes,Breathlessness
+2024-11-18 00:34:20.438045,2,isabel.fernandes,Dizziness
+2024-10-27 05:44:59.101981,2,isabel.fernandes,Fatigue
+2024-11-10 14:14:31.129646,1,cristina.matias17,Fatigue
+2024-10-10 17:01:40.372685,4,cristina.matias17,Chest Pain
+2024-10-11 20:48:48.271933,1,cristina.matias17,Breathlessness
+2024-12-02 01:42:28.834246,4,cristina.matias17,Chest Pain
+2024-11-15 03:51:15.927058,4,cristina.matias17,Breathlessness
+2024-10-19 00:45:53.833229,3,cristina.matias17,Fatigue
+2024-11-20 07:41:39.776945,1,cristina.matias17,Dizziness
+2024-10-09 14:44:16.773648,3,cristina.matias17,Breathlessness
+2024-12-01 20:28:38.014139,3,cristina.matias17,Fatigue
+2024-10-25 09:37:41.897884,1,cristina.matias17,Breathlessness
+2024-12-03 12:12:44.205147,3,cristina.matias17,Chest Pain
+2024-10-23 13:01:36.360963,1,cristina.matias17,Breathlessness
+2024-11-18 02:11:20.557491,3,cristina.matias17,Chest Pain
+2024-10-16 23:25:36.660786,3,cristina.matias17,Chest Pain
+2024-10-11 15:20:21.269057,4,cristina.matias17,Dizziness
+2024-10-12 15:59:38.386809,3,cristina.matias17,Dizziness
+2024-11-11 22:47:27.659193,3,cristina.matias17,Chest Pain
+2024-11-28 20:20:26.645929,4,cristina.matias17,Fatigue
+2024-11-22 22:34:36.494253,3,cristina.matias17,Chest Pain
+2024-11-30 16:26:27.547206,1,cristina.matias17,Breathlessness
+2024-11-04 19:07:45.857396,2,cristina.matias17,Chest Pain
+2024-12-06 05:44:36.961860,4,cristina.matias17,Chest Pain
+2024-12-02 21:37:07.193712,4,cristina.matias17,Fatigue
+2024-10-11 05:47:00.559904,1,cristina.matias17,Fatigue
+2024-10-12 10:09:04.176181,3,cristina.matias17,Chest Pain
+2024-11-27 01:52:26.977503,4,cristina.matias17,Dizziness
+2024-12-05 12:42:40.842636,1,cristina.matias17,Dizziness
+2024-12-04 22:57:30.542681,1,cristina.matias17,Dizziness
+2024-12-02 03:09:58.948250,4,cristina.matias17,Fatigue
+2024-11-16 15:17:05.731630,4,cristina.matias17,Chest Pain
+2024-11-15 20:49:39.700725,3,cristina.matias17,Fatigue
+2024-10-13 20:46:42.357636,1,cristina.matias17,Dizziness
+2024-11-23 15:43:38.967960,4,cristina.matias17,Chest Pain
+2024-11-10 15:20:53.959062,3,cristina.matias17,Fatigue
+2024-10-15 16:33:43.475638,2,cristina.matias17,Breathlessness
+2024-11-27 18:13:32.438999,3,cristina.matias17,Chest Pain
+2024-10-30 08:48:42.561872,3,cristina.matias17,Fatigue
+2024-12-06 10:01:18.171500,2,cristina.matias17,Breathlessness
+2024-11-17 19:27:52.832296,3,bernardo_borges,Breathlessness
+2024-11-25 07:22:11.415101,4,bernardo_borges,Fatigue
+2024-12-06 05:18:22.917287,1,bernardo_borges,Chest Pain
+2024-12-03 13:08:53.118385,3,bernardo_borges,Breathlessness
+2024-10-27 04:51:20.318785,3,bernardo_borges,Chest Pain
+2024-10-14 21:21:50.507861,4,bernardo_borges,Fatigue
+2024-11-11 09:00:54.229660,2,bernardo_borges,Chest Pain
+2024-10-28 12:50:01.147159,3,bernardo_borges,Chest Pain
+2024-11-07 09:14:02.707642,2,bernardo_borges,Breathlessness
+2024-10-10 03:56:11.705636,3,bernardo_borges,Chest Pain
+2024-11-06 12:15:18.089472,4,bernardo_borges,Breathlessness
+2024-10-27 08:16:15.830137,2,bernardo_borges,Breathlessness
+2024-12-04 04:02:34.408516,2,bernardo_borges,Fatigue
+2024-10-13 03:42:07.427796,4,bernardo_borges,Chest Pain
+2024-11-24 16:10:26.965230,3,bernardo_borges,Fatigue
+2024-11-08 19:39:27.205888,3,bernardo_borges,Dizziness
+2024-11-25 18:25:29.425969,1,bernardo_borges,Dizziness
+2024-11-22 17:25:15.924787,2,bernardo_borges,Breathlessness
+2024-11-29 23:42:15.898371,1,bernardo_borges,Fatigue
+2024-12-02 06:44:22.634711,2,bernardo_borges,Breathlessness
+2024-10-10 03:11:28.505453,3,bernardo_borges,Fatigue
+2024-11-12 05:56:00.655605,4,bernardo_borges,Chest Pain
+2024-11-11 23:03:43.599905,3,bernardo_borges,Breathlessness
+2024-12-04 08:08:10.145828,1,bernardo_borges,Fatigue
+2024-12-05 06:52:29.076963,1,bernardo_borges,Fatigue
+2024-12-06 07:58:04.859644,1,bernardo_borges,Chest Pain
+2024-10-24 04:29:53.898011,4,bernardo_borges,Chest Pain
+2024-11-08 16:20:06.699792,1,bernardo_borges,Dizziness
+2024-11-05 12:07:56.654266,1,bernardo_borges,Dizziness
+2024-11-19 17:47:30.391089,4,bernardo_borges,Dizziness
+2024-11-16 20:43:24.961056,4,bernardo_borges,Dizziness
+2024-10-16 17:02:15.451606,3,bernardo_borges,Chest Pain
+2024-11-30 05:48:08.075439,2,bernardo_borges,Breathlessness
+2024-11-15 23:33:35.001209,3,bernardo_borges,Fatigue
+2024-11-12 20:41:14.882993,1,bernardo_borges,Chest Pain
+2024-11-15 16:06:58.437222,2,bernardo_borges,Fatigue
+2024-11-16 19:00:32.347467,4,bernardo_borges,Dizziness
+2024-11-23 11:34:52.569708,2,bernardo_borges,Chest Pain
+2024-10-18 17:58:38.597487,4,bernardo_borges,Dizziness
+2024-10-11 21:11:07.746806,2,david_lopes8,Breathlessness
+2024-10-21 09:41:39.607582,4,david_lopes8,Breathlessness
+2024-10-21 08:07:13.986709,3,david_lopes8,Fatigue
+2024-10-30 08:35:58.995977,1,david_lopes8,Breathlessness
+2024-10-19 13:06:49.786901,2,david_lopes8,Breathlessness
+2024-10-17 05:44:36.165997,1,david_lopes8,Dizziness
+2024-11-08 11:50:08.701066,1,david_lopes8,Dizziness
+2024-11-13 23:23:22.386839,2,david_lopes8,Dizziness
+2024-11-15 06:20:24.379841,3,david_lopes8,Dizziness
+2024-10-07 12:41:04.816470,3,david_lopes8,Dizziness
+2024-10-23 18:56:16.834285,4,david_lopes8,Dizziness
+2024-10-29 20:26:55.553355,4,david_lopes8,Breathlessness
+2024-11-10 04:16:44.733148,3,david_lopes8,Chest Pain
+2024-10-20 18:43:05.555278,2,david_lopes8,Breathlessness
+2024-11-17 14:30:50.190850,3,david_lopes8,Fatigue
+2024-11-13 22:14:21.459197,2,david_lopes8,Fatigue
+2024-12-01 14:18:31.946039,4,david_lopes8,Breathlessness
+2024-11-17 16:21:21.960744,2,david_lopes8,Breathlessness
+2024-11-07 20:26:19.641044,1,david_lopes8,Dizziness
+2024-11-13 05:30:15.081352,3,david_lopes8,Dizziness
+2024-12-02 07:06:20.823592,4,david_lopes8,Dizziness
+2024-11-03 13:34:52.937455,1,david_lopes8,Fatigue
+2024-10-13 16:07:06.623010,2,david_lopes8,Breathlessness
+2024-11-10 03:57:40.049159,3,david_lopes8,Fatigue
+2024-12-04 08:14:20.165991,2,david_lopes8,Chest Pain
+2024-11-08 11:54:41.627917,4,david_lopes8,Fatigue
+2024-10-20 08:31:44.189874,1,david_lopes8,Fatigue
+2024-11-05 08:29:26.854942,3,david_lopes8,Chest Pain
+2024-11-23 18:47:08.115873,4,david_lopes8,Fatigue
+2024-11-30 09:46:28.571238,2,david_lopes8,Dizziness
+2024-11-04 10:02:45.472720,3,daniel.teixeira1,Breathlessness
+2024-11-27 06:00:59.392399,2,daniel.teixeira1,Chest Pain
+2024-12-04 02:09:59.501507,1,daniel.teixeira1,Dizziness
+2024-11-16 03:00:47.029703,1,daniel.teixeira1,Breathlessness
+2024-11-01 09:54:30.542195,2,daniel.teixeira1,Dizziness
+2024-11-22 21:25:42.260733,4,daniel.teixeira1,Breathlessness
+2024-11-23 13:26:20.714511,2,daniel.teixeira1,Dizziness
+2024-12-03 12:41:01.194493,3,daniel.teixeira1,Chest Pain
+2024-10-20 09:03:55.879178,3,daniel.teixeira1,Fatigue
+2024-10-29 21:51:56.565174,4,daniel.teixeira1,Chest Pain
+2024-11-28 09:50:43.336167,1,daniel.teixeira1,Fatigue
+2024-10-21 16:44:02.594439,2,daniel.teixeira1,Breathlessness
+2024-10-28 22:50:28.018914,4,daniel.teixeira1,Chest Pain
+2024-11-10 22:34:16.679558,1,daniel.teixeira1,Chest Pain
+2024-10-14 09:36:33.031812,2,daniel.teixeira1,Dizziness
+2024-11-08 19:15:41.296655,4,daniel.teixeira1,Breathlessness
+2024-11-19 04:54:10.768641,1,daniel.teixeira1,Dizziness
+2024-10-27 12:10:07.848130,2,daniel.teixeira1,Fatigue
+2024-11-08 22:45:03.916868,2,daniel.teixeira1,Chest Pain
+2024-11-07 00:02:17.587108,4,daniel.teixeira1,Breathlessness
+2024-11-29 02:24:16.055329,1,daniel.teixeira1,Chest Pain
+2024-10-13 16:33:20.449309,3,daniel.teixeira1,Dizziness
+2024-11-21 06:39:20.973411,1,daniel.teixeira1,Chest Pain
+2024-10-26 13:36:05.460454,4,daniel.teixeira1,Fatigue
+2024-10-30 13:00:11.621138,3,daniel.teixeira1,Chest Pain
+2024-10-25 06:29:04.565130,1,daniel.teixeira1,Dizziness
+2024-11-28 10:08:00.081518,4,daniel.teixeira1,Breathlessness
+2024-10-12 03:06:27.115190,3,daniel.teixeira1,Fatigue
+2024-11-13 09:10:31.012981,4,daniel.teixeira1,Breathlessness
+2024-10-24 05:33:04.120830,2,daniel.teixeira1,Chest Pain
+2024-11-26 23:40:56.224692,3,daniel.teixeira1,Breathlessness
+2024-11-22 00:08:32.233615,2,daniel.teixeira1,Dizziness
+2024-11-18 13:07:53.972866,3,daniel.teixeira1,Dizziness
+2024-10-09 18:51:36.774024,4,daniel.teixeira1,Fatigue
+2024-10-19 05:02:11.593915,1,daniel.teixeira1,Fatigue
+2024-11-29 15:30:43.772269,2,mariana.ramos,Dizziness
+2024-11-26 09:23:21.928920,3,mariana.ramos,Dizziness
+2024-11-03 21:35:41.583368,3,mariana.ramos,Breathlessness
+2024-10-15 13:31:55.467764,2,mariana.ramos,Chest Pain
+2024-12-05 16:01:45.817434,2,mariana.ramos,Fatigue
+2024-10-24 01:29:30.353877,1,mariana.ramos,Fatigue
+2024-10-28 01:56:10.396299,4,mariana.ramos,Chest Pain
+2024-10-23 09:13:57.011190,4,mariana.ramos,Breathlessness
+2024-11-19 06:31:06.059331,1,mariana.ramos,Breathlessness
+2024-11-09 00:29:35.464969,4,mariana.ramos,Dizziness
+2024-12-02 00:02:05.880595,4,mariana.ramos,Fatigue
+2024-10-18 15:59:51.507184,3,mariana.ramos,Dizziness
+2024-11-12 22:16:01.388334,4,mariana.ramos,Fatigue
+2024-10-07 22:27:28.186356,2,mariana.ramos,Fatigue
+2024-11-03 08:53:21.758362,1,mariana.ramos,Chest Pain
+2024-11-30 17:42:50.581308,4,mariana.ramos,Dizziness
+2024-10-30 09:58:07.392901,3,mariana.ramos,Dizziness
+2024-11-05 17:49:28.273538,4,mariana.ramos,Breathlessness
+2024-11-23 02:38:09.259317,1,mariana.ramos,Chest Pain
+2024-10-08 14:13:42.119006,3,mariana.ramos,Dizziness
+2024-12-04 23:49:22.344418,1,mariana.ramos,Chest Pain
+2024-12-05 14:01:03.587864,3,mariana.ramos,Fatigue
+2024-11-09 01:27:08.262859,2,mariana.ramos,Breathlessness
+2024-10-30 19:09:03.010361,4,mariana.ramos,Fatigue
+2024-11-18 02:47:06.006766,1,mariana.ramos,Chest Pain
+2024-11-30 00:11:41.103463,4,mariana.ramos,Chest Pain
+2024-11-10 15:39:22.937449,1,mariana.ramos,Dizziness
+2024-10-14 14:58:10.584302,3,mariana.ramos,Chest Pain
+2024-10-20 20:17:45.152916,2,mariana.ramos,Fatigue
+2024-11-29 20:35:15.812458,4,mariana.ramos,Fatigue
+2024-11-27 07:52:42.992676,4,mariana.ramos,Fatigue
+2024-10-26 20:15:00.473956,4,mariana.ramos,Dizziness
+2024-11-23 20:34:59.817142,2,mariana.ramos,Chest Pain
+2024-10-14 18:29:26.247506,3,mariana.ramos,Breathlessness
+2024-11-15 15:15:38.984105,3,mariana.ramos,Breathlessness
+2024-11-22 07:48:21.144702,3,bernardo_pimentel26,Dizziness
+2024-10-28 21:36:42.267027,4,bernardo_pimentel26,Fatigue
+2024-10-10 19:23:35.528925,4,bernardo_pimentel26,Breathlessness
+2024-10-28 11:09:38.241813,3,bernardo_pimentel26,Dizziness
+2024-11-16 02:32:06.367524,1,bernardo_pimentel26,Fatigue
+2024-11-15 11:21:06.399276,4,bernardo_pimentel26,Dizziness
+2024-10-07 20:05:16.635721,1,bernardo_pimentel26,Fatigue
+2024-10-19 19:23:01.452731,3,bernardo_pimentel26,Chest Pain
+2024-12-01 01:21:14.579157,4,bernardo_pimentel26,Fatigue
+2024-10-28 01:23:21.118434,1,bernardo_pimentel26,Fatigue
+2024-10-16 23:24:11.317942,1,bernardo_pimentel26,Fatigue
+2024-11-29 21:35:54.613022,1,bernardo_pimentel26,Dizziness
+2024-10-28 10:02:26.671740,4,bernardo_pimentel26,Breathlessness
+2024-10-14 22:29:41.201856,2,bernardo_pimentel26,Breathlessness
+2024-10-11 05:41:58.273261,4,bernardo_pimentel26,Breathlessness
+2024-10-18 07:32:51.398671,3,bernardo_pimentel26,Breathlessness
+2024-11-04 09:57:15.226699,1,bernardo_pimentel26,Chest Pain
+2024-11-07 07:55:43.074977,4,bernardo_pimentel26,Chest Pain
+2024-11-09 18:54:12.030084,4,bernardo_pimentel26,Breathlessness
+2024-11-01 01:35:10.179858,4,bernardo_pimentel26,Fatigue
+2024-10-18 20:05:25.317465,3,bernardo_pimentel26,Dizziness
+2024-10-23 10:30:43.462039,2,bernardo_pimentel26,Breathlessness
+2024-11-13 17:41:36.050876,3,bernardo_pimentel26,Fatigue
+2024-12-01 03:35:35.853433,3,bernardo_pimentel26,Breathlessness
+2024-10-10 22:45:50.691398,1,bernardo_pimentel26,Breathlessness
+2024-11-04 20:01:04.764068,4,bernardo_pimentel26,Chest Pain
+2024-10-18 16:00:54.087943,4,bernardo_pimentel26,Dizziness
+2024-11-03 14:11:25.617541,1,bernardo_pimentel26,Dizziness
+2024-12-03 01:32:17.270116,2,bernardo_pimentel26,Chest Pain
+2024-11-01 23:55:46.399800,1,bernardo_pimentel26,Breathlessness
+2024-10-30 03:14:56.674692,3,bernardo_pimentel26,Breathlessness
+2024-10-08 07:20:40.794496,1,bernardo_pimentel26,Dizziness
+2024-11-16 09:59:10.505975,4,bernardo_pimentel26,Fatigue
+2024-11-17 20:02:27.714357,4,bernardo_pimentel26,Dizziness
+2024-10-24 17:41:11.150662,2,bernardo_pimentel26,Dizziness
+2024-12-03 12:39:26.892434,3,antónio.bastos2,Dizziness
+2024-11-17 23:52:25.634666,1,antónio.bastos2,Breathlessness
+2024-11-18 09:00:44.256891,2,antónio.bastos2,Fatigue
+2024-11-14 09:31:40.257545,4,antónio.bastos2,Fatigue
+2024-11-26 07:03:33.939839,1,antónio.bastos2,Chest Pain
+2024-10-08 19:27:59.061558,4,antónio.bastos2,Dizziness
+2024-10-09 05:24:00.330113,4,antónio.bastos2,Chest Pain
+2024-10-11 10:19:23.745386,4,antónio.bastos2,Dizziness
+2024-12-01 19:16:48.061201,2,antónio.bastos2,Fatigue
+2024-11-05 22:51:23.721946,1,antónio.bastos2,Dizziness
+2024-11-21 23:58:32.408266,3,antónio.bastos2,Breathlessness
+2024-10-12 10:47:57.085914,3,antónio.bastos2,Breathlessness
+2024-10-27 15:25:50.109882,4,antónio.bastos2,Fatigue
+2024-11-13 22:12:15.629800,3,antónio.bastos2,Dizziness
+2024-10-16 18:49:23.578164,1,antónio.bastos2,Breathlessness
+2024-11-21 09:39:47.717718,4,antónio.bastos2,Dizziness
+2024-10-27 08:25:02.158081,2,antónio.bastos2,Chest Pain
+2024-11-22 08:38:14.881628,1,antónio.bastos2,Fatigue
+2024-10-13 14:33:09.106960,1,antónio.bastos2,Dizziness
+2024-10-08 20:41:28.512327,3,antónio.bastos2,Chest Pain
+2024-11-09 00:37:52.131566,1,antónio.bastos2,Dizziness
+2024-11-22 06:23:09.399539,2,antónio.bastos2,Chest Pain
+2024-10-31 04:04:33.655911,4,antónio.bastos2,Chest Pain
+2024-10-29 05:41:04.583791,1,antónio.bastos2,Breathlessness
+2024-10-19 02:32:06.561189,4,antónio.bastos2,Fatigue
+2024-12-06 05:13:16.369920,4,antónio.bastos2,Fatigue
+2024-11-16 00:55:40.585148,1,antónio.bastos2,Breathlessness
+2024-10-20 03:04:23.298740,2,antónio.bastos2,Fatigue
+2024-11-20 17:44:05.550180,1,antónio.bastos2,Chest Pain
+2024-10-29 19:23:50.885923,2,antónio.bastos2,Chest Pain
+2024-12-02 01:02:39.216471,2,helenabraga15,Fatigue
+2024-12-02 06:11:51.095597,4,helenabraga15,Fatigue
+2024-10-18 00:18:01.046406,2,helenabraga15,Chest Pain
+2024-10-17 07:25:03.019287,2,helenabraga15,Breathlessness
+2024-11-22 00:17:29.850268,3,helenabraga15,Fatigue
+2024-10-29 00:45:39.525322,1,helenabraga15,Dizziness
+2024-10-21 08:31:55.424591,3,helenabraga15,Chest Pain
+2024-11-29 21:40:06.353852,2,helenabraga15,Dizziness
+2024-11-08 16:28:34.861865,4,helenabraga15,Breathlessness
+2024-11-18 18:30:08.710169,4,helenabraga15,Fatigue
+2024-10-21 11:50:32.974985,1,helenabraga15,Chest Pain
+2024-11-26 18:20:31.304039,4,helenabraga15,Dizziness
+2024-10-08 02:14:47.927932,2,helenabraga15,Fatigue
+2024-12-04 22:16:03.956156,2,helenabraga15,Breathlessness
+2024-12-05 22:05:34.392967,2,helenabraga15,Breathlessness
+2024-11-10 00:48:37.443907,1,helenabraga15,Fatigue
+2024-11-14 18:24:08.565132,2,helenabraga15,Fatigue
+2024-10-24 03:15:40.322922,1,helenabraga15,Chest Pain
+2024-11-27 08:36:02.115852,4,helenabraga15,Dizziness
+2024-10-14 19:30:56.564287,3,helenabraga15,Fatigue
+2024-10-17 12:51:09.777606,1,helenabraga15,Breathlessness
+2024-11-25 09:17:31.278911,4,helenabraga15,Breathlessness
+2024-11-19 05:10:22.311321,3,helenabraga15,Breathlessness
+2024-11-14 11:50:00.715169,2,helenabraga15,Chest Pain
+2024-12-04 17:39:46.957302,3,helenabraga15,Chest Pain
+2024-11-25 05:35:00.115501,1,helenabraga15,Dizziness
+2024-11-16 02:05:32.343872,4,helenabraga15,Chest Pain
+2024-10-18 14:05:28.890332,1,helenabraga15,Fatigue
+2024-11-06 13:11:59.879719,4,helenabraga15,Fatigue
+2024-10-12 10:41:15.806128,1,helenabraga15,Dizziness
+2024-11-22 04:21:43.279240,2,helenabraga15,Breathlessness
+2024-10-26 23:37:42.587243,4,helenabraga15,Chest Pain
+2024-11-19 06:59:36.186113,1,helenabraga15,Fatigue
+2024-11-12 03:02:38.708722,3,helenabraga15,Breathlessness
+2024-10-29 21:02:01.981572,3,helenabraga15,Breathlessness
+2024-11-08 09:09:18.084027,1,helenabraga15,Dizziness
+2024-11-19 22:34:12.439532,1,helenabraga15,Dizziness
+2024-11-04 18:32:06.881031,4,diogo.monteiro,Fatigue
+2024-10-19 19:38:57.327550,4,diogo.monteiro,Fatigue
+2024-11-28 10:16:02.564324,1,diogo.monteiro,Chest Pain
+2024-10-17 08:36:04.569939,1,diogo.monteiro,Dizziness
+2024-10-11 08:04:37.911938,3,diogo.monteiro,Breathlessness
+2024-11-16 07:35:45.471862,4,diogo.monteiro,Chest Pain
+2024-10-28 18:46:58.821002,1,diogo.monteiro,Breathlessness
+2024-10-24 08:31:15.213283,4,diogo.monteiro,Fatigue
+2024-10-08 20:36:33.040816,2,diogo.monteiro,Fatigue
+2024-10-11 02:16:54.966789,2,diogo.monteiro,Breathlessness
+2024-11-02 23:18:43.659293,1,diogo.monteiro,Dizziness
+2024-11-24 00:36:11.360402,2,diogo.monteiro,Dizziness
+2024-10-27 12:33:22.558170,3,diogo.monteiro,Breathlessness
+2024-10-13 01:04:01.962187,1,diogo.monteiro,Fatigue
+2024-11-27 11:53:38.687565,2,diogo.monteiro,Dizziness
+2024-11-15 17:21:55.450841,2,diogo.monteiro,Chest Pain
+2024-11-20 11:55:58.693279,4,diogo.monteiro,Breathlessness
+2024-10-26 10:29:08.050068,3,diogo.monteiro,Breathlessness
+2024-12-05 17:12:47.836374,4,diogo.monteiro,Dizziness
+2024-10-28 00:02:14.632470,4,diogo.monteiro,Chest Pain
+2024-11-23 20:57:06.622020,1,diogo.monteiro,Breathlessness
+2024-10-07 23:06:22.156284,4,diogo.monteiro,Dizziness
+2024-10-23 22:27:48.565071,3,diogo.monteiro,Breathlessness
+2024-11-11 02:54:47.229875,3,diogo.monteiro,Breathlessness
+2024-10-22 07:51:38.279719,4,diogo.monteiro,Fatigue
+2024-10-09 01:16:56.929426,1,diogo.monteiro,Breathlessness
+2024-11-06 06:26:03.078010,4,diogo.monteiro,Chest Pain
+2024-10-23 04:02:37.618985,4,diogo.monteiro,Dizziness
+2024-10-29 10:45:46.641237,2,diogo.monteiro,Fatigue
+2024-11-30 01:04:25.014817,2,diogo.monteiro,Chest Pain
+2024-11-03 17:31:28.392852,2,diogo.monteiro,Fatigue
+2024-10-12 03:51:56.687582,2,diogo.monteiro,Breathlessness
+2024-10-10 12:56:27.111747,1,diogo.monteiro,Chest Pain
+2024-10-23 05:23:13.842993,4,diogo.monteiro,Fatigue
+2024-10-29 15:51:00.651159,3,diogo.monteiro,Dizziness
+2024-10-24 10:15:19.958972,4,diogo.monteiro,Dizziness
+2024-11-01 10:49:45.561484,2,diogo.monteiro,Dizziness
+2024-10-15 14:40:15.613843,3,miguelduarte86,Chest Pain
+2024-11-03 08:49:34.223459,2,miguelduarte86,Fatigue
+2024-10-09 19:37:02.506998,4,miguelduarte86,Dizziness
+2024-11-24 23:28:26.616295,3,miguelduarte86,Dizziness
+2024-11-22 09:14:33.892651,1,miguelduarte86,Fatigue
+2024-11-28 00:38:35.986266,1,miguelduarte86,Breathlessness
+2024-11-19 02:46:04.355988,2,miguelduarte86,Dizziness
+2024-11-06 15:33:03.868261,3,miguelduarte86,Dizziness
+2024-11-09 01:36:17.943513,2,miguelduarte86,Breathlessness
+2024-10-17 18:29:39.298592,2,miguelduarte86,Chest Pain
+2024-11-04 05:35:37.239592,4,miguelduarte86,Fatigue
+2024-11-10 19:27:19.020177,2,miguelduarte86,Chest Pain
+2024-10-16 08:10:19.215432,3,miguelduarte86,Dizziness
+2024-10-28 03:54:13.879498,1,miguelduarte86,Chest Pain
+2024-12-05 08:17:07.271052,2,miguelduarte86,Fatigue
+2024-10-16 19:55:09.436715,2,miguelduarte86,Chest Pain
+2024-11-27 12:21:39.626544,3,miguelduarte86,Dizziness
+2024-10-08 04:56:34.412043,2,miguelduarte86,Fatigue
+2024-11-29 01:02:33.023843,2,miguelduarte86,Chest Pain
+2024-12-02 10:54:57.906378,1,miguelduarte86,Chest Pain
+2024-11-27 05:30:58.179553,2,miguelduarte86,Chest Pain
+2024-11-15 08:10:57.947756,2,miguelduarte86,Fatigue
+2024-10-17 07:55:56.262919,1,miguelduarte86,Chest Pain
+2024-11-06 22:18:17.316633,1,miguelduarte86,Fatigue
+2024-11-25 06:58:12.773376,2,miguelduarte86,Fatigue
+2024-10-26 17:27:15.669223,4,miguelduarte86,Dizziness
+2024-10-23 17:21:39.185498,3,miguelduarte86,Dizziness
+2024-12-03 21:08:41.941986,3,miguelduarte86,Fatigue
+2024-10-19 22:44:25.329400,3,miguelduarte86,Dizziness
+2024-11-12 03:08:04.487273,4,miguelduarte86,Breathlessness
+2024-11-28 12:41:05.251448,2,miguelduarte86,Dizziness
+2024-11-11 16:45:40.208716,2,miguelduarte86,Chest Pain
+2024-10-12 06:57:07.196086,2,miguelduarte86,Fatigue
+2024-11-27 11:56:44.961194,4,miguelduarte86,Fatigue
+2024-10-26 10:00:34.304477,1,miguelduarte86,Breathlessness
+2024-12-05 06:34:31.642593,1,miguelduarte86,Fatigue
+2024-11-05 18:55:26.210011,3,miguelduarte86,Breathlessness
+2024-10-23 14:38:54.567092,4,miguelduarte86,Breathlessness
+2024-11-18 05:19:18.021095,2,jorge.cardoso23,Breathlessness
+2024-12-04 18:17:12.184229,3,jorge.cardoso23,Chest Pain
+2024-11-17 12:05:52.343141,1,jorge.cardoso23,Fatigue
+2024-10-13 09:50:13.657203,3,jorge.cardoso23,Breathlessness
+2024-11-06 21:17:27.269173,3,jorge.cardoso23,Fatigue
+2024-11-03 14:07:18.002393,4,jorge.cardoso23,Fatigue
+2024-10-30 07:51:38.102547,3,jorge.cardoso23,Fatigue
+2024-10-18 04:55:11.374129,3,jorge.cardoso23,Breathlessness
+2024-11-07 00:55:00.238579,2,jorge.cardoso23,Fatigue
+2024-11-15 11:08:32.941619,4,jorge.cardoso23,Breathlessness
+2024-11-22 12:11:21.572980,1,jorge.cardoso23,Dizziness
+2024-11-07 08:59:04.694026,3,jorge.cardoso23,Chest Pain
+2024-11-21 14:36:20.052848,1,jorge.cardoso23,Fatigue
+2024-11-13 11:35:23.651063,2,jorge.cardoso23,Chest Pain
+2024-10-08 16:49:32.871668,1,jorge.cardoso23,Breathlessness
+2024-11-24 00:55:36.160704,2,jorge.cardoso23,Breathlessness
+2024-11-20 04:08:18.054912,3,jorge.cardoso23,Chest Pain
+2024-11-26 21:26:36.246147,1,jorge.cardoso23,Breathlessness
+2024-10-22 18:12:47.456159,3,jorge.cardoso23,Fatigue
+2024-10-08 11:58:38.308806,3,jorge.cardoso23,Dizziness
+2024-11-08 22:16:46.269293,4,jorge.cardoso23,Fatigue
+2024-10-21 19:45:09.030066,1,jorge.cardoso23,Fatigue
+2024-11-13 15:36:42.648124,2,jorge.cardoso23,Chest Pain
+2024-11-06 07:52:33.370837,4,jorge.cardoso23,Fatigue
+2024-11-16 09:05:49.634997,2,jorge.cardoso23,Dizziness
+2024-10-20 12:39:06.632216,1,jorge.cardoso23,Chest Pain
+2024-12-02 09:42:49.494948,1,jorge.cardoso23,Fatigue
+2024-10-15 21:21:49.409997,3,jorge.cardoso23,Chest Pain
+2024-11-01 19:26:16.850846,1,jorge.cardoso23,Chest Pain
+2024-10-07 18:18:43.825529,3,jorge.cardoso23,Chest Pain
+2024-10-13 12:03:31.023131,4,jorge.cardoso23,Breathlessness
+2024-11-16 14:17:32.054351,1,jorge.cardoso23,Dizziness
+2024-11-01 15:04:15.735366,1,jorge.cardoso23,Chest Pain
+2024-11-28 05:42:45.329386,4,jorge.cardoso23,Fatigue
+2024-12-06 02:40:52.077966,4,jorge.cardoso23,Chest Pain
+2024-12-03 00:50:18.923022,1,jorge.cardoso23,Dizziness
+2024-10-17 03:11:18.007961,3,jorge.cardoso23,Fatigue
+2024-10-13 00:32:08.809444,3,helena.guimarães9,Dizziness
+2024-11-03 01:51:24.311335,4,helena.guimarães9,Fatigue
+2024-11-16 13:48:52.190104,2,helena.guimarães9,Fatigue
+2024-10-10 22:09:05.512528,3,helena.guimarães9,Chest Pain
+2024-10-27 18:12:44.676158,3,helena.guimarães9,Chest Pain
+2024-10-13 07:53:38.498177,2,helena.guimarães9,Chest Pain
+2024-11-14 06:07:07.598473,2,helena.guimarães9,Fatigue
+2024-11-03 10:22:26.623055,3,helena.guimarães9,Breathlessness
+2024-11-26 11:31:07.353472,4,helena.guimarães9,Breathlessness
+2024-12-01 11:59:58.443011,4,helena.guimarães9,Fatigue
+2024-12-04 20:37:19.343047,3,helena.guimarães9,Fatigue
+2024-10-07 16:48:47.244413,4,helena.guimarães9,Breathlessness
+2024-10-28 10:19:05.859710,2,helena.guimarães9,Chest Pain
+2024-11-02 10:44:16.811149,1,helena.guimarães9,Chest Pain
+2024-10-30 01:32:02.993334,2,helena.guimarães9,Breathlessness
+2024-11-11 13:23:51.046244,2,helena.guimarães9,Dizziness
+2024-11-01 04:08:43.819098,3,helena.guimarães9,Chest Pain
+2024-11-14 20:45:35.248051,4,helena.guimarães9,Fatigue
+2024-11-29 15:07:30.022410,4,helena.guimarães9,Breathlessness
+2024-10-25 12:19:39.094939,1,helena.guimarães9,Dizziness
+2024-10-26 15:57:59.559325,3,helena.guimarães9,Chest Pain
+2024-11-21 17:48:13.496835,4,helena.guimarães9,Chest Pain
+2024-10-16 21:14:53.934085,4,helena.guimarães9,Breathlessness
+2024-11-08 12:07:48.722227,4,helena.guimarães9,Dizziness
+2024-12-06 08:16:53.685050,3,helena.guimarães9,Chest Pain
+2024-10-27 12:26:05.607470,2,helena.guimarães9,Dizziness
+2024-11-11 11:53:23.378230,4,helena.guimarães9,Fatigue
+2024-11-27 06:17:15.667160,2,helena.guimarães9,Fatigue
+2024-12-04 10:10:11.242512,4,helena.guimarães9,Fatigue
+2024-11-09 11:29:36.028177,2,helena.guimarães9,Chest Pain
+2024-10-08 06:38:27.834911,1,helena.guimarães9,Fatigue
+2024-10-24 02:06:35.659567,2,helena.guimarães9,Dizziness
+2024-10-31 04:49:00.366103,3,helena.guimarães9,Breathlessness
+2024-10-24 08:10:46.034483,1,isabel.duarte31,Chest Pain
+2024-11-10 07:42:57.277630,3,isabel.duarte31,Chest Pain
+2024-11-15 06:36:46.208236,3,isabel.duarte31,Fatigue
+2024-11-24 00:54:31.923012,3,isabel.duarte31,Breathlessness
+2024-11-09 06:46:46.949766,3,isabel.duarte31,Fatigue
+2024-11-29 08:53:32.707668,1,isabel.duarte31,Dizziness
+2024-11-19 22:46:28.058156,3,isabel.duarte31,Dizziness
+2024-11-11 07:05:29.500879,4,isabel.duarte31,Dizziness
+2024-11-03 20:18:38.653111,4,isabel.duarte31,Fatigue
+2024-11-29 09:34:21.294472,3,isabel.duarte31,Dizziness
+2024-11-14 09:44:38.741081,2,isabel.duarte31,Breathlessness
+2024-11-16 21:12:38.912018,3,isabel.duarte31,Fatigue
+2024-10-18 13:11:23.732547,2,isabel.duarte31,Dizziness
+2024-10-10 03:18:21.542295,3,isabel.duarte31,Fatigue
+2024-11-20 15:20:10.304629,2,isabel.duarte31,Chest Pain
+2024-10-21 20:00:10.769342,3,isabel.duarte31,Dizziness
+2024-10-27 06:56:04.812258,2,isabel.duarte31,Breathlessness
+2024-11-13 04:26:44.627712,1,isabel.duarte31,Chest Pain
+2024-11-29 08:41:47.988179,2,isabel.duarte31,Breathlessness
+2024-10-31 23:32:59.494650,4,isabel.duarte31,Fatigue
+2024-11-12 14:07:52.992802,1,isabel.duarte31,Chest Pain
+2024-11-15 11:08:18.945299,4,isabel.duarte31,Chest Pain
+2024-11-28 03:15:43.742575,4,isabel.duarte31,Fatigue
+2024-10-26 13:53:00.022582,1,isabel.duarte31,Breathlessness
+2024-11-24 14:35:38.468010,4,isabel.duarte31,Chest Pain
+2024-10-10 21:08:48.741510,1,isabel.duarte31,Fatigue
+2024-11-24 07:46:41.108146,2,isabel.duarte31,Dizziness
+2024-11-30 19:33:44.054935,2,isabel.duarte31,Breathlessness
+2024-12-05 05:55:50.645446,1,isabel.duarte31,Breathlessness
+2024-12-01 10:03:50.255517,4,isabel.duarte31,Breathlessness
+2024-10-24 13:28:55.466461,1,isabel.duarte31,Breathlessness
+2024-11-29 01:38:33.474321,2,isabel.duarte31,Fatigue
+2024-11-25 22:22:09.828444,1,henriquecampos36,Chest Pain
+2024-11-11 09:44:04.294202,4,henriquecampos36,Breathlessness
+2024-11-01 09:04:27.060176,1,henriquecampos36,Chest Pain
+2024-11-16 02:15:50.478933,2,henriquecampos36,Breathlessness
+2024-11-28 10:47:58.175813,2,henriquecampos36,Breathlessness
+2024-11-10 18:18:46.601852,4,henriquecampos36,Breathlessness
+2024-11-27 20:56:56.538665,1,henriquecampos36,Breathlessness
+2024-11-30 10:51:21.985213,4,henriquecampos36,Breathlessness
+2024-10-15 18:03:07.726228,3,henriquecampos36,Breathlessness
+2024-12-05 19:34:59.726080,1,henriquecampos36,Chest Pain
+2024-10-20 10:57:05.140028,2,henriquecampos36,Dizziness
+2024-11-18 12:09:23.947562,4,henriquecampos36,Dizziness
+2024-10-13 20:11:28.502310,2,henriquecampos36,Dizziness
+2024-11-25 11:43:49.299350,3,henriquecampos36,Fatigue
+2024-12-02 23:14:17.750122,2,henriquecampos36,Fatigue
+2024-10-10 07:59:08.626514,1,henriquecampos36,Chest Pain
+2024-10-09 21:13:04.677439,1,henriquecampos36,Chest Pain
+2024-11-13 16:12:36.471063,3,henriquecampos36,Chest Pain
+2024-11-04 04:10:35.170399,4,henriquecampos36,Chest Pain
+2024-10-27 19:40:35.672449,4,henriquecampos36,Chest Pain
+2024-10-20 00:38:38.888566,2,henriquecampos36,Dizziness
+2024-10-15 11:01:17.739215,4,henriquecampos36,Chest Pain
+2024-10-25 17:09:27.840016,4,henriquecampos36,Fatigue
+2024-12-02 16:04:35.617936,2,henriquecampos36,Fatigue
+2024-10-30 17:02:10.901465,1,henriquecampos36,Chest Pain
+2024-10-17 12:10:15.516548,4,henriquecampos36,Chest Pain
+2024-10-10 20:40:40.104004,4,henriquecampos36,Fatigue
+2024-11-02 05:23:36.665704,2,henriquecampos36,Breathlessness
+2024-10-19 14:55:50.734710,1,henriquecampos36,Chest Pain
+2024-11-25 19:43:12.538551,1,henriquecampos36,Chest Pain
+2024-12-02 05:16:01.487886,4,henriquecampos36,Chest Pain
+2024-11-04 16:27:26.627926,1,henriquecampos36,Fatigue
+2024-10-16 14:34:13.754350,1,henriquecampos36,Fatigue
+2024-10-30 14:56:06.167096,3,henriquecampos36,Breathlessness
+2024-11-22 08:04:41.712672,1,henriquecampos36,Fatigue
+2024-11-02 10:58:17.392257,1,henriquecampos36,Fatigue
+2024-10-16 09:41:06.838402,3,inêsmonteiro9,Breathlessness
+2024-11-04 18:30:02.250278,3,inêsmonteiro9,Dizziness
+2024-11-17 07:42:07.143275,2,inêsmonteiro9,Chest Pain
+2024-10-27 09:41:59.111207,2,inêsmonteiro9,Breathlessness
+2024-10-16 21:11:26.514299,1,inêsmonteiro9,Fatigue
+2024-11-23 07:51:55.214152,1,inêsmonteiro9,Fatigue
+2024-11-26 19:36:02.128438,2,inêsmonteiro9,Fatigue
+2024-10-22 01:23:35.061249,4,inêsmonteiro9,Dizziness
+2024-11-17 18:25:26.551587,4,inêsmonteiro9,Breathlessness
+2024-11-11 13:17:32.803898,3,inêsmonteiro9,Chest Pain
+2024-11-11 12:42:58.846634,1,inêsmonteiro9,Dizziness
+2024-11-04 09:59:33.789038,2,inêsmonteiro9,Fatigue
+2024-10-30 16:19:38.428296,2,inêsmonteiro9,Dizziness
+2024-11-23 14:49:00.127056,4,inêsmonteiro9,Fatigue
+2024-12-06 03:08:37.577225,1,inêsmonteiro9,Chest Pain
+2024-10-18 20:47:53.958625,3,inêsmonteiro9,Chest Pain
+2024-12-01 16:37:17.107141,4,inêsmonteiro9,Dizziness
+2024-10-14 04:21:14.772031,2,inêsmonteiro9,Chest Pain
+2024-10-12 16:11:07.376076,2,inêsmonteiro9,Breathlessness
+2024-10-13 18:51:36.555888,3,inêsmonteiro9,Chest Pain
+2024-10-10 22:53:54.430609,4,inêsmonteiro9,Breathlessness
+2024-11-16 22:12:32.328864,2,inêsmonteiro9,Chest Pain
+2024-11-16 13:45:58.879351,2,inêsmonteiro9,Dizziness
+2024-10-16 15:15:24.263834,3,inêsmonteiro9,Breathlessness
+2024-10-10 16:20:35.001226,1,inêsmonteiro9,Dizziness
+2024-10-24 07:15:11.777669,4,inêsmonteiro9,Dizziness
+2024-11-05 21:36:32.806216,2,inêsmonteiro9,Fatigue
+2024-10-19 01:18:31.315876,4,inêsmonteiro9,Breathlessness
+2024-11-08 08:58:20.533224,3,inêsmonteiro9,Breathlessness
+2024-10-26 16:00:58.258322,2,inêsmonteiro9,Chest Pain
+2024-12-03 15:42:45.538597,4,inêsmonteiro9,Breathlessness
+2024-12-02 05:10:31.816542,2,inêsmonteiro9,Dizziness
+2024-11-06 06:37:48.955333,1,inêsmonteiro9,Dizziness
+2024-10-23 06:23:36.930524,4,inêsmonteiro9,Breathlessness
+2024-11-30 18:12:33.622666,4,inêsmonteiro9,Dizziness
+2024-10-23 19:10:09.483955,1,inêsmonteiro9,Dizziness
+2024-12-03 19:31:08.372724,3,inêsmonteiro9,Breathlessness
+2024-11-07 15:15:59.877968,3,inêsmonteiro9,Breathlessness
+2024-10-29 21:53:55.424232,4,inêsmonteiro9,Chest Pain
+2024-10-15 09:31:49.336400,3,laurabarbosa,Breathlessness
+2024-11-19 00:46:19.591562,1,laurabarbosa,Dizziness
+2024-10-09 00:18:32.042648,4,laurabarbosa,Chest Pain
+2024-10-21 00:16:19.671589,1,laurabarbosa,Chest Pain
+2024-11-27 11:18:03.553841,4,laurabarbosa,Dizziness
+2024-11-18 02:05:45.176915,1,laurabarbosa,Fatigue
+2024-11-29 22:00:00.273595,1,laurabarbosa,Chest Pain
+2024-11-30 08:47:29.726222,3,laurabarbosa,Dizziness
+2024-10-23 08:21:33.145103,1,laurabarbosa,Chest Pain
+2024-11-29 16:51:05.599393,4,laurabarbosa,Chest Pain
+2024-11-30 07:13:21.651584,2,laurabarbosa,Dizziness
+2024-10-21 01:21:41.920192,4,laurabarbosa,Dizziness
+2024-11-26 09:27:08.786664,2,laurabarbosa,Breathlessness
+2024-11-16 03:22:17.729340,4,laurabarbosa,Chest Pain
+2024-12-04 21:59:57.115811,1,laurabarbosa,Chest Pain
+2024-11-22 03:16:07.457024,4,laurabarbosa,Fatigue
+2024-11-24 23:47:20.889701,1,laurabarbosa,Dizziness
+2024-11-06 03:56:30.908123,3,laurabarbosa,Breathlessness
+2024-10-18 12:25:04.118114,2,laurabarbosa,Breathlessness
+2024-11-11 04:37:29.826034,2,laurabarbosa,Breathlessness
+2024-11-11 16:01:14.892452,2,laurabarbosa,Chest Pain
+2024-10-16 11:49:15.659666,1,laurabarbosa,Chest Pain
+2024-11-30 23:33:40.320632,3,laurabarbosa,Fatigue
+2024-10-13 10:04:13.198264,4,laurabarbosa,Fatigue
+2024-11-29 21:48:17.039233,2,laurabarbosa,Chest Pain
+2024-11-30 19:39:27.227420,3,laurabarbosa,Dizziness
+2024-10-26 18:18:53.094216,1,laurabarbosa,Dizziness
+2024-10-10 11:18:39.379968,2,laurabarbosa,Dizziness
+2024-10-23 19:41:50.024981,2,laurabarbosa,Dizziness
+2024-10-31 10:35:31.354213,4,laurabarbosa,Breathlessness
+2024-10-30 10:07:50.125949,1,laurabarbosa,Dizziness
+2024-11-29 12:05:43.521335,3,laurabarbosa,Chest Pain
+2024-11-13 06:38:41.446627,1,gonçalo.esteves,Fatigue
+2024-10-20 03:50:58.015393,3,gonçalo.esteves,Fatigue
+2024-11-28 03:44:19.877609,1,gonçalo.esteves,Chest Pain
+2024-10-24 03:47:17.306166,2,gonçalo.esteves,Dizziness
+2024-11-02 23:30:26.784602,2,gonçalo.esteves,Dizziness
+2024-11-29 10:58:26.311002,3,gonçalo.esteves,Chest Pain
+2024-12-01 07:54:16.075724,2,gonçalo.esteves,Chest Pain
+2024-11-27 21:23:35.858787,2,gonçalo.esteves,Fatigue
+2024-10-20 06:40:00.622506,1,gonçalo.esteves,Breathlessness
+2024-10-25 06:28:56.695112,3,gonçalo.esteves,Dizziness
+2024-10-14 21:10:37.819186,4,gonçalo.esteves,Chest Pain
+2024-11-13 19:59:08.038383,4,gonçalo.esteves,Dizziness
+2024-10-17 21:57:35.852632,1,gonçalo.esteves,Chest Pain
+2024-11-05 18:25:52.231938,4,gonçalo.esteves,Chest Pain
+2024-10-14 00:52:05.650087,1,gonçalo.esteves,Fatigue
+2024-10-21 01:13:44.625905,1,gonçalo.esteves,Breathlessness
+2024-11-01 17:33:57.567618,3,gonçalo.esteves,Dizziness
+2024-11-02 17:01:30.850160,1,gonçalo.esteves,Breathlessness
+2024-10-12 12:18:15.743306,1,gonçalo.esteves,Fatigue
+2024-10-13 18:39:54.584294,1,gonçalo.esteves,Breathlessness
+2024-10-11 16:26:28.683771,1,gonçalo.esteves,Dizziness
+2024-11-02 03:58:24.523965,1,gonçalo.esteves,Dizziness
+2024-11-11 13:24:55.654915,3,gonçalo.esteves,Chest Pain
+2024-11-20 14:54:57.883519,2,gonçalo.esteves,Chest Pain
+2024-10-17 22:47:41.207597,4,gonçalo.esteves,Chest Pain
+2024-11-16 08:25:37.852756,1,gonçalo.esteves,Dizziness
+2024-10-29 08:12:23.222002,2,gonçalo.esteves,Chest Pain
+2024-11-05 06:05:34.633942,4,gonçalo.esteves,Dizziness
+2024-10-28 23:42:28.768518,1,gonçalo.esteves,Chest Pain
+2024-11-26 16:27:16.382663,1,gonçalo.esteves,Breathlessness
+2024-11-01 03:17:57.113749,4,gonçalo.esteves,Dizziness
+2024-10-13 09:20:11.091777,3,gonçalo.esteves,Dizziness
+2024-10-23 21:32:20.093718,3,gonçalo.esteves,Chest Pain
+2024-10-29 17:32:16.403563,3,gonçalo.esteves,Fatigue
+2024-11-06 23:50:47.687808,4,rafael.freitas32,Breathlessness
+2024-11-30 12:25:31.707872,3,rafael.freitas32,Dizziness
+2024-11-15 04:12:34.642173,4,rafael.freitas32,Dizziness
+2024-10-12 09:38:11.346384,4,rafael.freitas32,Fatigue
+2024-10-26 07:55:28.639576,1,rafael.freitas32,Dizziness
+2024-11-26 19:58:08.271982,3,rafael.freitas32,Chest Pain
+2024-11-23 11:18:04.600879,3,rafael.freitas32,Breathlessness
+2024-10-29 13:54:54.186904,3,rafael.freitas32,Fatigue
+2024-11-12 06:35:19.335062,1,rafael.freitas32,Fatigue
+2024-11-23 00:05:21.655680,4,rafael.freitas32,Breathlessness
+2024-10-08 10:39:31.247949,1,rafael.freitas32,Dizziness
+2024-10-21 05:21:13.936179,2,rafael.freitas32,Dizziness
+2024-11-11 06:03:18.633923,3,rafael.freitas32,Chest Pain
+2024-12-05 16:15:28.367041,2,rafael.freitas32,Fatigue
+2024-12-02 10:57:05.545148,1,rafael.freitas32,Breathlessness
+2024-11-16 05:43:33.040664,3,rafael.freitas32,Dizziness
+2024-10-14 20:56:24.769196,3,rafael.freitas32,Chest Pain
+2024-10-24 08:12:07.709306,2,rafael.freitas32,Dizziness
+2024-10-15 00:50:43.709364,2,rafael.freitas32,Chest Pain
+2024-11-08 09:43:22.427668,1,rafael.freitas32,Chest Pain
+2024-11-13 05:58:47.598206,4,rafael.freitas32,Chest Pain
+2024-11-27 00:37:42.139596,3,rafael.freitas32,Chest Pain
+2024-12-06 00:33:04.489752,3,rafael.freitas32,Dizziness
+2024-10-24 09:58:27.841242,3,rafael.freitas32,Fatigue
+2024-11-12 13:53:16.013700,3,rafael.freitas32,Dizziness
+2024-11-17 23:18:25.482396,3,rafael.freitas32,Dizziness
+2024-11-05 13:31:16.292545,4,rafael.freitas32,Chest Pain
+2024-11-23 22:27:40.979167,2,rafael.freitas32,Chest Pain
+2024-10-25 08:31:04.246855,1,rafael.freitas32,Breathlessness
+2024-10-24 11:26:43.488212,2,rafael.freitas32,Fatigue
+2024-11-07 01:07:17.708710,3,rafael.freitas32,Dizziness
+2024-11-20 04:28:40.009858,2,cristinaandrade16,Breathlessness
+2024-11-20 19:50:07.563043,1,cristinaandrade16,Dizziness
+2024-12-05 16:07:45.890524,3,cristinaandrade16,Fatigue
+2024-11-20 11:05:26.591701,2,cristinaandrade16,Chest Pain
+2024-10-27 00:59:20.114141,3,cristinaandrade16,Dizziness
+2024-11-01 11:09:01.317335,1,cristinaandrade16,Breathlessness
+2024-10-15 14:55:56.483940,1,cristinaandrade16,Fatigue
+2024-10-25 12:57:36.821842,2,cristinaandrade16,Breathlessness
+2024-11-29 03:45:11.891458,3,cristinaandrade16,Breathlessness
+2024-11-23 07:33:47.610594,1,cristinaandrade16,Breathlessness
+2024-12-03 19:06:58.672493,2,cristinaandrade16,Chest Pain
+2024-11-23 02:16:33.354225,4,cristinaandrade16,Breathlessness
+2024-10-10 22:57:16.204936,4,cristinaandrade16,Breathlessness
+2024-11-14 17:52:46.512275,3,cristinaandrade16,Dizziness
+2024-10-22 20:33:38.327598,3,cristinaandrade16,Fatigue
+2024-11-29 18:02:56.688335,1,cristinaandrade16,Fatigue
+2024-10-26 11:05:14.814255,2,cristinaandrade16,Fatigue
+2024-12-01 03:46:17.821724,2,cristinaandrade16,Breathlessness
+2024-11-03 21:32:09.280089,1,cristinaandrade16,Chest Pain
+2024-11-12 10:52:12.613809,1,cristinaandrade16,Dizziness
+2024-10-18 02:53:06.803010,2,cristinaandrade16,Breathlessness
+2024-10-28 19:03:52.728730,1,cristinaandrade16,Chest Pain
+2024-11-14 04:52:15.116634,2,cristinaandrade16,Fatigue
+2024-11-09 22:40:59.929699,1,cristinaandrade16,Fatigue
+2024-11-23 04:55:23.336132,1,cristinaandrade16,Fatigue
+2024-11-10 21:32:39.207464,2,cristinaandrade16,Dizziness
+2024-11-15 08:12:29.601801,2,cristinaandrade16,Dizziness
+2024-10-22 21:34:18.753825,4,cristinaandrade16,Dizziness
+2024-11-19 05:49:02.205054,2,cristinaandrade16,Fatigue
+2024-10-09 11:27:45.470488,3,cristinaandrade16,Chest Pain
+2024-11-05 07:52:10.062315,4,cristinaandrade16,Breathlessness
+2024-11-06 00:50:08.512153,3,cristinaandrade16,Fatigue
+2024-10-08 11:29:42.344443,2,cristinaandrade16,Dizziness
+2024-10-10 13:01:33.380926,3,cristinaandrade16,Fatigue
+2024-10-19 03:31:50.103065,3,joão_pereira88,Chest Pain
+2024-10-24 16:11:41.051377,1,joão_pereira88,Dizziness
+2024-11-27 22:38:09.084478,1,joão_pereira88,Fatigue
+2024-10-20 09:12:12.525504,3,joão_pereira88,Chest Pain
+2024-11-27 00:05:20.440983,2,joão_pereira88,Fatigue
+2024-10-23 07:59:50.624529,3,joão_pereira88,Breathlessness
+2024-11-19 12:17:10.283296,4,joão_pereira88,Chest Pain
+2024-10-09 10:58:25.675720,4,joão_pereira88,Breathlessness
+2024-10-29 20:26:37.941160,4,joão_pereira88,Fatigue
+2024-10-28 04:19:42.719810,1,joão_pereira88,Fatigue
+2024-10-25 14:17:48.202172,3,joão_pereira88,Fatigue
+2024-10-29 20:50:26.641002,1,joão_pereira88,Chest Pain
+2024-11-01 19:09:33.925725,4,joão_pereira88,Chest Pain
+2024-11-18 09:10:05.104930,2,joão_pereira88,Fatigue
+2024-11-28 21:58:24.625596,1,joão_pereira88,Breathlessness
+2024-10-10 16:54:19.476989,2,joão_pereira88,Fatigue
+2024-11-12 07:05:16.920048,3,joão_pereira88,Fatigue
+2024-11-06 12:04:00.418109,2,joão_pereira88,Fatigue
+2024-10-10 08:21:07.164893,2,joão_pereira88,Breathlessness
+2024-10-07 12:32:01.824894,3,joão_pereira88,Fatigue
+2024-11-12 20:37:03.254719,4,joão_pereira88,Breathlessness
+2024-10-30 18:00:50.571918,2,joão_pereira88,Dizziness
+2024-11-08 19:48:24.678906,2,joão_pereira88,Dizziness
+2024-10-15 09:28:34.468384,3,joão_pereira88,Dizziness
+2024-10-23 10:50:33.900679,4,joão_pereira88,Breathlessness
+2024-10-24 01:24:22.704360,1,joão_pereira88,Fatigue
+2024-10-18 19:53:17.354201,2,joão_pereira88,Dizziness
+2024-11-25 19:57:36.856117,2,joão_pereira88,Dizziness
+2024-10-17 15:26:28.815326,3,joão_pereira88,Chest Pain
+2024-10-08 11:09:03.754634,2,joão_pereira88,Chest Pain
+2024-10-22 20:45:13.888446,2,joão_pereira88,Chest Pain
+2024-10-12 23:26:20.548917,1,joão_pereira88,Dizziness
+2024-11-17 18:24:58.200582,1,joão_pereira88,Chest Pain
+2024-11-14 01:28:13.582225,4,joão_pereira88,Fatigue
+2024-10-19 00:10:38.660625,3,joão_pereira88,Chest Pain
+2024-12-04 08:22:09.904679,4,joão_pereira88,Fatigue
+2024-12-02 20:34:15.815628,1,joão_pereira88,Fatigue
+2024-11-03 07:05:55.741613,3,migueloliveira18,Fatigue
+2024-11-27 09:47:39.680348,4,migueloliveira18,Fatigue
+2024-10-12 04:17:00.828905,2,migueloliveira18,Chest Pain
+2024-10-08 21:38:22.332521,1,migueloliveira18,Chest Pain
+2024-11-12 00:16:42.022810,3,migueloliveira18,Fatigue
+2024-11-17 03:56:58.417536,3,migueloliveira18,Dizziness
+2024-10-14 04:48:40.023429,3,migueloliveira18,Dizziness
+2024-11-26 00:23:54.751263,2,migueloliveira18,Dizziness
+2024-11-05 04:01:09.777719,2,migueloliveira18,Chest Pain
+2024-12-01 11:52:00.372635,4,migueloliveira18,Chest Pain
+2024-10-21 22:54:25.227927,3,migueloliveira18,Dizziness
+2024-10-17 18:21:24.921585,4,migueloliveira18,Dizziness
+2024-10-27 21:18:41.610543,4,migueloliveira18,Breathlessness
+2024-11-17 08:06:47.223150,3,migueloliveira18,Fatigue
+2024-10-08 08:00:08.712633,3,migueloliveira18,Fatigue
+2024-12-01 19:07:13.791049,2,migueloliveira18,Fatigue
+2024-11-12 14:32:58.097865,4,migueloliveira18,Chest Pain
+2024-10-07 17:18:36.312397,3,migueloliveira18,Fatigue
+2024-11-21 13:10:17.998691,1,migueloliveira18,Chest Pain
+2024-11-18 16:27:59.121981,1,migueloliveira18,Chest Pain
+2024-11-30 21:10:32.843808,1,migueloliveira18,Dizziness
+2024-10-07 15:21:31.330516,4,migueloliveira18,Dizziness
+2024-10-09 18:26:24.962469,1,migueloliveira18,Breathlessness
+2024-11-01 05:05:23.425177,4,migueloliveira18,Fatigue
+2024-11-15 23:49:34.649143,4,migueloliveira18,Breathlessness
+2024-11-27 21:15:52.040303,2,migueloliveira18,Chest Pain
+2024-12-05 05:37:57.153579,1,migueloliveira18,Dizziness
+2024-11-20 00:20:05.651242,2,migueloliveira18,Breathlessness
+2024-10-08 06:55:30.388376,4,migueloliveira18,Dizziness
+2024-10-25 09:38:24.106826,2,migueloliveira18,Dizziness
+2024-11-10 16:46:00.068432,2,migueloliveira18,Dizziness
+2024-11-29 06:33:35.257249,4,migueloliveira18,Breathlessness
+2024-10-18 13:13:39.853099,2,migueloliveira18,Dizziness
+2024-11-17 11:56:26.076229,1,migueloliveira18,Dizziness
+2024-12-05 00:00:04.901161,2,migueloliveira18,Dizziness
+2024-10-14 16:00:57.711821,4,migueloliveira18,Breathlessness
+2024-10-21 06:21:54.943024,1,migueloliveira18,Fatigue
+2024-11-08 11:40:22.058925,2,helena.sousa54,Fatigue
+2024-10-24 21:53:57.264669,4,helena.sousa54,Chest Pain
+2024-11-18 00:56:46.594764,1,helena.sousa54,Breathlessness
+2024-11-13 01:32:43.934248,4,helena.sousa54,Chest Pain
+2024-11-08 16:51:22.196766,3,helena.sousa54,Fatigue
+2024-11-13 04:23:15.827335,3,helena.sousa54,Fatigue
+2024-10-16 21:58:02.363331,4,helena.sousa54,Fatigue
+2024-11-12 20:06:19.961454,3,helena.sousa54,Fatigue
+2024-11-18 01:39:49.731098,2,helena.sousa54,Fatigue
+2024-10-23 11:43:24.399453,3,helena.sousa54,Chest Pain
+2024-12-05 05:46:46.765940,3,helena.sousa54,Fatigue
+2024-10-23 17:36:17.904295,3,helena.sousa54,Breathlessness
+2024-11-24 19:19:18.517893,4,helena.sousa54,Fatigue
+2024-11-05 23:30:54.146899,4,helena.sousa54,Breathlessness
+2024-11-08 17:43:44.934373,2,helena.sousa54,Breathlessness
+2024-10-23 03:20:40.170376,4,helena.sousa54,Dizziness
+2024-11-05 17:36:01.500074,4,helena.sousa54,Breathlessness
+2024-11-27 15:21:01.024040,1,helena.sousa54,Breathlessness
+2024-11-24 18:43:31.045529,3,helena.sousa54,Chest Pain
+2024-11-13 21:02:52.215762,1,helena.sousa54,Fatigue
+2024-11-17 00:59:21.426276,3,helena.sousa54,Fatigue
+2024-11-01 20:40:25.566774,3,helena.sousa54,Breathlessness
+2024-11-05 12:00:22.456568,4,helena.sousa54,Breathlessness
+2024-11-24 02:42:59.574024,4,helena.sousa54,Chest Pain
+2024-11-24 04:26:08.474562,3,helena.sousa54,Breathlessness
+2024-10-24 12:32:47.996473,1,helena.sousa54,Chest Pain
+2024-10-27 13:57:07.414467,2,helena.sousa54,Breathlessness
+2024-11-14 11:44:12.515810,3,helena.sousa54,Chest Pain
+2024-10-21 21:09:25.834619,4,helena.sousa54,Fatigue
+2024-10-21 11:49:37.980402,4,helena.sousa54,Fatigue
+2024-10-15 18:39:14.238294,3,helena.sousa54,Fatigue
+2024-10-28 04:34:55.034943,3,jorge_moreira49,Fatigue
+2024-11-02 22:30:36.588657,1,jorge_moreira49,Fatigue
+2024-11-17 04:32:17.197534,4,jorge_moreira49,Breathlessness
+2024-12-02 23:35:19.852300,4,jorge_moreira49,Fatigue
+2024-11-25 18:05:31.179758,1,jorge_moreira49,Breathlessness
+2024-11-07 05:55:15.659157,4,jorge_moreira49,Chest Pain
+2024-10-21 17:56:38.518152,4,jorge_moreira49,Fatigue
+2024-11-19 00:56:33.168949,4,jorge_moreira49,Dizziness
+2024-10-10 04:10:12.043194,4,jorge_moreira49,Breathlessness
+2024-11-18 20:35:07.084086,3,jorge_moreira49,Breathlessness
+2024-12-03 10:03:32.921257,3,jorge_moreira49,Fatigue
+2024-11-11 15:35:04.886310,4,jorge_moreira49,Breathlessness
+2024-10-14 14:38:13.153744,2,jorge_moreira49,Breathlessness
+2024-11-16 01:26:39.508778,2,jorge_moreira49,Chest Pain
+2024-11-24 23:36:32.286367,4,jorge_moreira49,Chest Pain
+2024-10-13 23:45:27.581946,2,jorge_moreira49,Dizziness
+2024-12-04 17:38:23.329033,1,jorge_moreira49,Breathlessness
+2024-10-19 03:37:45.181588,2,jorge_moreira49,Fatigue
+2024-10-17 05:37:32.685439,1,jorge_moreira49,Fatigue
+2024-11-03 17:02:38.425545,1,jorge_moreira49,Dizziness
+2024-10-10 20:08:05.668930,2,jorge_moreira49,Chest Pain
+2024-10-31 09:14:39.603700,2,jorge_moreira49,Dizziness
+2024-10-21 01:17:59.238839,3,jorge_moreira49,Breathlessness
+2024-10-20 15:26:29.899661,2,jorge_moreira49,Chest Pain
+2024-12-02 09:05:01.934549,2,jorge_moreira49,Dizziness
+2024-11-20 02:25:15.213244,1,jorge_moreira49,Fatigue
+2024-11-30 03:38:12.067290,2,jorge_moreira49,Breathlessness
+2024-11-09 03:31:12.853296,2,jorge_moreira49,Fatigue
+2024-11-09 01:05:06.523163,2,jorge_moreira49,Dizziness
+2024-12-03 11:37:38.226474,3,jorge_moreira49,Breathlessness
+2024-10-18 20:33:28.262215,3,jorge_moreira49,Fatigue
+2024-10-08 05:51:57.788107,4,jorge_moreira49,Chest Pain
+2024-10-17 13:51:58.689026,2,jorge_moreira49,Dizziness
+2024-10-15 23:44:50.635287,1,jorge_moreira49,Dizziness
+2024-11-17 09:08:07.252847,4,jorge_moreira49,Chest Pain
+2024-10-24 17:22:12.898010,1,jorge_moreira49,Breathlessness
+2024-11-13 07:53:52.478862,4,jorge_moreira49,Chest Pain
+2024-10-14 03:37:39.372596,3,ana_vieira,Fatigue
+2024-11-12 06:10:27.347871,2,ana_vieira,Dizziness
+2024-10-21 09:42:26.667015,1,ana_vieira,Chest Pain
+2024-11-14 01:34:58.312862,1,ana_vieira,Chest Pain
+2024-11-18 22:31:00.633886,2,ana_vieira,Breathlessness
+2024-11-18 08:52:39.296475,4,ana_vieira,Fatigue
+2024-11-27 22:48:12.296113,3,ana_vieira,Breathlessness
+2024-11-25 13:38:04.897090,3,ana_vieira,Breathlessness
+2024-11-02 22:55:01.628432,2,ana_vieira,Breathlessness
+2024-11-30 11:06:21.405021,3,ana_vieira,Dizziness
+2024-11-21 08:50:14.027092,1,ana_vieira,Breathlessness
+2024-10-29 17:53:31.506337,4,ana_vieira,Breathlessness
+2024-11-02 19:28:39.888697,4,ana_vieira,Fatigue
+2024-12-04 23:26:32.144574,2,ana_vieira,Dizziness
+2024-10-14 19:45:32.283544,2,ana_vieira,Dizziness
+2024-11-17 00:39:28.895767,1,ana_vieira,Breathlessness
+2024-10-12 02:01:06.964645,1,ana_vieira,Dizziness
+2024-10-11 15:43:18.815645,1,ana_vieira,Breathlessness
+2024-11-16 03:24:53.439607,2,ana_vieira,Breathlessness
+2024-10-27 10:13:03.626223,4,ana_vieira,Dizziness
+2024-11-17 16:57:27.615046,3,ana_vieira,Chest Pain
+2024-11-16 04:40:56.471768,3,ana_vieira,Dizziness
+2024-11-10 13:19:27.301863,4,ana_vieira,Breathlessness
+2024-10-21 23:32:16.669085,1,ana_vieira,Breathlessness
+2024-10-16 19:19:30.949899,2,ana_vieira,Chest Pain
+2024-10-15 16:44:19.230791,4,ana_vieira,Dizziness
+2024-11-22 11:06:32.305016,2,ana_vieira,Chest Pain
+2024-11-26 20:23:36.661120,2,ana_vieira,Breathlessness
+2024-11-04 12:56:08.411190,4,ana_vieira,Chest Pain
+2024-11-21 17:35:10.586180,3,ana_vieira,Dizziness
+2024-12-05 07:24:52.933606,3,ana_vieira,Chest Pain
+2024-10-29 21:24:01.117371,1,ana_vieira,Dizziness
+2024-10-29 00:13:38.866813,3,ana_vieira,Breathlessness
+2024-11-07 15:17:57.132913,1,diana.freitas16,Chest Pain
+2024-10-18 20:31:30.178970,4,diana.freitas16,Fatigue
+2024-11-20 10:08:22.246109,3,diana.freitas16,Chest Pain
+2024-11-19 10:02:02.204513,3,diana.freitas16,Breathlessness
+2024-11-14 21:29:20.866036,4,diana.freitas16,Dizziness
+2024-10-25 11:21:45.289247,2,diana.freitas16,Breathlessness
+2024-11-22 01:47:53.820372,2,diana.freitas16,Fatigue
+2024-12-01 18:52:39.885953,4,diana.freitas16,Breathlessness
+2024-11-13 16:24:26.023295,4,diana.freitas16,Breathlessness
+2024-11-29 00:41:49.550901,4,diana.freitas16,Dizziness
+2024-10-09 18:17:46.187255,1,diana.freitas16,Chest Pain
+2024-11-11 00:19:15.165252,4,diana.freitas16,Fatigue
+2024-11-15 00:40:59.029323,1,diana.freitas16,Chest Pain
+2024-11-12 14:03:51.504757,3,diana.freitas16,Breathlessness
+2024-11-15 02:34:31.167354,1,diana.freitas16,Breathlessness
+2024-11-01 23:54:41.641850,2,diana.freitas16,Chest Pain
+2024-11-23 11:44:06.995873,1,diana.freitas16,Breathlessness
+2024-11-24 18:52:13.317798,2,diana.freitas16,Chest Pain
+2024-11-12 04:29:48.191981,3,diana.freitas16,Dizziness
+2024-12-03 18:11:07.903248,2,diana.freitas16,Breathlessness
+2024-11-13 13:24:32.555872,2,diana.freitas16,Chest Pain
+2024-10-07 19:25:33.129083,3,diana.freitas16,Chest Pain
+2024-10-28 02:06:19.696870,2,diana.freitas16,Dizziness
+2024-12-04 07:47:23.907634,2,diana.freitas16,Fatigue
+2024-11-23 10:00:46.796904,2,diana.freitas16,Fatigue
+2024-10-20 09:20:28.230890,2,diana.freitas16,Breathlessness
+2024-11-03 16:41:02.535010,1,diana.freitas16,Dizziness
+2024-10-17 11:20:24.975314,4,diana.freitas16,Chest Pain
+2024-11-17 16:28:01.854577,3,diana.freitas16,Dizziness
+2024-10-20 04:03:46.795591,2,diana.freitas16,Breathlessness
+2024-12-05 20:08:05.233150,2,diana.freitas16,Breathlessness

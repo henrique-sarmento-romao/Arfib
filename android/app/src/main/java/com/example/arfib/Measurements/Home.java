@@ -1,6 +1,8 @@
 package com.example.arfib.Measurements;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteAbortException;
+import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +18,18 @@ import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.arfib.Database.DatabaseHelper;
+
+import java.io.IOException;
+
 public class Home extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +66,27 @@ public class Home extends AppCompatActivity {
             Intent intent = new Intent(Home.this, Detailed.class);
             startActivity(intent);
         });
+
+        dbHelper = new DatabaseHelper(this);
+
+        try {
+            dbHelper.createDatabase();
+            dbHelper.openDatabase();
+
+            // Example of reading data from the database
+            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM User", null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    // Access the data in the cursor
+                    String data = cursor.getString(cursor.getColumnIndex("username"));
+                    // Do something with the data
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
