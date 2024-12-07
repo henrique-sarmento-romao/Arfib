@@ -25,7 +25,9 @@ public class Login extends AppCompatActivity {
         pw.setOnEditorActionListener((textView, id, keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_SEND) {
                 if ("p".equals(chosen)) {
-                    startActivity(new Intent(Login.this, HomePatient.class));
+                    Intent patientIntent = new Intent(Login.this, HomePatient.class);
+                    patientIntent.putExtra("username", "lauraalves30");
+                    startActivity(patientIntent);
                 } else if ("d".equals(chosen)) {
                     startActivity(new Intent(Login.this, HomeDoctor.class));
                 } else if ("n".equals(chosen)) {

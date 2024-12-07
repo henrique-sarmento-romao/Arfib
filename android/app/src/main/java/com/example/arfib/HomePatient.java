@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,12 +26,17 @@ public class HomePatient extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
         getSupportActionBar().setIcon(R.drawable.ic_menu_icon);
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePatient.this, BluetoothActivity.class);
-            startActivity(intent);
+            Intent bluetoothIntent = new Intent(HomePatient.this, BluetoothActivity.class);
+            startActivity(bluetoothIntent);
         });
+
+        TextView welcome = findViewById(R.id.welcome);
+        welcome.setText("👋 Welcome, "+username+"!");
     }
 
     @Override
@@ -54,14 +60,17 @@ public class HomePatient extends AppCompatActivity {
             return true;
         } else if (id == R.id.measurements) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Measurements.Home.class);
+            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.symptoms) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Symptoms.Home.class);
+            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.medications) {
             Intent intent = new Intent(HomePatient.this, com.example.arfib.Medications.Home.class);
+            intent.putExtra("username", "lauraalves30");
             startActivity(intent);
             return true;
         } else if (id == R.id.blog) {

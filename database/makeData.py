@@ -76,15 +76,16 @@ ECGs_available = [f for f in os.listdir("database/measurements") if os.path.isfi
 ECGs_available = [os.path.relpath(f,os.getcwd()) for f in ECGs_available]
 
 patient_list = Patient["username"].to_list()
-for file in ECGs_available:
-    now = datetime.now()
-    two_months_ago = now - timedelta(days=60)
-    date_time = two_months_ago + (now - two_months_ago) * random.random()
+for patient in patient_list:
+    for ecg in range(random.randint(8,12)):
+        now = datetime.now()
+        two_months_ago = now - timedelta(days=60)
+        date_time = two_months_ago + (now - two_months_ago) * random.random()
 
-    AF_presence = (random.random() < 0.2)
-    patient = random.choice(patient_list)
+        AF_presence = int((random.random() < 0.2))
+        file = None
 
-    Measurement.loc[len(Measurement)] = [file, date_time, AF_presence, patient]
+        Measurement.loc[len(Measurement)] = [file, date_time, AF_presence, patient]
 
 # -- SYMPTOM ------------------
 for sim in symptoms:
@@ -137,7 +138,7 @@ Symptom_Log.to_csv(folder+"Symptom_Log.csv", index=False)
 Medication.to_csv(folder+"Medication.csv", index=False)
 Prescription.to_csv(folder+"Prescription.csv", index=False)
 
-conn = sqlite3.connect('android/app/src/main/assets/database.db')
+conn = sqlite3.connect('database/database.db')
 User.to_sql('User', conn, if_exists='replace', index=False)
 Doctor.to_sql('Doctor', conn, if_exists='replace', index=False)
 Nurse.to_sql('Nurse', conn, if_exists='replace', index=False)

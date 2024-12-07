@@ -1,66 +1,58 @@
 patient,medication,frequency,start_date,end_date
-alice.freitas72,Aspirin,168,2024-11-28 01:49:39.965475,
-danielribeiro86,Aspirin,36,2024-10-13 23:53:13.280013,2025-01-09 10:23:11.076549
-danielribeiro86,Diuretics,12,2024-11-14 17:21:42.849450,2024-12-24 13:41:57.847496
-danielribeiro86,Eplerenone,36,2024-11-04 06:16:23.339327,2025-02-03 03:57:42.909026
-diana.figueiredo48,Nitroglycerin,12,2024-11-11 08:41:57.617705,2025-02-01 10:47:27.990322
-diana.figueiredo48,Beta-blockers,168,2024-10-19 19:26:37.048449,
-josé.barros68,Digoxin,168,2024-10-08 16:01:16.401719,2025-01-11 22:57:57.152423
-joão_mendes5,Beta-blockers,36,2024-11-22 06:17:06.207047,
-joão_mendes5,Clopidogrel,168,2024-10-16 07:50:14.030584,
-pedro.moraes25,Aspirin,36,2024-10-29 05:34:22.198946,
-cristina_moraes,Digoxin,36,2024-11-17 23:03:56.080061,
-cristina_moraes,Angiotensin II receptor blockers (ARBs),12,2024-11-07 17:06:33.850848,
-cristina_moraes,Eplerenone,168,2024-10-17 08:44:44.018945,
-david.dias92,Eplerenone,36,2024-10-07 20:22:36.303749,2024-12-12 16:33:35.723570
-andrésilva15,Digoxin,24,2024-11-11 21:31:23.887679,2024-12-22 19:59:39.349354
-andrésilva15,Hydralazine,24,2024-10-22 16:22:57.211648,2024-12-14 09:52:04.676122
-andrésilva15,Losartan,24,2024-10-25 18:10:48.322849,
-leonorfigueiredo,Beta-blockers,24,2024-10-31 21:42:30.342173,
-leonorfigueiredo,ACE inhibitors,168,2024-10-20 07:33:48.734098,2025-01-30 09:59:25.984320
-isabel.fernandes,Clopidogrel,12,2024-10-25 06:31:31.232299,
-isabel.fernandes,Warfarin,36,2024-11-01 08:59:56.983470,
-cristina.matias17,Ivabradine,12,2024-12-02 20:05:43.528132,
-cristina.matias17,Ivabradine,12,2024-11-22 00:19:31.504981,
-cristina.matias17,Calcium channel blockers,168,2024-10-16 02:11:21.062024,2024-12-21 09:33:20.379672
-bernardo_borges,Verapamil,168,2024-11-19 04:40:48.740754,
-bernardo_borges,Beta-blockers,12,2024-11-24 07:13:53.307119,2025-01-29 17:09:46.745098
-bernardo_borges,Eplerenone,12,2024-10-31 20:04:09.174121,2024-12-12 14:46:14.514220
-daniel.teixeira1,Warfarin,12,2024-10-27 04:07:49.669127,
-daniel.teixeira1,ACE inhibitors,12,2024-12-03 01:00:13.961638,2024-12-31 10:34:37.328475
-mariana.ramos,Nitroglycerin,12,2024-10-29 19:16:53.547341,2024-12-08 15:48:47.794138
-mariana.ramos,Furosemide,24,2024-10-27 19:34:12.265967,2024-12-24 17:00:23.947555
-bernardo_pimentel26,Nitroglycerin,12,2024-10-22 20:44:55.338861,2024-12-14 21:50:09.949305
-bernardo_pimentel26,Furosemide,168,2024-11-13 02:15:12.828821,
-antónio.bastos2,Digoxin,36,2024-11-09 18:03:17.734764,
-helenabraga15,Ivabradine,24,2024-11-14 15:33:31.417033,
-diogo.monteiro,Amiodarone,36,2024-11-10 00:53:43.421362,
-isabel.duarte31,Ranolazine,36,2024-11-25 23:46:08.304864,
-isabel.duarte31,Furosemide,24,2024-10-28 15:38:22.621863,
-isabel.duarte31,Amiodarone,36,2024-11-03 05:56:14.511018,2024-12-26 11:50:18.666179
-henriquecampos36,Verapamil,12,2024-10-09 15:04:05.612682,
-henriquecampos36,Amiodarone,168,2024-11-03 01:38:55.213581,2025-01-23 00:03:24.173986
-inêsmonteiro9,Lisinopril,168,2024-11-06 22:26:01.761458,
-inêsmonteiro9,Clopidogrel,168,2024-11-19 04:41:26.854809,
-laurabarbosa,Diuretics,12,2024-11-15 10:47:47.752711,
-laurabarbosa,Angiotensin II receptor blockers (ARBs),168,2024-11-12 03:37:27.222497,
-gonçalo.esteves,Eplerenone,168,2024-10-13 09:01:33.369565,
-gonçalo.esteves,Verapamil,36,2024-12-03 13:29:21.117594,
-gonçalo.esteves,Warfarin,168,2024-10-13 06:16:55.686959,2024-12-13 17:39:07.811126
-rafael.freitas32,Losartan,12,2024-11-25 15:12:55.871705,2024-12-08 13:47:21.705558
-cristinaandrade16,Ivabradine,12,2024-11-25 05:22:02.486421,2025-01-06 12:55:13.797985
-cristinaandrade16,Verapamil,168,2024-11-23 07:52:10.703545,
-joão_pereira88,Angiotensin II receptor blockers (ARBs),36,2024-10-26 17:47:06.289056,
-migueloliveira18,Angiotensin II receptor blockers (ARBs),24,2024-10-25 01:38:28.489405,
-migueloliveira18,Beta-blockers,24,2024-11-07 18:31:03.417003,
-helena.sousa54,Ranolazine,12,2024-10-20 03:01:39.297197,2024-12-25 04:52:05.406507
-helena.sousa54,Eplerenone,36,2024-10-18 18:36:57.071653,
-helena.sousa54,ACE inhibitors,36,2024-11-12 07:10:27.112101,2025-01-23 19:47:49.035976
-jorge_moreira49,Eplerenone,36,2024-10-21 12:25:48.181141,2025-01-13 23:44:22.938488
-jorge_moreira49,Furosemide,24,2024-10-30 08:40:49.647576,2025-01-01 08:54:25.826338
-jorge_moreira49,Ranolazine,24,2024-11-29 13:12:19.700253,2024-12-28 13:53:51.456402
-ana_vieira,Losartan,168,2024-11-27 11:37:57.488121,2024-12-23 09:46:53.913786
-ana_vieira,Hydralazine,168,2024-10-21 16:06:11.495567,2024-12-18 06:50:49.211237
-ana_vieira,Hydralazine,36,2024-11-07 15:23:09.506927,2024-12-13 06:43:36.058616
-diana.freitas16,Ivabradine,24,2024-11-02 02:13:50.528147,2025-01-07 18:39:09.423565
-diana.freitas16,Diuretics,168,2024-10-08 10:18:27.810533,2025-01-03 07:07:48.859317
+lauraalves30,Amiodarone,168,2024-10-10 11:26:23.823280,
+ricardomoreira80,Eplerenone,168,2024-10-18 00:50:31.257939,
+ricardomoreira80,Losartan,36,2024-10-18 23:03:15.631044,2025-01-30 06:18:21.574692
+ricardomoreira80,Beta-blockers,36,2024-11-05 23:30:21.747281,
+alicecosta10,Lisinopril,24,2024-10-12 10:40:51.085704,
+alicecosta10,Losartan,36,2024-10-30 12:03:40.363228,
+fábiocampos,Verapamil,12,2024-10-28 18:16:09.371681,
+joanasousa,Beta-blockers,36,2024-10-12 23:07:17.692014,
+brunamoraes,Angiotensin II receptor blockers (ARBs),36,2024-10-30 02:48:03.132921,
+brunamoraes,Diuretics,12,2024-11-27 08:51:22.253507,2025-01-19 20:18:32.472246
+brunamoraes,Furosemide,168,2024-11-03 18:02:27.019824,
+matilde_pimentel36,Nitroglycerin,168,2024-10-15 18:47:27.773002,2024-12-12 06:38:52.852612
+matilde_pimentel36,Aspirin,36,2024-10-11 20:56:48.287887,
+matilde_pimentel36,Losartan,24,2024-11-03 18:48:14.763402,
+bernardo.pimentel43,Diuretics,12,2024-12-03 03:32:51.214233,
+bernardo.pimentel43,Beta-blockers,36,2024-11-16 12:38:54.149207,
+bernardo.pimentel43,Calcium channel blockers,12,2024-12-06 15:48:04.368470,2025-01-09 07:13:32.336726
+diogofreitas,Amiodarone,24,2024-10-11 07:13:41.897779,2024-12-11 06:08:40.374408
+diogofreitas,Warfarin,36,2024-12-01 11:25:38.410379,
+diogofreitas,Lisinopril,24,2024-10-13 15:51:22.483900,
+jorge.oliveira38,Statins,12,2024-10-24 21:04:17.949440,
+jorge.oliveira38,Warfarin,24,2024-10-18 07:06:08.315840,
+jorge.oliveira38,Diuretics,12,2024-10-22 15:24:23.092395,
+daniel_carvalho36,Warfarin,12,2024-10-09 18:01:20.334774,2025-01-17 03:34:00.452443
+marianamacedo42,Clopidogrel,36,2024-11-10 17:21:12.457762,
+marianamacedo42,Aspirin,36,2024-11-03 22:11:46.322994,
+ricardo.duarte16,Nitroglycerin,12,2024-11-19 18:11:12.015291,
+madalenacarvalho,Aspirin,24,2024-10-15 21:02:49.252830,
+madalenacarvalho,Losartan,168,2024-10-11 19:39:51.453577,2025-01-22 00:47:50.171169
+madalenacarvalho,Nitroglycerin,36,2024-10-11 20:10:45.579116,2025-01-29 09:15:01.872345
+alicemoreira38,Lisinopril,168,2024-11-30 15:06:56.022241,2024-12-27 22:16:54.736655
+brunaramos12,Aspirin,36,2024-11-30 11:58:02.555716,
+matildecoelho48,Ranolazine,168,2024-10-11 13:21:43.583175,
+matildecoelho48,Nitroglycerin,24,2024-10-19 16:29:50.777681,2024-12-14 22:54:09.550195
+matildecoelho48,Nitroglycerin,168,2024-11-29 18:55:12.123701,2025-01-11 19:01:07.430730
+diogobastos,Angiotensin II receptor blockers (ARBs),12,2024-11-02 01:06:22.514357,
+diogobastos,Ranolazine,24,2024-12-01 03:55:58.767861,
+diogobastos,Furosemide,24,2024-10-17 05:43:39.695304,
+leonorvieira,Nitroglycerin,36,2024-10-30 02:30:02.391929,2024-12-27 06:31:40.309223
+cristinadias27,ACE inhibitors,12,2024-10-14 13:55:52.885090,
+josé.campos78,Ranolazine,168,2024-11-24 15:25:02.932742,2024-12-11 11:52:07.394250
+josé.campos78,Ivabradine,24,2024-11-01 20:07:24.845827,
+joana_coelho40,Lisinopril,36,2024-11-13 21:40:44.451566,
+pedropimentel24,Statins,168,2024-11-19 10:56:18.954412,
+andré_teixeira24,Clopidogrel,36,2024-11-05 07:27:30.056293,
+andré_teixeira24,Digoxin,24,2024-11-22 02:55:35.630399,2024-12-11 00:55:32.790791
+andré_teixeira24,ACE inhibitors,36,2024-10-09 02:40:26.095484,2024-12-21 12:50:00.673104
+carla_ramos18,Aspirin,36,2024-10-28 21:31:04.890304,
+fábio_duarte22,Beta-blockers,36,2024-11-01 17:33:29.895301,2025-01-19 16:08:02.229538
+afonsoneves20,Angiotensin II receptor blockers (ARBs),12,2024-10-27 08:47:40.250471,
+afonsoneves20,Losartan,168,2024-12-02 03:40:05.407103,
+helena_coelho38,Diuretics,24,2024-12-04 20:03:15.371814,2024-12-14 06:28:06.304771
+helena_coelho38,Losartan,168,2024-10-22 19:39:02.650869,2024-12-18 06:36:44.645938
+helena_coelho38,Amiodarone,12,2024-10-13 09:49:25.942662,
+ricardo_machado54,Calcium channel blockers,168,2024-10-25 23:36:08.263031,2025-01-31 18:13:09.473228
+gonçalo_mendes10,Warfarin,12,2024-10-28 02:21:40.229303,
+gonçalo_mendes10,Verapamil,24,2024-10-17 20:58:15.467402,2024-12-20 11:33:06.320969
