@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -42,7 +43,8 @@ public class Log extends AppCompatActivity {
 
         ImageButton logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Log.this, Measuring.class);
+            //Intent intent = new Intent(Log.this, Measuring.class);
+            Intent intent = new Intent(Log.this, BluetoothActivity.class);
             startActivity(intent);
         });
     }

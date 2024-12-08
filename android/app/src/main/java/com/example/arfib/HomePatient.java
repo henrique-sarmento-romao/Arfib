@@ -35,12 +35,6 @@ public class HomePatient extends AppCompatActivity {
         TextView welcome = findViewById(R.id.welcome);
         welcome.setText("👋 Welcome, "+username+"!");
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(v -> {
-            Intent bluetoothIntent = new Intent(HomePatient.this, BluetoothActivity.class);
-            startActivity(bluetoothIntent);
-        });
-
         Button logout = findViewById(R.id.logoutButton);
         logout.setOnClickListener(v -> {
             SharedPreferences.Editor editor = sharedPref.edit();

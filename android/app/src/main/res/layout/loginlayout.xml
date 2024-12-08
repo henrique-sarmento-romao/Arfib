@@ -71,5 +71,14 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/error_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:textSize="25sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
