@@ -1,5 +1,6 @@
 package com.example.arfib.Measurements;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,19 +92,28 @@ public class Home extends AppCompatActivity {
 
             if (cursor.moveToFirst()) {
                 do {
-                    String date = cursor.getString(cursor.getColumnIndex("date_time"));
+                    @SuppressLint("Range") String date = cursor.getString(cursor.getColumnIndex("date_time"));
 
-                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
+                    DateTimeFormatter inputFormatter = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    }
+                    LocalDateTime dateTime = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        dateTime = LocalDateTime.parse(date, inputFormatter);
+                    }
 
                     // Format the date into the desired format
-                    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+                    DateTimeFormatter outputFormatter = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+                    }
                     String formattedDate = dateTime.format(outputFormatter);
 
-                    String path = cursor.getString(cursor.getColumnIndex("file"));
-                    int AF_presence = cursor.getInt(cursor.getColumnIndex("AF_presence"));
+                    @SuppressLint("Range") String path = cursor.getString(cursor.getColumnIndex("file"));
+                    @SuppressLint("Range") int AF_presence = cursor.getInt(cursor.getColumnIndex("AF_presence"));
                     String has_AF;
-                    if (AF_presence == 0) {
+                    if (AF_presence == 1) {
                         has_AF = "AF Detected";
                     } else {
                         has_AF = "No AF Detected";

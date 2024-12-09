@@ -9,8 +9,13 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PAIRING" />
 
-    <uses-sdk android:minSdkVersion="10" />
+
+
+
+    <uses-sdk android:minSdkVersion="21" />
 
     <application
         android:allowBackup="true"

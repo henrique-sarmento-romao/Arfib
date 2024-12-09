@@ -2,11 +2,17 @@ package com.example.arfib.Measurements;
 
 import Bio.Library.namespace.BioLib;
 import android.Manifest;
+import android.Manifest.permission;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -17,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.arfib.Database.DatabaseHelper;
 import com.example.arfib.R;
 import android.graphics.Color;
 
@@ -28,6 +35,10 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import com.github.mikephil.charting.data.Entry;
 
@@ -46,19 +57,26 @@ public class BluetoothActivity extends AppCompatActivity {
     private byte[][] ecg = new byte[0][0]; // Initialized as an empty array
     private int nBytes = 0;
     private LineChart ecgChart;
+    private DatabaseHelper dbHelper;
+
 
     private static final int REQUEST_ENABLE_BT = 1;
     private static final String TARGET_DEVICE_MAC = "00:23:FE:00:0B:50"; // Replace with your device MAC address
+    private ArrayList<Integer> hrValues = new ArrayList<>(); // List to store HR values
+    private ArrayList<Integer> ecgData = new ArrayList<>(); // List to store ECG data
+
 
     private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
-            Manifest.permission.BLUETOOTH_SCAN,
-            Manifest.permission.BLUETOOTH_CONNECT,
-            Manifest.permission.BLUETOOTH_PRIVILEGED
+            permission.READ_EXTERNAL_STORAGE,
+            permission.WRITE_EXTERNAL_STORAGE,
+            permission.ACCESS_FINE_LOCATION,
+            permission.ACCESS_COARSE_LOCATION,
+            permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+            permission.BLUETOOTH_SCAN,
+            permission.BLUETOOTH_CONNECT,
+            permission.BLUETOOTH_PRIVILEGED,
+            permission.BLUETOOTH_ADVERTISE
+
     };
 
     @Override
@@ -94,7 +112,7 @@ public class BluetoothActivity extends AppCompatActivity {
         }
 
         if (!bluetoothAdapter.isEnabled()) {
-            textStatus.setText("Bluetooth is off. Enabling...");
+            Toast.makeText(this, "Bluetooth is off. Enabling...", Toast.LENGTH_LONG).show();
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
@@ -125,6 +143,12 @@ public class BluetoothActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.2f", value / 500); // Divide o índice pela frequência de amostragem
+            }
+        });
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
@@ -132,13 +156,13 @@ public class BluetoothActivity extends AppCompatActivity {
         chart.getAxisRight().setEnabled(false); // Disable right axis
 
         Legend legend = chart.getLegend();
-        legend.setEnabled(false); // Hide legend
+        legend.setEnabled(true);
     }
 
     private void checkPermissions() {
-        int permission1 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int permission2 = ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN);
-        int permission3 = ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT);
+        int permission1 = ActivityCompat.checkSelfPermission(this, permission.WRITE_EXTERNAL_STORAGE);
+        int permission2 = ActivityCompat.checkSelfPermission(this, permission.BLUETOOTH_SCAN);
+        int permission3 = ActivityCompat.checkSelfPermission(this, permission.BLUETOOTH_CONNECT);
 
         // Request permissions if not granted
         if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED) {
@@ -146,25 +170,61 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
+
     private void selectDeviceAndConnect() {
+        // Clear data before starting a new connection
+        hrValues.clear();
+        ecgData.clear();
+
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+        boolean devicePaired = false;
 
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
                 if (device.getAddress().equals(TARGET_DEVICE_MAC)) {
                     selectedDevice = device;
+                    devicePaired = true;
                     break;
                 }
             }
+        }
 
+        if (!devicePaired) {
+            // Dispositivo não emparelhado
+            textStatus.setText("Device not paired. Attempting to pair...");
+            selectedDevice = bluetoothAdapter.getRemoteDevice(TARGET_DEVICE_MAC);
             if (selectedDevice != null) {
-                textStatus.setText("Selected device: " + selectedDevice.getName());
-                connectToDevice();
+                pairDevice(selectedDevice);
             } else {
-                textStatus.setText("Device not found in paired devices.");
+                textStatus.setText("Device with MAC address " + TARGET_DEVICE_MAC + " not found.");
             }
+        } else if (selectedDevice != null) {
+            textStatus.setText("Selected device: " + selectedDevice.getName());
+            connectToDevice();
         } else {
-            textStatus.setText("No paired devices found.");
+            textStatus.setText("Device not found in paired devices.");
+        }
+    }
+
+    private void pairDevice(BluetoothDevice device) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Para Android 12+, é necessário solicitar permissão para emparelhamento
+            if (ActivityCompat.checkSelfPermission(this, permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{permission.BLUETOOTH_ADVERTISE}, 2);
+                return;
+            }
+        }
+
+        try {
+            boolean bondInitiated = device.createBond();
+            if (bondInitiated) {
+                textStatus.setText("Paired with " + device.getName());
+            } else {
+                textStatus.setText("Pairing failed to initiate with " + device.getName());
+            }
+        } catch (Exception e) {
+            textStatus.setText("Error initiating pairing: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -172,8 +232,19 @@ public class BluetoothActivity extends AppCompatActivity {
         try {
             if (selectedDevice != null) {
                 biolib = new BioLib(this, mHandler);
-                biolib.Connect(selectedDevice.getAddress(), 30); // Timeout value assumed to be 30 seconds
+                biolib.Connect(selectedDevice.getAddress(), 30);
                 textStatus.setText("Connecting to " + selectedDevice.getName() + "...");
+
+                // Schedule disconnection after 60 seconds
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    try {
+                        biolib.Disconnect();
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Error in disconnecting", Toast.LENGTH_LONG).show();
+                    }
+                }, 60000); // 60 seconds in milliseconds
+
+
             } else {
                 textStatus.setText("Selected device is null.");
             }
@@ -182,6 +253,7 @@ public class BluetoothActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void updateChart(LineChart chart, ArrayList<Entry> data) {
         LineDataSet dataSet = new LineDataSet(data, "ECG Data");
         dataSet.setColor(Color.CYAN);
@@ -224,16 +296,21 @@ public class BluetoothActivity extends AppCompatActivity {
 
                 case BioLib.MESSAGE_DISCONNECT_TO_DEVICE:
                     activity.textStatus.setText("Device disconnected.");
+                    activity.processData();
+
                     break;
 
                 case BioLib.MESSAGE_DATA_UPDATED:
                     BioLib.Output out = (BioLib.Output) msg.obj;
                     activity.textHR.setText("HR: " + out.pulse + " bpm     Nb. Leads: " + activity.biolib.GetNumberOfChannels());
+                    if (out.pulse > 0) {
+                        activity.hrValues.add(out.pulse);
+                    }
                     break;
 
                 case BioLib.MESSAGE_PEAK_DETECTION:
                     BioLib.QRS qrs = (BioLib.QRS) msg.obj;
-                    activity.textHR.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
+                    activity.textECG2.setText("PEAK: " + qrs.position + "  BPMi: " + qrs.bpmi + " bpm  BPM: " + qrs.bpm + " bpm  R-R: " + qrs.rr + " ms");
                     break;
 
                 case BioLib.MESSAGE_ECG_STREAM:
@@ -242,13 +319,19 @@ public class BluetoothActivity extends AppCompatActivity {
                             activity.ecg = (byte[][]) msg.obj;
                             int nLeads = activity.ecg.length;
                             int nBytes = activity.ecg[0].length;
-
                             activity.textECG.setText("ECG stream: OK   nBytes: " + nBytes + "   nLeads: " + nLeads);
-                            // Convertendo os dados para o gráfico
+
+                            // Converter os dados para o gráfico
                             ArrayList<Entry> ecgEntries = new ArrayList<>();
-                            for (int i = 0; i < Math.min(nBytes, 300); i++) { // Limite de 300 pontos
-                                int value = activity.ecg[0][i] & 0xFF; // Pegando o primeiro lead (ajustável)
+                            for (int i = 0; i < Math.min(nBytes, 150); i++) { // Limite de 300 pontos
+                                int value = activity.ecg[0][i] & 0xFF;
                                 ecgEntries.add(new Entry(i, value));
+                            }
+
+                            // Atualiza os valores na stream
+                            for (int i = 0; i < nBytes; i++) {
+                                int value = activity.ecg[0][i] & 0xFF;
+                                activity.ecgData.add(value);
                             }
 
                             // Atualizar o gráfico
@@ -267,6 +350,58 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void processData() {
+        dbHelper = new DatabaseHelper(this);
+        try {
+            dbHelper.createDatabase();
+            dbHelper.openDatabase();
+
+            // Export data to file
+            exportDataToFile();
+
+            // Clear the data
+            textStatus.setText("Data collection complete. HR samples: " + hrValues.size() + ", ECG samples: " + ecgData.size());
+            hrValues.clear();
+            ecgData.clear();
+        } catch (IOException e) {
+            throw new RuntimeException("Error initializing database", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Error processing data", e);
+        }
+    }
+
+    private void exportDataToFile() {
+        // Criar um nome de arquivo único com base no timestamp
+        File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Arfib");
+        if (!directory.exists()) {
+            directory.mkdirs(); // Cria o diretório se não existir
+        }
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String filename = "patient_data_" + timestamp + ".txt";
+        File file = new File(directory, filename);
+        try (FileWriter writer = new FileWriter(file)) {
+            // Escrever os valores de ECG
+            for (Integer value : ecgData) { // Iterar diretamente sobre ecgData
+                writer.write(value + " ");
+            }
+
+            Toast.makeText(this, "Data exported to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+
+            // Salvar informações do arquivo no banco de dados
+            SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            String username = sharedPref.getString("username", "");
+
+            // Salvar informações no banco de dados
+            dbHelper.insertFile(file.getAbsolutePath(), username, this);
+        } catch (IOException e) {
+            Toast.makeText(this, "Error exporting data: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
+
+
 
 

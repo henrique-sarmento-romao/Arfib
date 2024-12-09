@@ -1,16 +1,22 @@
 package com.example.arfib.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "database.db"; // Name of the pre-populated DB
@@ -82,4 +88,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         super.close();
     }
+
+    public void insertFile(String filepath, String patient, Context context) {
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("file", filepath);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            String formattedDate = dateFormat.format(new Date()); // Data e hora atual formatada
+
+            values.put("date_time", formattedDate);
+            values.put("AF_presence", 0); // Sempre insere como 0
+            values.put("patient", patient);
+
+            long result = db.insert("Measurement", null, values);
+            if (result == -1) {
+                Toast.makeText(context, "Failed to insert file metadata", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "File metadata inserted successfully!", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+
 }
