@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +23,13 @@ import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Home extends AppCompatActivity {
 
@@ -49,15 +53,21 @@ public class Home extends AppCompatActivity {
         Intent previousIntent = getIntent();
         String viewDate = previousIntent.getStringExtra("date");
         if (viewDate == null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E,\nMMM d"); // Match the format in your dateList
-            viewDate = LocalDateTime.now().format(formatter);
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
+            viewDate = dateFormatter.format(today);
         }
 
-        ImageButton homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, HomePatient.class);
-            startActivity(intent);
-        });
+        if (viewDate == null) {
+            try {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                Date today = new Date();
+                viewDate = dateFormatter.format(today); // Format today's date
+            } catch (Exception e) {
+                e.printStackTrace(); // Log the exception if any issues occur
+                viewDate = "2024-12-9"; // Fallback to a default date
+            }
+        }
 
         ImageButton notificationsButton = findViewById(R.id.notificationsButton);
         notificationsButton.setOnClickListener(v -> {
@@ -71,38 +81,44 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
-        dbHelper = new DatabaseHelper(this);
+        TextView YourMedications = findViewById(R.id.your_medications);
+        YourMedications.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, MedicationList.class);
+            startActivity(intent);
+        });
 
-        java.util.List<String> dateList = null;
+        dbHelper = new DatabaseHelper(this);
         try {
             dbHelper.createDatabase();
             dbHelper.openDatabase();
-
-            // Example of reading data from the database
-            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Medication_Log WHERE patient='"+ username +"' ORDER BY date_time DESC", null);
-
-            dateList = new ArrayList<>();
-
-            if (cursor.moveToFirst()) {
-                do {
-                    String date = cursor.getString(cursor.getColumnIndex("date_time"));
-
-                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
-
-                    // Format the date into the desired format
-                    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E,\nMMM d");
-                    String formattedDate = dateTime.format(outputFormatter);
-
-                    dateList.add(formattedDate);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
+        List<List<String>> dateList = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Medication_Log WHERE patient='" + username + "' GROUP BY date ORDER BY date DESC, time DESC",
+                null
+        );
+        int dateIndex, timeIndex;
+
+        if (cursor.moveToFirst()) {
+            do {
+                List<String> date_time = new ArrayList<>();
+
+                String date = cursor.getString(cursor.getColumnIndex("date"));
+                String time = cursor.getString(cursor.getColumnIndex("time"));
+
+                date_time.add(date);
+                date_time.add(time);
+
+                dateList.add(date_time);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        RecyclerView recyclerView = findViewById(R.id.dates);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setVerticalScrollBarEnabled(false);
@@ -111,12 +127,101 @@ public class Home extends AppCompatActivity {
         DateList adapter = new DateList(this, dateList, username, viewDate);
         recyclerView.setAdapter(adapter);
 
-        int selectedPosition = dateList.indexOf(viewDate);
+        int selectedPosition = -1; // Default to -1 if no match is found
+        for (int i = 0; i < dateList.size(); i++) {
+            List<String> date_time = dateList.get(i);
+            if (date_time.get(0).equals(viewDate)) { // Compare with the date part
+                selectedPosition = i;
+                break;
+            }
+        }
         if (selectedPosition != -1) {
+            int finalSelectedPosition = selectedPosition;
             recyclerView.post(() -> {
                 int offset = (recyclerView.getWidth() / 2) - (recyclerView.getChildAt(0).getWidth() / 2);
-                layoutManager.scrollToPositionWithOffset(selectedPosition, offset);
+                layoutManager.scrollToPositionWithOffset(finalSelectedPosition, offset);
             });
         }
+
+
+        List<List<String>> day_medications = new ArrayList<>();
+        Cursor dayMed = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Medication_Log " +
+                        "JOIN Medication ON Medication_Log.medication = Medication.name " +
+                        "WHERE patient = ? AND date = ? " +
+                        "ORDER BY date DESC, time DESC",
+                new String[]{username, viewDate}
+        );
+        if (dayMed.moveToFirst()) {
+            do {
+                String med = dayMed.getString(dayMed.getColumnIndex("medication"));
+                String date = dayMed.getString(dayMed.getColumnIndex("date"));
+                String time = dayMed.getString(dayMed.getColumnIndex("time"));
+                String asset = dayMed.getString(dayMed.getColumnIndex("image"));
+                int taken = dayMed.getInt(dayMed.getColumnIndex("taken"));
+
+                String isTaken="";
+                if(taken==1){
+                    isTaken = "true";
+                } else if(taken==0){
+                    isTaken = "false";
+                }
+                List<String> singleArray = new ArrayList<>();
+                singleArray.add(med);
+                singleArray.add(isTaken);
+                singleArray.add(date);
+                singleArray.add(time);
+                singleArray.add(asset);
+
+                // Add this "array" to the main list
+                day_medications.add(singleArray);
+
+            } while (dayMed.moveToNext());
+        }
+        dayMed.close();
+
+        RecyclerView dayMedicationView = findViewById(R.id.day_medications);
+        LinearLayoutManager dayMedicationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        dayMedicationView.setLayoutManager(dayMedicationLayoutManager);
+        dayMedicationView.setVerticalScrollBarEnabled(false);
+        dayMedicationView.setHorizontalScrollBarEnabled(false);
+
+        DayMedicationList dayMedicationAdapter = new DayMedicationList(this, day_medications);
+        dayMedicationView.setAdapter(dayMedicationAdapter);
+
+        List<List<String>> patient_medications = new ArrayList<>();
+        Cursor patMed = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Prescription " +
+                        "JOIN Medication ON Prescription.medication = Medication.name " +
+                        "WHERE patient = ? " +
+                        "ORDER BY start_date ASC",
+                new String[]{username}
+        );
+        if (patMed.moveToFirst()) {
+            do {
+                String med = patMed.getString(patMed.getColumnIndex("medication"));
+                int frequency = patMed.getInt(patMed.getColumnIndex("frequency"));
+                String asset = patMed.getString(patMed.getColumnIndex("image"));
+
+                List<String> singleArray = new ArrayList<>();
+                singleArray.add(med);
+                singleArray.add(String.valueOf(frequency));
+                singleArray.add(asset);
+
+                // Add this "array" to the main list
+                patient_medications.add(singleArray);
+            } while (patMed.moveToNext());
+        }
+        patMed.close();
+
+        RecyclerView patientMedicationView = findViewById(R.id.medication_list);
+        LinearLayoutManager patientMedicationLayoutManager = new LinearLayoutManager(this);
+        patientMedicationView.setLayoutManager(patientMedicationLayoutManager);
+        patientMedicationView.setVerticalScrollBarEnabled(false);
+        patientMedicationView.setHorizontalScrollBarEnabled(false);
+
+        PatientMedicationList patientMedicationAdapter = new PatientMedicationList(this, patient_medications);
+        patientMedicationView.setAdapter(patientMedicationAdapter);
+
     }
 }

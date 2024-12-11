@@ -18,12 +18,12 @@ User = pd.DataFrame({"username":[], "password":[], "first_name":[], "last_name":
 Doctor = pd.DataFrame({"username":[]})
 Nurse = pd.DataFrame({"username":[]})
 Patient = pd.DataFrame({"username":[], "doctor":[], "nurse":[]})
-Measurement = pd.DataFrame({"file":[], "date_time":[], "AF_presence":[], "patient":[]})
+Measurement = pd.DataFrame({"file":[], "date":[], "time":[], "AF_presence":[], "patient":[], "observations":[]})
 Symptom = pd.DataFrame({"name":[], "description":[]})
-Symptom_Log = pd.DataFrame({"date_time":[], "intensity":[], "patient":[], "symptom":[]})
-Medication = pd.DataFrame({"name":[], "effect":[]})
+Symptom_Log = pd.DataFrame({"date":[], "time":[], "intensity":[], "patient":[], "symptom":[]})
+Medication = pd.DataFrame({"name":[], "effect":[], "image":[]})
 Prescription = pd.DataFrame({"patient":[], "medication":[], "frequency":[], "start_date":[], "end_date":[]})
-Medication_Log = pd.DataFrame({"patient":[], "medication":[], "date_time":[], "taken":[]})
+Medication_Log = pd.DataFrame({"patient":[], "medication":[], "date":[], "time":[], "taken":[]})
 
 # -- USER -------------------------------
 num_User = num_Patient + num_Doctor + num_Nurse
@@ -65,7 +65,7 @@ nurse_list = Nurse["username"].to_list()
 for i in range(num_Patient):
     username = username_list.pop(random.randint(0, len(username_list)-1)) 
     doctor = random.choice(doctor_list)
-    needsNurse = random.choice([0,0,0,1])
+    needsNurse = random.random() < 0.25
     if needsNurse == 1:
         nurse = random.choice(doctor_list)
     else:
@@ -83,11 +83,14 @@ for patient in patient_list:
         now = datetime.now()
         two_months_ago = now - timedelta(days=60)
         date_time = two_months_ago + (now - two_months_ago) * random.random()
+        date = date_time.date()
+        time = date_time.time()
 
         AF_presence = int((random.random() < 0.2))
-        file = None
+        file = random.choice(ECGs_available)
+        observations = None
 
-        Measurement.loc[len(Measurement)] = [file, date_time, AF_presence, patient]
+        Measurement.loc[len(Measurement)] = [file, date, time, AF_presence, patient, observations]
 
 # -- SYMPTOM ------------------
 for sim in symptoms:
@@ -100,25 +103,33 @@ for patient in patient_list:
         now = datetime.now()
         two_months_ago = now - timedelta(days=60)
         date_time = two_months_ago + (now - two_months_ago) * random.random()
+        date = date_time.date()
+        time = date_time.time()
 
         intensity = random.randint(1,4)
         symptom = random.choice(simps)
-        Symptom_Log.loc[len(Symptom_Log)] = [date_time, intensity, patient, symptom]
+        Symptom_Log.loc[len(Symptom_Log)] = [date, time, intensity, patient, symptom]
 
 #  -- MEDICATIONs ------------------
+med_image_list = [f for f in os.listdir("database/medications") if os.path.isfile(os.path.join("database/medications", f))]
+med_image_list = [os.path.splitext(os.path.relpath(f, os.getcwd()))[0] for f in med_image_list]
 for med in medications:
-    Medication.loc[len(Medication)]=[med[0], med[1]]
+    med_image = med_image_list.pop(random.randint(0,len(med_image_list)-1))
+    Medication.loc[len(Medication)]=[med[0], med[1], med_image]
+
 
 medication_list = Medication["name"].to_list()
 # -- PRESCRIPTION ------------------
 for patient in patient_list:
-    for med in range(random.randint(0,3)):
-        medication = random.choice(medication_list)
-        frequency = random.choice([12,24,36,7*24])
+    num_medications = random.choice([2,3,3,3,3,4,5,6])
+    medications = random.sample(medication_list, num_medications)
 
+    for med in medications:
+        frequency = random.choice([12,24,36,7*24])
         now = datetime.now()
         two_months_ago = now - timedelta(days=60)
         start_date = two_months_ago + (now - two_months_ago) * random.random()
+        
         if random.random() < 0.4:
             now = datetime.now()
             two_months_from = now + timedelta(days=60)
@@ -127,9 +138,10 @@ for patient in patient_list:
         else:
             end_date = None
 
-        Prescription.loc[len(Prescription)] = [patient, medication, frequency, start_date, end_date]
+        Prescription.loc[len(Prescription)] = [patient, med, frequency, start_date, end_date]
 
 
+# -- MEDICATION LOG ------------------
 for patient in patient_list:
     medications = Prescription[Prescription["patient"] == patient]
     if len(medications) == 0:
@@ -145,14 +157,20 @@ for patient in patient_list:
         start_date = start_date.replace(hour=8, minute=0, second=0, microsecond=0)
 
         end_date = medications["end_date"].iloc[i]
-        if end_date is None:
+        if pd.isna(end_date):
             end_date = start_date + relativedelta(months=6)  # Set a default end date
         
-        date = start_date
-        while date < end_date:
-            taken = random.random() > 0.05  # Simulate medication taken with a 5% chance
-            Medication_Log.loc[len(Medication_Log)] = [patient, medication, date, taken]  # Corrected date_time to date
-            date += relativedelta(hours=int(frequency))  # Add frequency (in hours)
+        date_time = start_date
+        while date_time < end_date:
+            date = date_time.date()
+            time = date_time.time()
+            if date_time > datetime.now():
+                taken = 0
+            else:
+                taken = random.random() > 0.05  # Simulate medication taken with a 5% chance
+
+            Medication_Log.loc[len(Medication_Log)] = [patient, medication, date, time, taken]  # Corrected date_time to date
+            date_time += relativedelta(hours=int(frequency))  # Add frequency (in hours)
 
 
 folder = "database/CSVs/"

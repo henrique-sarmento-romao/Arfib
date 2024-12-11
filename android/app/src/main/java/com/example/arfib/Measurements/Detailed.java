@@ -20,9 +20,12 @@ import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Detailed extends AppCompatActivity {
@@ -47,6 +50,7 @@ public class Detailed extends AppCompatActivity {
 
         Intent previousIntent = getIntent();
         String date = previousIntent.getStringExtra("date");
+        String time = previousIntent.getStringExtra("time");
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
@@ -75,7 +79,7 @@ public class Detailed extends AppCompatActivity {
             dbHelper.openDatabase();
 
             // Example of reading data from the database
-            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + username + "' ORDER BY date_time DESC", null);
+            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + username + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
 
             if (cursor.moveToFirst()) {
                 String path = cursor.getString(cursor.getColumnIndex("file"));
@@ -95,7 +99,25 @@ public class Detailed extends AppCompatActivity {
         TextView Date, AFpresent, Observations;
 
         Date = findViewById(R.id.date);
-        Date.setText(date);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormatterDate = new SimpleDateFormat("MMM dd yyyy");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss.SSSSSS");
+        SimpleDateFormat outputFormatterTime = new SimpleDateFormat("HH:mm");
+
+        String date_time = "";
+        try{
+            Date parsedDate = dateFormatter.parse(date);
+            Date parsedTime = timeFormatter.parse(time);
+
+            String formattedDate = outputFormatterDate.format(parsedDate);
+            String formattedTime = outputFormatterTime.format(parsedTime);
+
+            // Final combined output
+            date_time = formattedDate + ", " + formattedTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date.setText(date_time);
 
         AFpresent = findViewById(R.id.AF_presence);
         AFpresent.setText(has_AF);

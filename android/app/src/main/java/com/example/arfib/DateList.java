@@ -19,16 +19,22 @@ import com.example.arfib.Medications.Home;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
 
     private final String username;
     private final String selectedDate;
-    private List<String> dateList;
-    private Context context;
+    private final List<List<String>> dateList;
+    private final Context context;
 
-    public DateList(Context context, List<String> dateList, String username, String selectedDate) {
+    public DateList(Context context, List<List<String>> dateList, String username, String selectedDate) {
         this.context = context;
         this.dateList = dateList;
         this.selectedDate = selectedDate;
@@ -36,22 +42,40 @@ public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
     }
 
     @Override
-    public com.example.arfib.DateList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DateList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.datebutton, parent, false);
         return new com.example.arfib.DateList.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(com.example.arfib.DateList.MyViewHolder holder, int position) {
-        String date = dateList.get(position);
-        holder.dateButton.setText(date);
+    public void onBindViewHolder(DateList.MyViewHolder holder, int position) {
+
+        List<String> date_time = dateList.get(position);
+
+        String date = date_time.get(0);
+
+        SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat outputFormatter = new SimpleDateFormat("E,\nMMM d", Locale.getDefault());
+
+        String formattedDate = "";
+        try{
+            Date parsedDate = inputFormatter.parse(date);
+            formattedDate = outputFormatter.format(parsedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        holder.dateButton.setText(formattedDate);
+
         // Change the button background color based on selection
         if (date.equals(selectedDate)) {
             holder.dateButton.setBackgroundResource(R.drawable.dark_date_button); // Set the background from a drawable resource // Use your selected color
+        } else {
+            holder.dateButton.setBackgroundResource(R.drawable.light_date_button); // Default background
         }
 
-        holder.goToDate(username, dateList.get(position));  // Set the date for the button click
+        holder.goToDate(username, date);  // Set the date for the button click
     }
 
     @Override
