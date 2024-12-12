@@ -57,178 +57,38 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <TextView
-        android:id="@+id/todaydate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/leadgray"
-        android:gravity="center"
-        android:text="&quot;&quot;"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="84dp" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
-        <!-- Barra Superior -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:padding="3dp"
+            android:scrollbars="horizontal" />
+
         <TextView
-            android:id="@+id/today_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#BB86FC"
-            android:padding="16dp"
-            android:text="Today, 01 nov"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:textColor="@color/atrial"
+            android:textStyle="bold"
+            android:text="Day's Symptoms"
+            />
 
-        <!-- Calendário Horizontal -->
-        <HorizontalScrollView
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/day_symptoms"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:background="@color/leadgray"
-            android:fillViewport="true"> <!-- Garante que o conteúdo preencha a largura total -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
-
-                <!-- Botões de dias -->
-                <TextView
-                    android:id="@+id/today_4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_dayselector"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:minWidth="60dp"
-                    android:minHeight="60dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/today_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_dayselector"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:minWidth="60dp"
-                    android:minHeight="60dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/today_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_dayselector"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:minWidth="60dp"
-                    android:minHeight="60dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/today_1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_dayselector"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:minWidth="60dp"
-                    android:minHeight="60dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/today"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_dayselector"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:minWidth="60dp"
-                    android:minHeight="60dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-
-
-
-        <!-- Lista de Eventos -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Evento 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <!-- Hora -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_time_box"
-                    android:padding="8dp"
-                    android:text="8:10"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-
-                <!-- Descrição do Evento -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_event_box"
-                    android:padding="8dp"
-                    android:text="Chest Pain\nModerate"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <!-- Adicione mais eventos conforme necessário -->
-
-        </LinearLayout>
+            android:padding="8dp" />
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

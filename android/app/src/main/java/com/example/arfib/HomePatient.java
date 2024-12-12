@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,12 +16,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arfib.Database.DatabaseHelper;
 import com.example.arfib.Measurements.BluetoothActivity;
 import com.example.arfib.Measurements.Home;
+import com.example.arfib.Medications.DayMedicationList;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class HomePatient extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,64 @@ public class HomePatient extends AppCompatActivity {
             Intent backMainActivity = new Intent(HomePatient.this, MainActivity.class);
             startActivity(backMainActivity);
         });
+
+        dbHelper = new DatabaseHelper(this);
+        try {
+            dbHelper.createDatabase();
+            dbHelper.openDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        String viewDate = dateFormatter.format(today);
+
+
+        List<List<String>> day_medications = new ArrayList<>();
+        Cursor dayMed = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Medication_Log " +
+                        "JOIN Medication ON Medication_Log.medication = Medication.name " +
+                        "WHERE patient = ? AND date = ? " +
+                        "ORDER BY date DESC, time DESC",
+                new String[]{username, viewDate}
+        );
+        if (dayMed.moveToFirst()) {
+            do {
+                String med = dayMed.getString(dayMed.getColumnIndex("medication"));
+                String date = dayMed.getString(dayMed.getColumnIndex("date"));
+                String time = dayMed.getString(dayMed.getColumnIndex("time"));
+                String asset = dayMed.getString(dayMed.getColumnIndex("image"));
+                int taken = dayMed.getInt(dayMed.getColumnIndex("taken"));
+
+                String isTaken="";
+                if(taken==1){
+                    isTaken = "true";
+                } else if(taken==0){
+                    isTaken = "false";
+                }
+                List<String> singleArray = new ArrayList<>();
+                singleArray.add(med);
+                singleArray.add(isTaken);
+                singleArray.add(date);
+                singleArray.add(time);
+                singleArray.add(asset);
+
+                // Add this "array" to the main list
+                day_medications.add(singleArray);
+
+            } while (dayMed.moveToNext());
+        }
+        dayMed.close();
+
+        RecyclerView dayMedicationView = findViewById(R.id.day_medications);
+        LinearLayoutManager dayMedicationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        dayMedicationView.setLayoutManager(dayMedicationLayoutManager);
+        dayMedicationView.setVerticalScrollBarEnabled(false);
+        dayMedicationView.setHorizontalScrollBarEnabled(false);
+
+        DayMedicationList dayMedicationAdapter = new DayMedicationList(this, day_medications);
+        dayMedicationView.setAdapter(dayMedicationAdapter);
 
 
     }

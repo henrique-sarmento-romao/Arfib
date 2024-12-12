@@ -14,7 +14,7 @@ public class AddNew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepagedoctor);
+        setContentView(R.layout.medicationaddnew);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Add New Medication");
