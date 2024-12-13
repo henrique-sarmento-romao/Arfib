@@ -89,17 +89,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.close();
     }
 
-    public void insertFile(String filepath, String patient, Context context) {
+    public void insertFile(String filepath, String patient, Integer AF_presence, Context context) {
         SQLiteDatabase db = null;
         try {
             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("file", filepath);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            String formattedDate = dateFormat.format(new Date()); // Data e hora atual formatada
 
-            values.put("date_time", formattedDate);
-            values.put("AF_presence", 0); // Sempre insere como 0
+            values.put("file", filepath);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss.SSSSSS", Locale.getDefault());
+            String formattedDate = dateFormat.format(new Date()); // Data e hora atual formatada
+            String formattedTime = timeFormat.format(new Date()); // Data e hora atual formatada
+
+            values.put("date", formattedDate);
+            values.put("time", formattedTime);
+            values.put("AF_presence", AF_presence); // Sempre insere como 0
             values.put("patient", patient);
 
             long result = db.insert("Measurement", null, values);

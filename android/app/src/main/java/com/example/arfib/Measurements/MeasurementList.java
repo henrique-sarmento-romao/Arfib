@@ -103,7 +103,7 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
             actionButton.setOnClickListener(v -> {
                 // Create an Intent to open the Detailed activity
                 Intent intent = new Intent(v.getContext(), Detailed.class);
-                intent.putExtra("username", username);
+                intent.putExtra("patient", username);
                 intent.putExtra("date", date);
                 intent.putExtra("time", time); // Pass the date as an extra
                 v.getContext().startActivity(intent);  // Start the activity

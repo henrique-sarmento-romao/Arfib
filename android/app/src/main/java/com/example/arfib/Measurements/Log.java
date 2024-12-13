@@ -44,7 +44,7 @@ public class Log extends AppCompatActivity {
         ImageButton logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
             //Intent intent = new Intent(Log.this, Measuring.class);
-            Intent intent = new Intent(Log.this, BluetoothActivity.class);
+            Intent intent = new Intent(Log.this, Measuring.class);
             startActivity(intent);
         });
     }
