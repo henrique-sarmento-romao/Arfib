@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.arfib.Database.DatabaseHelper;
@@ -45,11 +46,16 @@ public class Login extends AppCompatActivity {
         }
 
         TextInputEditText user = findViewById(R.id.username_input);
-        TextInputEditText pass = findViewById(R.id.pw_input); // Ensure this ID exists in login.xml
+        TextInputEditText pass = findViewById(R.id.pw_input);
         TextView error = findViewById(R.id.error_dialog);
 
         pass.setOnEditorActionListener((textView, id, keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_SEND) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+                }
+
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
 

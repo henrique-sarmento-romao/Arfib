@@ -25,7 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="AF Detection" />
+            android:text="AF Detection"
+            android:textColor="@color/hartpink"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="wrap_content"
@@ -33,12 +35,15 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chartECG_detailed"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/measurement_box"
         android:layout_margin="10dp"
-        android:drawableTop="@drawable/ecg_sample"
-        android:background="@drawable/measurement_box" />
+        />
+
 
 </LinearLayout>

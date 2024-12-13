@@ -148,6 +148,7 @@ public class Measuring extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
+        xAxis.setDrawLabels(false);
 
 
         YAxis leftAxis = chart.getAxisLeft();
@@ -156,6 +157,7 @@ public class Measuring extends AppCompatActivity {
         leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
         leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
         chart.getAxisRight().setEnabled(false);
+        leftAxis.setDrawLabels(false);
 
         Legend legend = chart.getLegend();
         legend.setEnabled(false);
@@ -247,7 +249,6 @@ public class Measuring extends AppCompatActivity {
                     }
                 }, 60000); // 60 seconds in milliseconds
 
-
             } else {
                 textHR.setText("Selected device is null.");
             }
@@ -257,35 +258,10 @@ public class Measuring extends AppCompatActivity {
         }
     }
 
-    private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
-        return minOut + ((x - minIn) * (maxOut - minOut)) / (maxIn - minIn);
-    }
-
-    private float mapToTime(float x, float sampleRate) {
-
-        return x / sampleRate;
-    }
-
 
     private void updateChart(LineChart chart, ArrayList<Entry> data) {
-        // Data mapping
-        float minIn = 0f;
-        float maxIn = 230f;   // Maximum of bit
-        float minOut = -1.15f; // Min in mV (Y)
-        float maxOut = 1.15f;  // Max in mV (Y)
 
-        ArrayList<Entry> mappedData = new ArrayList<>();
-
-        for (Entry entry : data) {
-            float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
-
-            // Map Y (ECG) to mV
-            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
-
-            mappedData.add(new Entry(mappedX, mappedY));
-        }
-
-        LineDataSet dataSet = new LineDataSet(mappedData, "ECG Data");
+        LineDataSet dataSet = new LineDataSet(data, "ECG Data");
         int color = ContextCompat.getColor(this, R.color.hartpink);
         dataSet.setColor(color);
         dataSet.setLineWidth(2f);
@@ -302,7 +278,7 @@ public class Measuring extends AppCompatActivity {
     private final MyHandler mHandler = new MyHandler(this);
 
 
-    private static class MyHandler extends Handler {
+    private class MyHandler extends Handler {
         private final WeakReference<com.example.arfib.Measurements.Measuring> activityReference;
 
         // Constructor receives a reference to the Activity
@@ -330,12 +306,15 @@ public class Measuring extends AppCompatActivity {
                 case BioLib.MESSAGE_DISCONNECT_TO_DEVICE:
                     activity.textHR.setText("Device disconnected.");
                     activity.processData();
+                    Intent intent = new Intent(Measuring.this, Log.class);
+                    startActivity(intent);
+
 
                     break;
 
                 case BioLib.MESSAGE_DATA_UPDATED:
                     BioLib.Output out = (BioLib.Output) msg.obj;
-                    activity.textHR.setText("HR: " + out.pulse + " bpm     Nb. Leads: " + activity.biolib.GetNumberOfChannels());
+                    activity.textHR.setText("HR: " + out.pulse + " bpm");
                     if (out.pulse > 0) {
                         activity.hrValues.add(out.pulse);
                     }
@@ -497,10 +476,41 @@ public class Measuring extends AppCompatActivity {
             }
         }
 
+        File directory = getFilesDir();
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String filename_AF = "patient_data_" + timestamp + "_AFdetection.txt";
+
+        File file_AF = new File(directory, filename_AF);
+        try (FileWriter writer = new FileWriter(file_AF)) {
+            for (Double value : smooth_af_detection) {
+                writer.write(value + " ");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
         // Info para dar plot
 
 
         return AF;
 
     }
+    @Override
+    protected void onDestroy() {
+        if (biolib != null) {
+            try {
+                biolib.Disconnect();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        super.onDestroy();
+    }
+
 }

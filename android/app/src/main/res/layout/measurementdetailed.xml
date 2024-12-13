@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Barra de navegação inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/rounded_bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent">
-
+        <!-- Barra com os outros botões -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -31,13 +33,12 @@
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/home_icon" />
 
-            <ImageButton
-                android:id="@+id/logButton"
+            <!-- Botão log normal -->
+
+            <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/measurement_button" />
+                android:layout_weight="2" />
 
             <ImageButton
                 android:id="@+id/notificationsButton"
@@ -55,32 +56,57 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <ImageButton
+        android:id="@+id/logButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/measurement_button" />
+
+    <!-- Conteúdo adicional acima da barra de navegação -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="top"
-        android:layout_marginTop="100dp"
-        android:padding="15dp">
+        android:orientation="vertical"
+        android:padding="40dp"
+        tools:layout_editor_absoluteY="100dp">
 
-        <TextView
-            android:id="@+id/date"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/AF_presence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/hartpink"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chartECG_detailed"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/measurement_box" />
-
-        <TextView
-            android:id="@+id/AF_presence"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
 
         <TextView
             android:id="@+id/observation"

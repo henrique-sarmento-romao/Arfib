@@ -30,6 +30,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -142,8 +143,13 @@ public class Detailed extends AppCompatActivity {
 
         configureChart(ecgChart);
         ArrayList<Entry> data = readTxtFile(path);
-        updateChart(ecgChart, data);
+        String af_path = deriveAFDetectionFilePath(path);
+        ArrayList<Entry> dataaf = readTxtFile(af_path);
+        updateChart(ecgChart, data,dataaf);
 
+    }
+    private String deriveAFDetectionFilePath(String originalPath) {
+        return originalPath.replace(".txt", "_AFdetection.txt");
     }
 
 
@@ -164,6 +170,8 @@ public class Detailed extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
+        xAxis.setDrawLabels(false); // Remove os rótulos numéricos
+
         chart.setVisibleXRangeMaximum(1000);  // Limita a visualização a 1000 pontos no eixo X
         chart.setVisibleXRangeMinimum(1);
 
@@ -172,12 +180,14 @@ public class Detailed extends AppCompatActivity {
         leftAxis.setDrawGridLines(false);
         leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
         leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
+        leftAxis.setDrawLabels(false); // Remove os rótulos numéricos
+
         chart.getAxisRight().setEnabled(false);
 
         Legend legend = chart.getLegend();
         legend.setEnabled(false);
     }
-    private void updateChart(LineChart chart, ArrayList<Entry> data) {
+    private void updateChart(LineChart chart, ArrayList<Entry> data, ArrayList<Entry> AF_data) {
         // Data mapping
         float minIn = 0f;
         float maxIn = 230f;   // Maximum of bit
@@ -185,6 +195,7 @@ public class Detailed extends AppCompatActivity {
         float maxOut = 1.15f;  // Max in mV (Y)
 
         ArrayList<Entry> mappedData = new ArrayList<>();
+        ArrayList<Entry> mappedAF = new ArrayList<>();
 
         for (Entry entry : data) {
             float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
@@ -195,15 +206,36 @@ public class Detailed extends AppCompatActivity {
             mappedData.add(new Entry(mappedX, mappedY));
         }
 
-        LineDataSet dataSet = new LineDataSet(mappedData, "ECG Data");
-        int color = ContextCompat.getColor(this, R.color.hartpink);
-        dataSet.setColor(color);
-        dataSet.setLineWidth(2f);
-        dataSet.setDrawCircles(false);
-        dataSet.setDrawValues(false);
-        dataSet.setMode(LineDataSet.Mode.LINEAR);
+        for (Entry entry : AF_data) {
+            float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
 
-        LineData lineData = new LineData(dataSet);
+            // Map Y (ECG) to mV
+            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
+
+            mappedAF.add(new Entry(mappedX, mappedY));
+        }
+
+        LineDataSet dataSetECG = new LineDataSet(mappedData, "ECG Data");
+        int color = ContextCompat.getColor(this, R.color.hartpink);
+        dataSetECG.setColor(color);
+        dataSetECG.setLineWidth(2f);
+        dataSetECG.setDrawCircles(false);
+        dataSetECG.setDrawValues(false);
+        dataSetECG.setMode(LineDataSet.Mode.LINEAR);
+
+        LineDataSet dataSetaf = new LineDataSet(mappedAF, "ECG Data");
+        int color_2 = ContextCompat.getColor(this, R.color.atrial);
+        dataSetaf.setColor(color_2);
+        dataSetaf.setLineWidth(2f);
+        dataSetaf.setDrawCircles(false);
+        dataSetaf.setDrawValues(false);
+        dataSetaf.setMode(LineDataSet.Mode.LINEAR);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(dataSetECG);
+        dataSets.add(dataSetaf);
+
+        LineData lineData = new LineData(dataSets);
         chart.setData(lineData);
     }
     private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
@@ -246,18 +278,6 @@ public class Detailed extends AppCompatActivity {
         return data;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permissão concedida, tente ler o arquivo novamente
-                ArrayList<Entry> data = readTxtFile(path);
-            } else {
-                Toast.makeText(this, "Permissão negada para ler o armazenamento externo", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
 
 
