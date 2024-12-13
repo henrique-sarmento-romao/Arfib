@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
+import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
@@ -33,6 +34,30 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.medicationhome);
+
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(com.example.arfib.Medications.Home.this, Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(com.example.arfib.Medications.Home.this, com.example.arfib.Medications.Log.class);
+            startActivity(intent);
+        });
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(com.example.arfib.Medications.Home.this, HomePatient.class);
+            startActivity(intent);
+        });
+
+        TextView YourMedications = findViewById(R.id.your_medications);
+        YourMedications.setOnClickListener(v -> {
+            Intent intent = new Intent(com.example.arfib.Medications.Home.this, MedicationList.class);
+            startActivity(intent);
+        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Medications");
@@ -53,23 +78,7 @@ public class Home extends AppCompatActivity {
             viewDate = dateFormatter.format(today);
         }
 
-        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
-        notificationsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, Notifications.class);
-            startActivity(intent);
-        });
 
-        ImageButton logButton = findViewById(R.id.logButton);
-        logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, Log.class);
-            startActivity(intent);
-        });
-
-        TextView YourMedications = findViewById(R.id.your_medications);
-        YourMedications.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, MedicationList.class);
-            startActivity(intent);
-        });
 
         dbHelper = new DatabaseHelper(this);
         try {

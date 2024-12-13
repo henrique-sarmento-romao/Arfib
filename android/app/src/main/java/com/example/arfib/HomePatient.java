@@ -7,9 +7,14 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +22,11 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arfib.DatabaseHelper;
+import com.example.arfib.Measurements.Home;
+import com.example.arfib.Measurements.Log;
 import com.example.arfib.Medications.DayMedicationList;
+import com.example.arfib.Symptoms.Details;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -46,6 +55,25 @@ public class HomePatient extends AppCompatActivity {
         setContentView(R.layout.homepagepatient);
         getSupportActionBar().setTitle("Home");
         getSupportActionBar().setIcon(R.drawable.ic_menu_icon);
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePatient.this, HomePatient.class);
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePatient.this, Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePatient.this, Log.class);
+            startActivity(intent);
+        });
+
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("username", "");
@@ -78,7 +106,7 @@ public class HomePatient extends AppCompatActivity {
                 new String[]{patient}
         );
 
-        ArrayList<Entry> symptom_entries = new ArrayList<>();
+        ArrayList<Entry> AF_entries = new ArrayList<>();
         if (af_timeline.moveToFirst()) {
             do {
                 String date = af_timeline.getString(af_timeline.getColumnIndex("date"));
@@ -97,14 +125,13 @@ public class HomePatient extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                symptom_entries.add(new Entry((float) timestamp, (float) AF_presence));
+                AF_entries.add(new Entry((float) timestamp, (float) AF_presence));
 
             } while (af_timeline.moveToNext());
         }
         af_timeline.close();
 
-
-        LineDataSet dataSet = new LineDataSet(symptom_entries, patient+" AF Presence");
+        LineDataSet dataSet = new LineDataSet(AF_entries, patient+" AF Presence");
         int pink = getResources().getColor(R.color.hartpink);
         dataSet.setColor(pink);
         dataSet.setLineWidth(2f);
@@ -222,13 +249,64 @@ public class HomePatient extends AppCompatActivity {
         RecyclerView dayMedicationView = findViewById(R.id.day_medications);
         LinearLayoutManager dayMedicationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dayMedicationView.setLayoutManager(dayMedicationLayoutManager);
-        dayMedicationView.setVerticalScrollBarEnabled(false);
+        dayMedicationView.setVerticalScrollBarEnabled(true);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
         DayMedicationList dayMedicationAdapter = new DayMedicationList(this, day_medications);
         dayMedicationView.setAdapter(dayMedicationAdapter);
 
 
+        // ----------------------
+        // Symptoms
+        // ---------------------
+
+
+        RecyclerView recyclerView = findViewById(R.id.symptom_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Cursor symptom_log;
+
+        List<Symptom> symptoms = new ArrayList<>();
+
+        for (String symptomName : new String[]{"Fatigue", "Breathlessness", "Dizziness", "Chest Pain"}) {
+            String symptom_name = symptomName;
+
+            symptom_log = dbHelper.getReadableDatabase().rawQuery(
+                    "SELECT * FROM Symptom_Log " +
+                            "WHERE patient = ? AND symptom = ? " +
+                            "ORDER BY date ASC, time ASC",
+                    new String[]{patient, symptom_name}
+            );
+
+            ArrayList<Entry> symptom_entries = new ArrayList<>();
+            if (symptom_log.moveToFirst()) {
+                do {
+                    String date = symptom_log.getString(symptom_log.getColumnIndex("date"));
+                    String time = symptom_log.getString(symptom_log.getColumnIndex("time"));
+                    int intensity = symptom_log.getInt(symptom_log.getColumnIndex("intensity"));
+
+                    SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS", Locale.getDefault());
+                    String dateTime = date + " " + time;
+
+                    long timestamp = new Date().getTime();
+                    try {
+                        Date date_time = inputFormatter.parse(dateTime);
+                        timestamp = date_time.getTime();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    symptom_entries.add(new Entry((float) timestamp, (float) intensity));
+
+                } while (symptom_log.moveToNext());
+            }
+            symptom_log.close();
+
+            symptoms.add(new Symptom(symptom_name, symptom_entries));
+        }
+
+
+        SymptomAdapter adapter = new SymptomAdapter(this, symptoms);
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -254,7 +332,7 @@ public class HomePatient extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.measurements) {
-            Intent intent = new Intent(HomePatient.this, com.example.arfib.Measurements.Home.class);
+            Intent intent = new Intent(HomePatient.this, Home.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.symptoms) {
@@ -286,4 +364,138 @@ public class HomePatient extends AppCompatActivity {
         // Show the menu
         popupMenu.show();
     }
+
+    public static class Symptom {
+        String name;
+        List<Entry> symptomEntries;
+
+        public Symptom(String name, List<Entry> symptomEntries) {
+            this.name = name;
+            this.symptomEntries = symptomEntries;
+        }
+    }
+
+    public static class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomViewHolder> {
+        private Context context;
+        private List<Symptom> symptoms;
+
+        public SymptomAdapter(Context context, List<Symptom> symptoms) {
+            this.context = context;
+            this.symptoms = symptoms;
+        }
+
+        @Override
+        public SymptomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(context).inflate(R.layout.home_patient_symptom, parent, false);
+            return new SymptomViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(SymptomViewHolder holder, int position) {
+            Symptom symptom = symptoms.get(position);
+
+            // Set the name of the symptom in the TextView
+            holder.name.setText(symptom.name);
+
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, Details.class);
+                intent.putExtra("symptom", symptom.name);
+                context.startActivity(intent);
+            });
+
+            LineDataSet dataSet = new LineDataSet(symptom.symptomEntries, symptom.name + " Logs");
+            int purple = context.getResources().getColor(R.color.symptompurple);
+            dataSet.setColor(purple);
+            dataSet.setLineWidth(2f);
+            dataSet.setCircleRadius(4f);
+            dataSet.setCircleHoleRadius(1f);
+            dataSet.setCircleColor(purple);
+            dataSet.setCircleHoleColor(purple);
+            dataSet.setDrawValues(false);
+            dataSet.setDrawFilled(false);
+
+            holder.symptomTimeline.setData(new LineData(dataSet));
+
+
+            holder.symptomTimeline.setExtraLeftOffset(16f); // Adjust padding for the left
+            holder.symptomTimeline.setExtraRightOffset(16f); // Adjust padding for the right
+
+            // Format X-axis with dates
+            XAxis xAxis = holder.symptomTimeline.getXAxis();
+            xAxis.setEnabled(true);
+            xAxis.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    // Create a Date object using the timestamp
+                    Date date = new Date((long) value);
+
+                    // Define a simple date format (you can modify the format as needed)
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()); // Format as "Year-Month-Day"
+
+                    // Return the formatted date string
+                    return dateFormat.format(date);
+                }
+            });
+            xAxis.setGranularityEnabled(true);
+            xAxis.setLabelCount(4, true);
+            xAxis.setGranularity(1f);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setLabelRotationAngle(0);
+            xAxis.setTextColor(R.color.atrial);
+            xAxis.setAvoidFirstLastClipping(true);
+            xAxis.setSpaceMax(4f); // Add extra space to prevent last label from being clipped
+            xAxis.setDrawGridLines(false);
+
+            YAxis leftAxis = holder.symptomTimeline.getAxisLeft();
+            leftAxis.setDrawGridLines(true); // Ensure horizontal grid lines are drawn
+            leftAxis.enableGridDashedLine(30f, 20f, 0f); // Dash pattern: 10px line, 5px space
+            leftAxis.setAxisMinimum(1f); // Ensure axis starts at 1
+            leftAxis.setAxisMaximum(4f); // Ensure axis ends at 4
+            leftAxis.setLabelCount(4, true); // Ensure labels at 1, 2, 3, 4
+            leftAxis.setTextColor(R.color.atrial);
+
+            Map<Integer, String> intensityMap = new HashMap<>();
+            intensityMap.put(1, "Low");
+            intensityMap.put(2, "Moderate");
+            intensityMap.put(3, "High");
+            intensityMap.put(4, "Very High");
+            leftAxis.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    return intensityMap.get((int) value); // Default to empty string if no match
+                }
+            });
+
+
+            YAxis rightAxis = holder.symptomTimeline.getAxisRight();
+            rightAxis.setEnabled(false); // Disable right Y axis
+
+            holder.symptomTimeline.setExtraOffsets(0, 50, 10, 15); // Add padding to the chart
+            holder.symptomTimeline.getLegend().setEnabled(false); // Hide the legend
+            holder.symptomTimeline.getDescription().setEnabled(false);
+            holder.symptomTimeline.getDescription().setText("Stock Quotes Over Time");
+            holder.symptomTimeline.getDescription().setTextColor(Color.WHITE);
+            holder.symptomTimeline.setTouchEnabled(false);
+
+            holder.symptomTimeline.invalidate(); // Refresh chart
+        }
+
+        @Override
+        public int getItemCount() {
+            return symptoms.size();
+        }
+
+        public  class SymptomViewHolder extends RecyclerView.ViewHolder {
+            TextView name, description;
+            LineChart symptomTimeline;
+
+            public SymptomViewHolder(View itemView) {
+                super(itemView);
+                name = itemView.findViewById(R.id.symptom_name);
+                symptomTimeline = itemView.findViewById(R.id.symptom_Timeline);
+
+            }
+        }
+    }
+
 }

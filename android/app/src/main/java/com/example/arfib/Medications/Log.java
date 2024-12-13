@@ -74,5 +74,7 @@ public class Log extends AppCompatActivity {
         });
 
 
+
+
     }
 }

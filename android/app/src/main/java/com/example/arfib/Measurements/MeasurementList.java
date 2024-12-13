@@ -10,13 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
+import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -68,6 +70,8 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
         String date, time;
         date = data.get(0);
         time = data.get(1);
+
+
 
         dbHelper = new DatabaseHelper(context);
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + username + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
