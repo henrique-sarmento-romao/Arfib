@@ -30,6 +30,15 @@
             android:textColor="@color/atrial"
             android:textStyle="bold"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/measurement_box"
+            android:paddingTop="2dp"
+            android:layout_marginTop="5dp"/>
+
         <TextView
             android:text="Symptoms"
             android:layout_width="match_parent"
@@ -39,6 +48,15 @@
             android:textColor="@color/atrial"
             android:textStyle="bold"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/symptom_box"
+            android:paddingTop="2dp"
+            android:layout_marginTop="5dp"/>
+
         <TextView
             android:text="Medications"
             android:layout_width="match_parent"
@@ -47,6 +65,23 @@
             android:textSize="30dp"
             android:textColor="@color/atrial"
             android:textStyle="bold"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/medication_box"
+            android:paddingTop="2dp"
+            android:layout_marginTop="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/day_medications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp" />
+        </FrameLayout>
 
         <Button
             android:id="@+id/logoutButton"

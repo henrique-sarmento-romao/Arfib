@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/monitor_heart/baseline_monitor_heart_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/chevron_right/baseline_chevron_right_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="baseline_monitor_heart_24" />
-                            <entry key="sourceFile" value="C:\Users\maria\Downloads\Medication Log Button.svg" />
+                            <entry key="outputName" value="breathlessness" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/Breathlessness.svg" />
                           </map>
                         </option>
                       </PersistentState>

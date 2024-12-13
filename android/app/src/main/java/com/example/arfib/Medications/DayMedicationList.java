@@ -65,11 +65,11 @@ public class DayMedicationList extends RecyclerView.Adapter<DayMedicationList.My
             // Set the background tint with the semi-transparent grey
             holder.medButton.setBackgroundTintList(ColorStateList.valueOf(transparentGray));
             holder.medButton.setBackgroundTintMode(PorterDuff.Mode.SRC_ATOP);
+
+            holder.goToLog(med_name, date, time);
         }
 
         holder.medName.setText(med_name);
-
-        holder.goToLog(med_name, date, time);  // Set the date for the button click
     }
 
     @Override

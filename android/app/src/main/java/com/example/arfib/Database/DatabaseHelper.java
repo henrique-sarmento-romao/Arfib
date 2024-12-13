@@ -121,5 +121,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void logMedication(Context context, String username, String med_name, String date, String time) {
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("taken", 1);
+
+            String whereClause = "patient = ? AND medication = ? AND date = ? AND time = ?";
+            String[] whereArgs = {username, med_name, date, time};
+
+            long result = db.update("Medication_Log", values, whereClause, whereArgs);
+        } catch (Exception e) {
+            Toast.makeText(context, "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
 
 }

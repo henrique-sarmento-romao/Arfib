@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class Home extends AppCompatActivity {
-
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +55,6 @@ public class Home extends AppCompatActivity {
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
             Date today = new Date();
             viewDate = dateFormatter.format(today);
-        }
-
-        if (viewDate == null) {
-            try {
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                Date today = new Date();
-                viewDate = dateFormatter.format(today); // Format today's date
-            } catch (Exception e) {
-                e.printStackTrace(); // Log the exception if any issues occur
-                viewDate = "2024-12-9"; // Fallback to a default date
-            }
         }
 
         ImageButton notificationsButton = findViewById(R.id.notificationsButton);
@@ -101,7 +89,6 @@ public class Home extends AppCompatActivity {
                 "SELECT * FROM Medication_Log WHERE patient='" + username + "' GROUP BY date ORDER BY date DESC, time DESC",
                 null
         );
-        int dateIndex, timeIndex;
 
         if (cursor.moveToFirst()) {
             do {

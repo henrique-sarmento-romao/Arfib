@@ -90,6 +90,8 @@
         </activity>
         <activity android:name=".Symptoms.Home">
         </activity>
+        <activity android:name=".Symptoms.Details">
+        </activity>
         <activity android:name=".Symptoms.List">
         </activity>
         <activity android:name=".Symptoms.Log">

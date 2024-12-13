@@ -94,7 +94,7 @@ public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
         public void goToDate(String username, String date) {
             dateButton.setOnClickListener(v -> {
                 // Create an Intent to open the Detailed activity
-                Intent intent = new Intent(v.getContext(), Home.class);
+                Intent intent = new Intent(v.getContext(), v.getContext().getClass());
                 intent.putExtra("username", username);
                 intent.putExtra("date", date);  // Pass the date as an extra
                 v.getContext().startActivity(intent);  // Start the activity
