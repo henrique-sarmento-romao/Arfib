@@ -68,7 +68,7 @@ public class Home extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         Intent previousIntent = getIntent();
         String viewDate = previousIntent.getStringExtra("date");
@@ -91,7 +91,7 @@ public class Home extends AppCompatActivity {
 
         List<List<String>> dateList = new ArrayList<>();
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
-                "SELECT * FROM Medication_Log WHERE patient='" + username + "' GROUP BY date ORDER BY date DESC, time DESC",
+                "SELECT * FROM Medication_Log WHERE patient='" + patient + "' GROUP BY date ORDER BY date DESC, time DESC",
                 null
         );
 
@@ -116,7 +116,7 @@ public class Home extends AppCompatActivity {
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
 
-        DateList adapter = new DateList(this, dateList, username, viewDate);
+        DateList adapter = new DateList(this, dateList, patient, viewDate);
         recyclerView.setAdapter(adapter);
 
         int selectedPosition = -1; // Default to -1 if no match is found
@@ -142,7 +142,7 @@ public class Home extends AppCompatActivity {
                         "JOIN Medication ON Medication_Log.medication = Medication.name " +
                         "WHERE patient = ? AND date = ? " +
                         "ORDER BY date DESC, time DESC",
-                new String[]{username, viewDate}
+                new String[]{patient, viewDate}
         );
         if (dayMed.moveToFirst()) {
             do {
@@ -187,7 +187,7 @@ public class Home extends AppCompatActivity {
                         "JOIN Medication ON Prescription.medication = Medication.name " +
                         "WHERE patient = ? " +
                         "ORDER BY start_date ASC",
-                new String[]{username}
+                new String[]{patient}
         );
         if (patMed.moveToFirst()) {
             do {

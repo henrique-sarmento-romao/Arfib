@@ -43,16 +43,16 @@ import java.util.Objects;
 
 public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyViewHolder> {
     private DatabaseHelper dbHelper;
-    private final String username;
+    private final String patient;
     private List<List<String>> dataList;
     private Context context;
     private String path;
 
 
-    public MeasurementList(Context context, List<List<String>> dataList, String username) {
+    public MeasurementList(Context context, List<List<String>> dataList, String patient) {
         this.context = context;
         this.dataList = dataList;
-        this.username = username;
+        this.patient = patient;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
 
 
         dbHelper = new DatabaseHelper(context);
-        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + username + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + patient + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
 
         if (cursor.moveToFirst()) {
             path = cursor.getString(cursor.getColumnIndex("file"));
@@ -118,7 +118,7 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
         updateChart(holder.chart, chartData); // Atualiza o gráfico com os dados
 
         // Configurar o clique do gráfico para navegar até a tela detalhada
-        holder.goToDetailed(username, date, time);
+        holder.goToDetailed(patient, date, time);
     }
 
     private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
@@ -240,11 +240,11 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
 
 
         // Method to set the date and handle the button click
-        public void goToDetailed(String username, String date, String time) {
+        public void goToDetailed(String patient, String date, String time) {
             chart.setOnClickListener(v -> {
                 // Create an Intent to open the Detailed activity
                 Intent intent = new Intent(v.getContext(), Detailed.class);
-                intent.putExtra("patient", username);
+                intent.putExtra("patient", patient);
                 intent.putExtra("date", date);
                 intent.putExtra("time", time); // Pass the date as an extra
                 v.getContext().startActivity(intent);  // Start the activity

@@ -40,7 +40,7 @@ public class Log extends AppCompatActivity {
         String time = previousIntent.getStringExtra("time");
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         dbHelper = new DatabaseHelper(this);
         try {
@@ -55,7 +55,7 @@ public class Log extends AppCompatActivity {
                         "JOIN Medication ON Medication_Log.medication = Medication.name " +
                         "WHERE patient = ? AND medication = ? AND date = ? AND time = ?" +
                         "ORDER BY date DESC, time DESC LIMIT 1",
-                new String[]{username, med_name, date, time}
+                new String[]{patient, med_name, date, time}
         );
 
         medication.moveToFirst();
@@ -67,7 +67,7 @@ public class Log extends AppCompatActivity {
 
         Button logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
-            dbHelper.logMedication(this, username,  med_name, date, time);
+            dbHelper.logMedication(this, patient,  med_name, date, time);
             Intent intent = new Intent(Log.this, Home.class);
             intent.putExtra("date", date);
             startActivity(intent);

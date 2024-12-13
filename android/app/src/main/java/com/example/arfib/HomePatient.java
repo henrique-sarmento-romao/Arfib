@@ -76,10 +76,7 @@ public class HomePatient extends AppCompatActivity {
 
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String patient = sharedPref.getString("username", "");
-
-        TextView welcome = findViewById(R.id.welcome);
-        welcome.setText("👋 Welcome, "+patient+"!");
+        String patient = sharedPref.getString("patient", "");
 
         Button logout = findViewById(R.id.logoutButton);
         logout.setOnClickListener(v -> {
@@ -98,6 +95,18 @@ public class HomePatient extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        TextView welcome = findViewById(R.id.welcome);
+        welcome.setText("👋 Welcome, "+name+"!");
 
         Cursor af_timeline = dbHelper.getReadableDatabase().rawQuery(
                 "SELECT * FROM Measurement " +

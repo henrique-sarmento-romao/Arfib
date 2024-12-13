@@ -44,7 +44,7 @@ public class Log extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String patient = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         Intent previousIntent = getIntent();
         String intentSymptom = previousIntent.getStringExtra("symptom");
