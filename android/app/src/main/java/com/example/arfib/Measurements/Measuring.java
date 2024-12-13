@@ -402,9 +402,9 @@ public class Measuring extends AppCompatActivity {
             }
 
             SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-            String username = sharedPref.getString("username", "");
+            String patient = sharedPref.getString("patient", "");
 
-            dbHelper.insertFile(file.getAbsolutePath(), username, AF_presence, this);
+            dbHelper.insertFile(file.getAbsolutePath(), patient, AF_presence, this);
         } catch (IOException e) {
             Toast.makeText(this, "Error exporting data: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }

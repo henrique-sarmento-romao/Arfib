@@ -64,7 +64,7 @@ public class Detailed extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         Intent previousIntent = getIntent();
         String date = previousIntent.getStringExtra("date");
@@ -96,7 +96,7 @@ public class Detailed extends AppCompatActivity {
             dbHelper.createDatabase();
             dbHelper.openDatabase();
 
-            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + username + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
+            Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + patient + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
 
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex("file"));

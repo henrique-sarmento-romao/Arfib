@@ -38,7 +38,7 @@ public class MedicationList extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         ImageButton addMedication = findViewById(R.id.addMedication);
         addMedication.setOnClickListener(v -> {
@@ -60,7 +60,7 @@ public class MedicationList extends AppCompatActivity {
                         "JOIN Medication ON Prescription.medication = Medication.name " +
                         "WHERE patient = ? " +
                         "ORDER BY start_date ASC",
-                new String[]{username}
+                new String[]{patient}
         );
         if (patMed.moveToFirst()) {
             do {

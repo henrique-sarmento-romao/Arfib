@@ -37,10 +37,8 @@
         android:id="@+id/chartECG_detailed"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/measurement_box"
-        android:layout_margin="10dp"
         />
 
 

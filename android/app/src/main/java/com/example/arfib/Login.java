@@ -79,6 +79,9 @@ public class Login extends AppCompatActivity {
 
                             switch (profile) {
                                 case "patient":
+                                    editor = sharedPref.edit();
+                                    editor.putString("patient", username);
+                                    editor.apply();
                                     startActivity(new Intent(Login.this, HomePatient.class));
                                     break;
                                 case "doctor":

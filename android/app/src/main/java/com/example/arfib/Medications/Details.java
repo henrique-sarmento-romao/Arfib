@@ -42,7 +42,7 @@ public class Details extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         dbHelper = new DatabaseHelper(this);
         try {
@@ -57,7 +57,7 @@ public class Details extends AppCompatActivity {
                         "JOIN Medication ON Prescription.medication = Medication.name " +
                         "WHERE patient = ? AND medication = ? " +
                         "ORDER BY start_date DESC LIMIT 1",
-                new String[]{username, med_name}
+                new String[]{patient, med_name}
         );
 
         medication.moveToFirst();

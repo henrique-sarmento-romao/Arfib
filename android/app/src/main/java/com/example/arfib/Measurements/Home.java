@@ -55,7 +55,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.measurementhome);
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String patient = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Measurements");

@@ -56,7 +56,7 @@ public class Details extends AppCompatActivity {
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String patient = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("patient", "");
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
