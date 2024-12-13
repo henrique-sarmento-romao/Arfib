@@ -1,12 +1,12 @@
-package com.example.arfib.Database;
+package com.example.arfib;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -134,6 +134,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             long result = db.update("Medication_Log", values, whereClause, whereArgs);
         } catch (Exception e) {
             Toast.makeText(context, "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+    public void logSymptom(View context, String patient, String symptom, int intensity, String date, String time) {
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            values.put("patient", patient);
+            values.put("symptom", symptom);
+            values.put("intensity", intensity);
+            values.put("date", date);
+            values.put("time", time);
+
+            long result = db.insert("Symptom_Log", null,values);
+
+        } catch (Exception e) {
+            Toast.makeText(context.getContext(), "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
             if (db != null) {
                 db.close();

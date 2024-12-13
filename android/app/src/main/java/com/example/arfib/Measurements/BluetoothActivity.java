@@ -1,7 +1,7 @@
 package com.example.arfib.Measurements;
 
 import Bio.Library.namespace.BioLib;
-import android.Manifest;
+
 import android.Manifest.permission;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
 import com.example.arfib.R;
 import android.graphics.Color;
 
@@ -35,7 +34,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.io.File;
 import java.io.FileWriter;

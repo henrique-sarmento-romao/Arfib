@@ -14,7 +14,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
 import com.example.arfib.R;
 
 import java.io.IOException;

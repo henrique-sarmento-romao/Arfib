@@ -16,20 +16,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Database.DatabaseHelper;
-import com.example.arfib.HomePatient;
+import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class Home extends AppCompatActivity {
     private DatabaseHelper dbHelper;

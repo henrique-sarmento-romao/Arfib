@@ -22,7 +22,7 @@
             android:textColor="@color/atrial"/>
 
         <TextView
-            android:text="Measurements"
+            android:text="AF Presence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -32,33 +32,20 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:layout_gravity="center"
-            android:background="@drawable/measurement_box"
-            android:paddingTop="2dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_height="150dp"
+            android:background="@drawable/measurement_box">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/AF_Timeline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="10dp" />
+
+        </FrameLayout>
 
         <TextView
-            android:text="Symptoms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="30dp"
-            android:textColor="@color/atrial"
-            android:textStyle="bold"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:layout_gravity="center"
-            android:background="@drawable/symptom_box"
-            android:paddingTop="2dp"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:text="Medications"
+            android:text="Day's Medications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -81,6 +68,29 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp" />
+        </FrameLayout>
+
+        <TextView
+            android:text="Symptoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="30dp"
+            android:textColor="@color/atrial"
+            android:textStyle="bold"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/symptom_box"
+            android:paddingTop="2dp"
+            android:layout_marginTop="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
 
         <Button

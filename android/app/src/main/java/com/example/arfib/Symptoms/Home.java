@@ -7,9 +7,7 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.HorizontalScrollView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +19,14 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
-import com.example.arfib.Medications.DayMedicationList;
+import com.example.arfib.HomePatient;
+import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
 public class Home extends AppCompatActivity {
@@ -51,6 +49,25 @@ public class Home extends AppCompatActivity {
 
         Intent previousIntent = getIntent();
         String viewDate = previousIntent.getStringExtra("date");
+
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, HomePatient.class);
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, Log.class);
+            startActivity(intent);
+        });
 
         dbHelper = new DatabaseHelper(this);
         try {
@@ -113,6 +130,30 @@ public class Home extends AppCompatActivity {
                 layoutManager.scrollToPositionWithOffset(finalSelectedPosition, offset);
             });
         }
+
+        List<String> all_symptoms = new ArrayList<>();
+        Cursor allSymptoms = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Symptom",
+                null
+        );
+        if (allSymptoms.moveToFirst()){
+            do{
+                String symptom = allSymptoms.getString(allSymptoms.getColumnIndex("name"));
+                all_symptoms.add(symptom);
+            } while (allSymptoms.moveToNext());
+        }
+        allSymptoms.close();
+
+        RecyclerView allSymptomsView = findViewById(R.id.allSymptoms);
+        LinearLayoutManager allSymptomsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        allSymptomsView.setLayoutManager(allSymptomsLayoutManager);
+        allSymptomsView.setVerticalScrollBarEnabled(false);
+        allSymptomsView.setHorizontalScrollBarEnabled(false);
+
+        AllSymptomsList allSymptomsAdapter = new AllSymptomsList(this, all_symptoms);
+        allSymptomsView.setAdapter(allSymptomsAdapter);
+
+
 
         List<List<String>> day_symptoms = new ArrayList<>();
         Cursor daySymptoms = dbHelper.getReadableDatabase().rawQuery(

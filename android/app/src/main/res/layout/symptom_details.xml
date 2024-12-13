@@ -4,24 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/rounded_bottom_nav"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/home_icon" />
+
+            <ImageButton
+                android:id="@+id/logButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/new_symptom_button" />
+
+            <ImageButton
+                android:id="@+id/notificationsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/notification_icon" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="20dp"
-        android:gravity="center|center_horizontal">
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
         <ImageView
             android:id="@+id/symptom_Image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/dizziness" />
+            android:layout_marginTop="50dp"
+            android:background="@drawable/dizziness" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:textSize="25dp"
             android:textColor="@color/atrial"
@@ -47,6 +102,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:textSize="25dp"
             android:textColor="@color/atrial"
             android:textStyle="bold"
