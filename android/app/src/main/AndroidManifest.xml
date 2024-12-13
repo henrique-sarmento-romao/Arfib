@@ -86,13 +86,9 @@
         <activity android:name=".Professional.Patient">
         </activity>
 
-        <activity android:name=".Symptoms.Calendar">
-        </activity>
         <activity android:name=".Symptoms.Home">
         </activity>
         <activity android:name=".Symptoms.Details">
-        </activity>
-        <activity android:name=".Symptoms.List">
         </activity>
         <activity android:name=".Symptoms.Log">
         </activity>

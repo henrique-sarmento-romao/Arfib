@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-import com.example.arfib.Database.DatabaseHelper;
 import com.example.arfib.Professional.HomeDoctor;
 import com.example.arfib.Professional.HomeNurse;
 import com.google.android.material.textfield.TextInputEditText;

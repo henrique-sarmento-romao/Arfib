@@ -4,18 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteAbortException;
-import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -28,22 +23,28 @@ import com.example.arfib.Notifications;
 import com.example.arfib.R;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Map;
 
 public class Home extends AppCompatActivity {
     private DatabaseHelper dbHelper;
@@ -54,7 +55,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.measurementhome);
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("username", "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Measurements");
@@ -90,9 +91,114 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        List<List<String>> dataList = new ArrayList<>();
+        Cursor af_timeline = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Measurement " +
+                        "WHERE patient = ? " +
+                        "ORDER BY date ASC, time ASC",
+                new String[]{patient}
+        );
 
-        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='"+ username +"' ORDER BY date DESC, time DESC", null);
+        ArrayList<Entry> symptom_entries = new ArrayList<>();
+        if (af_timeline.moveToFirst()) {
+            do {
+                String date = af_timeline.getString(af_timeline.getColumnIndex("date"));
+                String time = af_timeline.getString(af_timeline.getColumnIndex("time"));
+                int AF_presence = af_timeline.getInt(af_timeline.getColumnIndex("AF_presence"));
+
+
+                SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS", Locale.getDefault());
+                String dateTime = date + " " + time;
+
+                long timestamp = new Date().getTime();
+                try {
+                    Date date_time = inputFormatter.parse(dateTime);
+                    timestamp = date_time.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                symptom_entries.add(new Entry((float) timestamp, (float) AF_presence));
+
+            } while (af_timeline.moveToNext());
+        }
+        af_timeline.close();
+
+
+        LineDataSet dataSet = new LineDataSet(symptom_entries, patient+" AF Presence");
+        int pink = getResources().getColor(R.color.hartpink);
+        dataSet.setColor(pink);
+        dataSet.setLineWidth(2f);
+        dataSet.setCircleRadius(4f);
+        dataSet.setCircleHoleRadius(1f);
+        dataSet.setCircleColor(pink);
+        dataSet.setCircleHoleColor(pink);
+        dataSet.setDrawValues(false);
+        dataSet.setDrawFilled(false);
+
+        LineChart AfTimeline = findViewById(R.id.AF_Timeline);
+        AfTimeline.setData(new LineData(dataSet));
+
+        AfTimeline.setExtraLeftOffset(16f); // Adjust padding for the left
+        AfTimeline.setExtraRightOffset(16f); // Adjust padding for the right
+
+        // Format X-axis with dates
+        XAxis xAxis = AfTimeline.getXAxis();
+        xAxis.setEnabled(true);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                // Create a Date object using the timestamp
+                Date date = new Date((long) value);
+
+                // Define a simple date format (you can modify the format as needed)
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()); // Format as "Year-Month-Day"
+
+                // Return the formatted date string
+                return dateFormat.format(date);
+            }
+        });
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(4, true);
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(0);
+        xAxis.setTextColor(R.color.atrial);
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setSpaceMax(4f); // Add extra space to prevent last label from being clipped
+        xAxis.setDrawGridLines(false);
+
+        YAxis leftAxis = AfTimeline.getAxisLeft();
+        leftAxis.setDrawGridLines(true); // Ensure horizontal grid lines are drawn
+        leftAxis.enableGridDashedLine(30f, 20f, 0f); // Dash pattern: 10px line, 5px space
+        leftAxis.setAxisMinimum(0f); // Ensure axis starts at 1
+        leftAxis.setAxisMaximum(1f); // Ensure axis ends at 4
+        leftAxis.setLabelCount(2, true);
+        leftAxis.setTextColor(R.color.atrial);
+
+        Map<Integer, String> intensityMap = new HashMap<>();
+        intensityMap.put(0, "No");
+        intensityMap.put(1, "Yes");
+        leftAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return intensityMap.get((int) value); // Default to empty string if no match
+            }
+        });
+
+
+        YAxis rightAxis = AfTimeline.getAxisRight();
+        rightAxis.setEnabled(false); // Disable right Y axis
+
+        AfTimeline.setExtraOffsets(10, 20, 20, 20); // Add padding to the chart
+        AfTimeline.getLegend().setEnabled(false); // Hide the legend
+        AfTimeline.getDescription().setEnabled(false);
+        AfTimeline.getDescription().setTextColor(Color.WHITE);
+
+        AfTimeline.invalidate(); // Refresh chart
+
+
+        List<List<String>> dataList = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='"+ patient +"' ORDER BY date DESC, time DESC", null);
         if (cursor.moveToFirst()) {
             do {
                 String date = cursor.getString(cursor.getColumnIndex("date"));
@@ -124,7 +230,7 @@ public class Home extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        MeasurementList adapter = new MeasurementList(this, dataList, username);
+        MeasurementList adapter = new MeasurementList(this, dataList, patient);
         recyclerView.setAdapter(adapter);
     }
 

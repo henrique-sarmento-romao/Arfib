@@ -9,17 +9,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.Manifest;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.arfib.Database.DatabaseHelper;
+import com.example.arfib.DatabaseHelper;
 import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
@@ -39,7 +37,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
