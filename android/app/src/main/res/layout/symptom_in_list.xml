@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="Intensity"
-                    android:textColor="@color/atrial"
+                    android:textColor="@color/symptompurple"
                     android:textSize="18dp" />
             </LinearLayout>
 

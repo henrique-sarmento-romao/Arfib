@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -16,33 +18,45 @@ import androidx.core.content.ContextCompat;
 
 import com.example.arfib.Database.DatabaseHelper;
 import com.example.arfib.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Details extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationdetails);
+        setContentView(R.layout.symptom_details);
 
         Intent previousIntent = getIntent();
-        String med_name = previousIntent.getStringExtra("med_name");
+        String symptom_name = previousIntent.getStringExtra("symptom");
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(med_name);
-        ColorDrawable yellow = new ColorDrawable(ContextCompat.getColor(this, R.color.drugblue));
+        actionBar.setTitle(symptom_name);
+        ColorDrawable yellow = new ColorDrawable(ContextCompat.getColor(this, R.color.symptompurple));
         actionBar.setBackgroundDrawable(yellow);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.drugblue));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.symptompurple));
         }
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String username = sharedPref.getString("username", "");
+        String patient = sharedPref.getString("username", "");
 
         dbHelper = new DatabaseHelper(this);
         try {
@@ -52,71 +66,120 @@ public class Details extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Cursor medication = dbHelper.getReadableDatabase().rawQuery(
-                "SELECT * FROM Prescription " +
-                        "JOIN Medication ON Prescription.medication = Medication.name " +
-                        "WHERE patient = ? AND medication = ? " +
-                        "ORDER BY start_date DESC LIMIT 1",
-                new String[]{username, med_name}
+        Cursor symptom = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Symptom " +
+                        "WHERE name = ? " +
+                        "LIMIT 1",
+                new String[]{symptom_name}
         );
 
-        medication.moveToFirst();
-        int frequency = medication.getInt(medication.getColumnIndex("frequency"));
-        String start_date = medication.getString(medication.getColumnIndex("start_date"));
-        String end_date = medication.getString(medication.getColumnIndex("end_date"));
-        String effect = medication.getString(medication.getColumnIndex("effect"));
-        String asset = medication.getString(medication.getColumnIndex("image"));
+        symptom.moveToFirst();
+        String description = symptom.getString(symptom.getColumnIndex("description"));
 
-        TextView Frequency, StartDate, EndDate, Effects;
-        ImageView MedImage;
+        TextView Description = findViewById(R.id.description);
+        ImageView SymptomImage = findViewById(R.id.symptom_Image);
+        LineChart SymptomTimeline = findViewById(R.id.symptom_Timeline);
 
-        Frequency = findViewById(R.id.frequency);
-        StartDate = findViewById(R.id.start_date);
-        EndDate = findViewById(R.id.end_date);
-        Effects = findViewById(R.id.effects);
-        MedImage = findViewById(R.id.medImage);
+        Description.setText(description);
 
-        int days = frequency / 24;  // Get the number of days
-        int remainingHours = frequency % 24;  // Get the remaining hours after dividing by 24
-        String frequencyText;
-        if(days==0){
-            frequencyText = String.format("Every %02dh", remainingHours);
-        } else if(remainingHours==0) {
-            frequencyText = String.format("Every %dd", days);
-        } else {
-            frequencyText = String.format("Every %dd %02dh", days, remainingHours);
-        }
-        Frequency.setText(frequencyText);
-
-
-        SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS", Locale.getDefault());
-        SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
-        String start_date_formatted = "";
-        try{
-            Date start_date_parsed = inputFormatter.parse(start_date);
-            start_date_formatted = outputFormatter.format(start_date_parsed);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        StartDate.setText(start_date_formatted);
-
-        if(end_date == null){
-            EndDate.setText("Not Applicable");
-        } else {
-            String end_date_formatted = "";
-            try {
-                Date end_date_parsed = inputFormatter.parse(end_date);
-                end_date_formatted = outputFormatter.format(end_date_parsed);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            EndDate.setText(end_date_formatted);
-        }
-
-        Effects.setText(effect);
+        Map<String, String> symptomMap = new HashMap<>();
+        symptomMap.put("Fatigue", "fatigue");
+        symptomMap.put("Breathlessness", "breathlessness");
+        symptomMap.put("Dizziness", "dizziness");
+        symptomMap.put("Chest Pain", "chest_pain");
+        String asset = symptomMap.get(symptom_name);
 
         int resId = getResources().getIdentifier(asset, "drawable","com.example.arfib");
-        MedImage.setImageResource(resId);
+        SymptomImage.setBackgroundResource(resId);
+
+        Cursor symptom_log = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Symptom_Log " +
+                        "WHERE patient = ? AND symptom = ? " +
+                        "LIMIT 1",
+                new String[]{patient, symptom_name}
+        );
+
+        ArrayList<Entry> symptom_entries = new ArrayList<>();
+        if (symptom_log.moveToFirst()) {
+            do {
+                String date = symptom_log.getString(symptom_log.getColumnIndex("date"));
+                String time = symptom_log.getString(symptom_log.getColumnIndex("time"));
+                int intensity = symptom_log.getInt(symptom_log.getColumnIndex("intensity"));
+
+
+                SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS", Locale.getDefault());
+                String dateTime = date + " " + time;
+
+                long timestamp = new Date().getTime();
+                try {
+                    Date date_time = inputFormatter.parse(dateTime);
+                    timestamp = date_time.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                symptom_entries.add(new Entry((float) timestamp, (float) intensity));
+
+            } while (symptom_log.moveToNext());
+        }
+        symptom_log.close();
+
+        LineDataSet dataSet = new LineDataSet(symptom_entries, symptom_name+" Logs");
+        int purple = getResources().getColor(R.color.symptompurple);
+        int black = getResources().getColor(R.color.black);
+        dataSet.setColor(purple);
+        dataSet.setLineWidth(2f);
+        dataSet.setCircleRadius(5f);
+        dataSet.setCircleHoleRadius(3f);
+        dataSet.setCircleColor(purple);
+        dataSet.setCircleHoleColor(black);
+        dataSet.setDrawValues(false);
+        dataSet.setDrawFilled(false);
+
+        LineData lineData = new LineData(dataSet);
+            SymptomTimeline.setData(lineData);
+
+        SymptomTimeline.setExtraLeftOffset(16f); // Adjust padding for the left
+        SymptomTimeline.setExtraRightOffset(16f); // Adjust padding for the right
+
+        // Format X-axis with dates
+        XAxis xAxis = SymptomTimeline.getXAxis();
+        xAxis.setEnabled(true);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                // Create a Date object using the timestamp
+                Date date = new Date((long) value);
+
+                // Define a simple date format (you can modify the format as needed)
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()); // Format as "Year-Month-Day"
+
+                // Return the formatted date string
+                return dateFormat.format(date);
+            }
+        });
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(10, true);
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(0);
+        xAxis.setTextColor(Color.WHITE);
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setSpaceMax(4f); // Add extra space to prevent last label from being clipped
+
+
+        YAxis rightAxis = SymptomTimeline.getAxisRight();
+        rightAxis.setTextColor(Color.WHITE);
+
+        Legend legend = SymptomTimeline.getLegend();
+        legend.setTextColor(Color.WHITE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        SymptomTimeline.setExtraOffsets(0, 50, 10, 15); // Add padding to the chart
+        SymptomTimeline.getDescription().setEnabled(false);
+        SymptomTimeline.getDescription().setText("Stock Quotes Over Time");
+        SymptomTimeline.getDescription().setTextColor(Color.WHITE);
+
+        SymptomTimeline.invalidate(); // Refresh chart
     }
 }

@@ -49,7 +49,6 @@ public class DaySymptomList  extends RecyclerView.Adapter<DaySymptomList.MyViewH
         symptomMap.put("Breathlessness", "breathlessness");
         symptomMap.put("Dizziness", "dizziness");
         symptomMap.put("Chest Pain", "chest_pain");
-
         String asset = symptomMap.get(symptom_name);
 
         // asset = asset + ".xml";
