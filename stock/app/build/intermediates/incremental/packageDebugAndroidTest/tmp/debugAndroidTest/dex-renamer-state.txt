@@ -1,4 +1,0 @@
-#Tue Nov 26 22:25:25 WET 2024
-base.0=C\:\\Users\\maria\\Documents\\Faculdade\\MESTRADO\\CMEB\\Projeto\\Arfib\\stock\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
-path.0=0/classes.dex
-renamed.0=classes.dex
