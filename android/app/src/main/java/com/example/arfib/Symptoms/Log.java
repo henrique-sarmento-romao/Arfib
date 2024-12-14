@@ -17,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.arfib.DatabaseHelper;
+import com.example.arfib.HomePatient;
+import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
@@ -45,6 +49,26 @@ public class Log extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Notifications.class);
+            startActivity(intent);
+        });
 
         Intent previousIntent = getIntent();
         String intentSymptom = previousIntent.getStringExtra("symptom");

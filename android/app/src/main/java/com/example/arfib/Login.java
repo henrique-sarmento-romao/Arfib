@@ -30,6 +30,11 @@ public class Login extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String profile = sharedPref.getString("profile", "patient");
         boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
+
+        SharedPreferences.Editor editor1 = sharedPref.edit();
+        editor1.remove("patient");
+        editor1.apply();
+
         if(isLoggedIn){
             switch (profile) {
                 case "patient":

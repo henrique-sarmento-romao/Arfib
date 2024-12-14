@@ -27,6 +27,8 @@ import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
 import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 public class Home extends AppCompatActivity {
@@ -46,14 +48,21 @@ public class Home extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
 
         Intent previousIntent = getIntent();
         String viewDate = previousIntent.getStringExtra("date");
 
-
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, HomePatient.class);
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
             startActivity(intent);
         });
 
@@ -77,13 +86,34 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            actionBar.setTitle(name+ "'s Symptoms");
+        }
+
         if (viewDate == null) {
             Cursor maxDate = dbHelper.getReadableDatabase().rawQuery(
                     "SELECT * FROM Symptom_Log WHERE patient= ? GROUP BY date ORDER BY date DESC, time DESC LIMIT 1",
                     new String[]{patient}
             );
             maxDate.moveToFirst();
-            viewDate = maxDate.getString(maxDate.getColumnIndex("date"));
+
+            try{
+                int dateIndex= maxDate.getColumnIndex("date");
+                viewDate = maxDate.getString(dateIndex);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
         List<List<String>> dateList = new ArrayList<>();
@@ -95,8 +125,18 @@ public class Home extends AppCompatActivity {
             do {
                 java.util.List<String> date_time = new ArrayList<>();
 
-                String date = cursor.getString(cursor.getColumnIndex("date"));
-                String time = cursor.getString(cursor.getColumnIndex("time"));
+                int dateIndex = 0;
+                int timeIndex = 0;
+
+                try{
+                    dateIndex = cursor.getColumnIndex("date");
+                    timeIndex = cursor.getColumnIndex("time");
+                } catch (RuntimeException e) {
+                    e.printStackTrace();
+                }
+
+                String date = cursor.getString(dateIndex);
+                String time = cursor.getString(timeIndex);
 
                 date_time.add(date);
                 date_time.add(time);

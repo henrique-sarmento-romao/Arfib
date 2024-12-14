@@ -205,13 +205,15 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawLabels(false);
+        xAxis.setDrawAxisLine(false);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
         leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
-        leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
+        //leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
+        //leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
         leftAxis.setDrawLabels(false);
+        leftAxis.setDrawAxisLine(false);
 
         chart.getAxisRight().setEnabled(false);
 

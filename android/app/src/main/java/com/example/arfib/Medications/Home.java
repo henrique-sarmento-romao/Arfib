@@ -19,7 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
 import com.example.arfib.HomePatient;
+import com.example.arfib.Measurements.Log;
 import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
@@ -35,30 +38,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.medicationhome);
 
-
-        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
-        notificationsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, Notifications.class);
-            startActivity(intent);
-        });
-
-        ImageButton logButton = findViewById(R.id.logButton);
-        logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, com.example.arfib.Medications.Log.class);
-            startActivity(intent);
-        });
-        ImageButton homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, HomePatient.class);
-            startActivity(intent);
-        });
-
-        TextView YourMedications = findViewById(R.id.your_medications);
-        YourMedications.setOnClickListener(v -> {
-            Intent intent = new Intent(com.example.arfib.Medications.Home.this, MedicationList.class);
-            startActivity(intent);
-        });
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Medications");
         ColorDrawable yellow = new ColorDrawable(ContextCompat.getColor(this, R.color.drugblue));
@@ -69,6 +48,38 @@ public class Home extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddNew.class);
+            startActivity(intent);
+        });
+
+        TextView YourMedications = findViewById(R.id.your_medications);
+        YourMedications.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), PatientMedications.class);
+            startActivity(intent);
+        });
 
         Intent previousIntent = getIntent();
         String viewDate = previousIntent.getStringExtra("date");
@@ -78,8 +89,6 @@ public class Home extends AppCompatActivity {
             viewDate = dateFormatter.format(today);
         }
 
-
-
         dbHelper = new DatabaseHelper(this);
         try {
             dbHelper.createDatabase();
@@ -88,6 +97,18 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            YourMedications.setText(name+ "'s Medications");
+        }
 
         List<List<String>> dateList = new ArrayList<>();
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
@@ -141,7 +162,7 @@ public class Home extends AppCompatActivity {
                 "SELECT * FROM Medication_Log " +
                         "JOIN Medication ON Medication_Log.medication = Medication.name " +
                         "WHERE patient = ? AND date = ? " +
-                        "ORDER BY date DESC, time DESC",
+                        "ORDER BY taken ASC, time ASC",
                 new String[]{patient, viewDate}
         );
         if (dayMed.moveToFirst()) {
@@ -178,7 +199,7 @@ public class Home extends AppCompatActivity {
         dayMedicationView.setVerticalScrollBarEnabled(false);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
-        DayMedicationList dayMedicationAdapter = new DayMedicationList(this, day_medications);
+        ListDayMedication dayMedicationAdapter = new ListDayMedication(this, day_medications);
         dayMedicationView.setAdapter(dayMedicationAdapter);
 
         List<List<String>> patient_medications = new ArrayList<>();

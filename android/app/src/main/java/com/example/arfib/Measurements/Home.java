@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +21,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 import android.database.Cursor;
@@ -56,6 +59,7 @@ public class Home extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Measurements");
@@ -65,21 +69,49 @@ public class Home extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.electroyellow));
         }
 
+        dbHelper = new DatabaseHelper(this);
+        try {
+            dbHelper.createDatabase();
+            dbHelper.openDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            getSupportActionBar().setTitle(name+ "'s Measurements");
+        }
+
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, HomePatient.class);
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
             startActivity(intent);
         });
 
         ImageButton notificationsButton = findViewById(R.id.notificationsButton);
         notificationsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, Notifications.class);
+            Intent intent = new Intent(v.getContext(), Notifications.class);
             startActivity(intent);
         });
 
         ImageButton logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, Log.class);
+            Intent intent = new Intent(v.getContext(), Log.class);
             startActivity(intent);
         });
 

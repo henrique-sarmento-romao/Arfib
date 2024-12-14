@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat;
 import com.example.arfib.DatabaseHelper;
 import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -65,6 +67,28 @@ public class Detailed extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
+
+        dbHelper = new DatabaseHelper(this);
+        try {
+            dbHelper.createDatabase();
+            dbHelper.openDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            getSupportActionBar().setTitle(name+ "'s Measurement");
+        }
 
         Intent previousIntent = getIntent();
         String date = previousIntent.getStringExtra("date");
@@ -72,7 +96,14 @@ public class Detailed extends AppCompatActivity {
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Detailed.this, HomePatient.class);
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
             startActivity(intent);
         });
 
@@ -168,6 +199,7 @@ public class Detailed extends AppCompatActivity {
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawLabels(false); // Remove os rótulos numéricos
+        xAxis.setDrawAxisLine(false);
 
         chart.setVisibleXRangeMaximum(1000);  // Limita a visualização a 1000 pontos no eixo X
         chart.setVisibleXRangeMinimum(1);
@@ -175,9 +207,10 @@ public class Detailed extends AppCompatActivity {
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
         leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
-        leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
+        //leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
+        //leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
         leftAxis.setDrawLabels(false); // Remove os rótulos numéricos
+        leftAxis.setDrawAxisLine(false);
 
         chart.getAxisRight().setEnabled(false);
 

@@ -1,6 +1,8 @@
 package com.example.arfib.Measurements;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.arfib.HomePatient;
 import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 public class Log extends AppCompatActivity {
@@ -20,6 +24,9 @@ public class Log extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measurementlog);
+
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String profile = sharedPref.getString("profile", "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Log Measurement");
@@ -31,7 +38,14 @@ public class Log extends AppCompatActivity {
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Log.this, HomePatient.class);
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
             startActivity(intent);
         });
 

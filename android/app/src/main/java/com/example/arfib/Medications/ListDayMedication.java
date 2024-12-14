@@ -4,48 +4,43 @@ import static android.app.PendingIntent.getActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.DateList;
 import com.example.arfib.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class DayMedicationList extends RecyclerView.Adapter<DayMedicationList.MyViewHolder> {
+public class ListDayMedication extends RecyclerView.Adapter<ListDayMedication.MyViewHolder> {
     private final List<List<String>> dayMedications;
     private final Context context;
 
-    public DayMedicationList(Context context, List<List<String>> dayMedications) {
+    public ListDayMedication(Context context, List<List<String>> dayMedications) {
         this.context = context;
         this.dayMedications = dayMedications;
     }
 
     @Override
-    public DayMedicationList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListDayMedication.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.daymedicationbutton, parent, false);
-        return new DayMedicationList.MyViewHolder(view);
+        return new ListDayMedication.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(com.example.arfib.Medications.DayMedicationList.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ListDayMedication.MyViewHolder holder, int position) {
         List<String> medication = dayMedications.get(position);
 
         String med_name = medication.get(0);
@@ -70,6 +65,18 @@ public class DayMedicationList extends RecyclerView.Adapter<DayMedicationList.My
         }
 
         holder.medName.setText(med_name);
+
+        SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mm:ss.SSSSS", Locale.getDefault());
+        SimpleDateFormat outputFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+        String formattedTime = "";
+        try{
+            Date parsedTime = inputFormatter.parse(time);
+            formattedTime = outputFormatter.format(parsedTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.time.setText(formattedTime);
     }
 
     @Override
@@ -79,11 +86,12 @@ public class DayMedicationList extends RecyclerView.Adapter<DayMedicationList.My
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageButton medButton;
-        TextView medName;
+        TextView medName, time;
         public MyViewHolder(View itemView) {
             super(itemView);
             medButton = itemView.findViewById(R.id.medButton);
             medName = itemView.findViewById(R.id.med_name);
+            time = itemView.findViewById(R.id.time);
         }
 
         // Method to set the date and handle the button click

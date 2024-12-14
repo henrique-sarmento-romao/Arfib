@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Medications.DayMedicationList;
+import com.example.arfib.Medications.ListDayMedication;
 import com.example.arfib.R;
 
 import java.util.HashMap;

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +22,11 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.DatabaseHelper;
 import com.example.arfib.Measurements.Home;
 import com.example.arfib.Measurements.Log;
-import com.example.arfib.Medications.DayMedicationList;
+import com.example.arfib.Medications.ListDayMedication;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.Symptoms.Details;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -53,40 +54,17 @@ public class HomePatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepagepatient);
-        getSupportActionBar().setTitle("Home");
         getSupportActionBar().setIcon(R.drawable.ic_menu_icon);
-
-        ImageButton homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePatient.this, HomePatient.class);
-            startActivity(intent);
-        });
-
-        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
-        notificationsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePatient.this, Notifications.class);
-            startActivity(intent);
-        });
-
-        ImageButton logButton = findViewById(R.id.logButton);
-        logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePatient.this, Log.class);
-            startActivity(intent);
-        });
-
+        getSupportActionBar().setTitle("Home");
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
+        boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
 
-        Button logout = findViewById(R.id.logoutButton);
-        logout.setOnClickListener(v -> {
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.remove("username"); // Remove the username
-            editor.remove("is_logged_in"); // Remove the is_logged_in flag
-            editor.apply();
-            Intent backMainActivity = new Intent(HomePatient.this, MainActivity.class);
-            startActivity(backMainActivity);
-        });
+        if(!isLoggedIn){
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
         dbHelper = new DatabaseHelper(this);
         try {
@@ -102,11 +80,73 @@ public class HomePatient extends AppCompatActivity {
                         "LIMIT 1",
                 new String[]{patient}
         );
-        nameCursor.moveToFirst();
-        String name = nameCursor.getString(0);
 
         TextView welcome = findViewById(R.id.welcome);
-        welcome.setText("👋 Welcome, "+name+"!");
+        String patientName = null;
+        if(nameCursor.moveToFirst()){
+            patientName = nameCursor.getString(0);
+            welcome.setText("👋 Welcome, "+patientName+"!");
+        }
+
+        LinearLayout welcomeLayout = findViewById(R.id.welcome_layout);
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            welcomeLayout.setVisibility(View.GONE); // Hides the LinearLayout completely
+            if(patientName!=null){
+                getSupportActionBar().setTitle(patientName+ "'s Home");
+            }
+        }
+
+        Button logout = findViewById(R.id.logoutButton);
+        logout.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.remove("username"); // Remove the username
+            editor.remove("is_logged_in"); // Remove the is_logged_in flag
+            editor.apply();
+            Intent backMainActivity = new Intent(HomePatient.this, MainActivity.class);
+            startActivity(backMainActivity);
+        });
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Log.class);
+            startActivity(intent);
+        });
+
+        TextView AfPresence, DayMedications, SymptomsTimelines;
+        AfPresence = findViewById(R.id.af_presence_title);
+        AfPresence.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), com.example.arfib.Measurements.Home.class);
+            startActivity(intent);
+        });
+        DayMedications = findViewById(R.id.day_medications_title);
+        DayMedications.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), com.example.arfib.Medications.Home.class);
+            startActivity(intent);
+        });
+        SymptomsTimelines = findViewById(R.id.symptoms_title);
+        SymptomsTimelines.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), com.example.arfib.Symptoms.Home.class);
+            startActivity(intent);
+        });
 
         Cursor af_timeline = dbHelper.getReadableDatabase().rawQuery(
                 "SELECT * FROM Measurement " +
@@ -224,7 +264,7 @@ public class HomePatient extends AppCompatActivity {
                 "SELECT * FROM Medication_Log " +
                         "JOIN Medication ON Medication_Log.medication = Medication.name " +
                         "WHERE patient = ? AND date = ? " +
-                        "ORDER BY date DESC, time DESC",
+                        "ORDER BY taken ASC, time ASC",
                 new String[]{patient, viewDate}
         );
         if (dayMed.moveToFirst()) {
@@ -258,12 +298,11 @@ public class HomePatient extends AppCompatActivity {
         RecyclerView dayMedicationView = findViewById(R.id.day_medications);
         LinearLayoutManager dayMedicationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dayMedicationView.setLayoutManager(dayMedicationLayoutManager);
-        dayMedicationView.setVerticalScrollBarEnabled(true);
+        dayMedicationView.setVerticalScrollBarEnabled(false);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
-        DayMedicationList dayMedicationAdapter = new DayMedicationList(this, day_medications);
+        ListDayMedication dayMedicationAdapter = new ListDayMedication(this, day_medications);
         dayMedicationView.setAdapter(dayMedicationAdapter);
-
 
         // ----------------------
         // Symptoms
@@ -317,8 +356,6 @@ public class HomePatient extends AppCompatActivity {
         SymptomAdapter adapter = new SymptomAdapter(this, symptoms);
         recyclerView.setAdapter(adapter);
 
-
-
     }
 
     @Override
@@ -341,7 +378,7 @@ public class HomePatient extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.measurements) {
-            Intent intent = new Intent(HomePatient.this, Home.class);
+            Intent intent = new Intent(HomePatient.this, com.example.arfib.Measurements.Home.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.symptoms) {

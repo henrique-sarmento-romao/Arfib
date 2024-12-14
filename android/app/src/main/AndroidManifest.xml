@@ -72,7 +72,7 @@
         </activity>
         <activity android:name=".Medications.Home">
         </activity>
-        <activity android:name=".Medications.MedicationList">
+        <activity android:name=".Medications.PatientMedications">
         </activity>
         <activity android:name=".Medications.Log">
         </activity>
@@ -82,8 +82,6 @@
         <activity android:name=".Professional.HomeNurse">
         </activity>
         <activity android:name=".Professional.PatientList">
-        </activity>
-        <activity android:name=".Professional.Patient">
         </activity>
 
         <activity android:name=".Symptoms.Home">

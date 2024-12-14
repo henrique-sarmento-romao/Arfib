@@ -23,21 +23,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="right"
             android:text="AF Detection"
             android:textColor="@color/hartpink"
             android:textStyle="bold" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chartECG_detailed"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/measurement_box"
         />
 

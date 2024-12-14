@@ -1,21 +1,21 @@
 name,effect,image
-Aspirin,Aspirin helps reduce the risk of heart attacks by preventing blood clots from forming.,med3_green
-Beta-Blockers,"Beta-blockers reduce the heart rate and blood pressure, easing the heart's workload.",med1_yellow
-Nitroglycerin,Nitroglycerin dilates blood vessels to relieve chest pain (angina) by improving blood flow to the heart.,med2_yellow
-Statins,"Statins lower cholesterol levels, which helps prevent plaque buildup in the arteries and reduces the risk of heart disease.",med1_gray
-ACE Inhibitors,"ACE inhibitors relax blood vessels, lowering blood pressure and reducing strain on the heart.",med4_purple
-Diuretics,"Diuretics help reduce fluid buildup in the body, which can alleviate symptoms of heart failure.",med4_green
-Calcium Channel Blockers,"Calcium channel blockers relax and widen blood vessels, lowering blood pressure and reducing the heart's workload.",med2_salmon
-Warfarin,"Warfarin is a blood thinner that prevents blood clots, reducing the risk of stroke and heart attack.",med4_yellow
-Clopidogrel,"Clopidogrel helps prevent blood clots by inhibiting platelets from sticking together, often used after heart attacks or surgeries.",med2_purple
-ARBs,"ARBs, Angiotensin II receptor blockers, block the action of a hormone that constricts blood vessels, helping to lower blood pressure and reduce the risk of heart failure.",med2_green
-Eplerenone,Eplerenone helps reduce blood pressure and prevent heart failure symptoms by blocking a hormone that causes fluid retention.,med1_green
-Furosemide,"Furosemide is a diuretic that helps remove excess fluid from the body, which can relieve symptoms of heart failure and hypertension.",med3_purple
-Hydralazine,"Hydralazine works by relaxing the blood vessels, helping to lower blood pressure and reduce the heart's workload.",med4_gray
-Digoxin,"Digoxin increases the strength and efficiency of the heart's contractions, often used in heart failure and arrhythmias.",med1_purple
-Ivabradine,"Ivabradine slows the heart rate, helping people with heart failure by reducing the heart's workload and improving its pumping efficiency.",med3_yellow
-Ranolazine,Ranolazine helps treat chronic angina by improving blood flow to the heart and reducing pain during physical exertion.,med3_gray
-Lisinopril,"Lisinopril is an ACE inhibitor that lowers blood pressure, improves heart function, and helps prevent heart failure progression.",med1_salmon
-Verapamil,"Verapamil is a calcium channel blocker that relaxes blood vessels and slows the heart rate, used in managing high blood pressure and certain arrhythmias.",med4_salmon
-Amiodarone,"Amiodarone is used to treat arrhythmias by helping to regulate the heart's rhythm, often used in life-threatening cases.",med3_salmon
-Losartan,"Losartan is an ARB that helps lower blood pressure and reduce the risk of strokes, kidney disease, and heart failure progression.",med2_gray
+Aspirin,Aspirin helps reduce the risk of heart attacks by preventing blood clots from forming.,med3_salmon
+Beta-Blockers,"Beta-blockers reduce the heart rate and blood pressure, easing the heart's workload.",med1_salmon
+Nitroglycerin,Nitroglycerin dilates blood vessels to relieve chest pain (angina) by improving blood flow to the heart.,med3_yellow
+Statins,"Statins lower cholesterol levels, which helps prevent plaque buildup in the arteries and reduces the risk of heart disease.",med3_purple
+ACE Inhibitors,"ACE inhibitors relax blood vessels, lowering blood pressure and reducing strain on the heart.",med4_green
+Diuretics,"Diuretics help reduce fluid buildup in the body, which can alleviate symptoms of heart failure.",med1_green
+Calcium Channel Blockers,"Calcium channel blockers relax and widen blood vessels, lowering blood pressure and reducing the heart's workload.",med4_purple
+Warfarin,"Warfarin is a blood thinner that prevents blood clots, reducing the risk of stroke and heart attack.",med1_yellow
+Clopidogrel,"Clopidogrel helps prevent blood clots by inhibiting platelets from sticking together, often used after heart attacks or surgeries.",med3_gray
+ARBs,"ARBs, Angiotensin II receptor blockers, block the action of a hormone that constricts blood vessels, helping to lower blood pressure and reduce the risk of heart failure.",med2_purple
+Eplerenone,Eplerenone helps reduce blood pressure and prevent heart failure symptoms by blocking a hormone that causes fluid retention.,med2_green
+Furosemide,"Furosemide is a diuretic that helps remove excess fluid from the body, which can relieve symptoms of heart failure and hypertension.",med4_salmon
+Hydralazine,"Hydralazine works by relaxing the blood vessels, helping to lower blood pressure and reduce the heart's workload.",med1_gray
+Digoxin,"Digoxin increases the strength and efficiency of the heart's contractions, often used in heart failure and arrhythmias.",med2_gray
+Ivabradine,"Ivabradine slows the heart rate, helping people with heart failure by reducing the heart's workload and improving its pumping efficiency.",med4_gray
+Ranolazine,Ranolazine helps treat chronic angina by improving blood flow to the heart and reducing pain during physical exertion.,med3_green
+Lisinopril,"Lisinopril is an ACE inhibitor that lowers blood pressure, improves heart function, and helps prevent heart failure progression.",med2_yellow
+Verapamil,"Verapamil is a calcium channel blocker that relaxes blood vessels and slows the heart rate, used in managing high blood pressure and certain arrhythmias.",med4_yellow
+Amiodarone,"Amiodarone is used to treat arrhythmias by helping to regulate the heart's rhythm, often used in life-threatening cases.",med2_salmon
+Losartan,"Losartan is an ARB that helps lower blood pressure and reduce the risk of strokes, kidney disease, and heart failure progression.",med1_purple

@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
 
-        if(isLoggedIn){
+        /*if(isLoggedIn){
             startActivity(new Intent(MainActivity.this, Login.class));
-        }
+        }*/
 
         Button patient_button = findViewById(R.id.patient_button);
         patient_button.setOnClickListener(v -> {

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
+import com.example.arfib.HomePatient;
+import com.example.arfib.Notifications;
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicationList extends AppCompatActivity {
+public class PatientMedications extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +44,36 @@ public class MedicationList extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");
+        String profile = sharedPref.getString("profile", "");
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent;
+            if (profile.equals("doctor")){
+                intent = new Intent(v.getContext(), HomeDoctor.class);
+            } else if (profile.equals("nurse")) {
+                intent = new Intent(v.getContext(), HomeNurse.class);
+            } else {
+                intent = new Intent(v.getContext(), HomePatient.class);
+            }
+            startActivity(intent);
+        });
+
+        ImageButton notificationsButton = findViewById(R.id.notificationsButton);
+        notificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Notifications.class);
+            startActivity(intent);
+        });
+
+        ImageButton logButton = findViewById(R.id.logButton);
+        logButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddNew.class);
+            startActivity(intent);
+        });
 
         ImageButton addMedication = findViewById(R.id.addMedication);
         addMedication.setOnClickListener(v -> {
-            Intent intent = new Intent(MedicationList.this, AddNew.class);
+            Intent intent = new Intent(v.getContext(), AddNew.class);
             startActivity(intent);
         });
 
@@ -52,6 +83,21 @@ public class MedicationList extends AppCompatActivity {
             dbHelper.openDatabase();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        Cursor nameCursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT first_name FROM User " +
+                        "WHERE username = ? " +
+                        "LIMIT 1",
+                new String[]{patient}
+        );
+        nameCursor.moveToFirst();
+        String name = nameCursor.getString(0);
+
+        if (profile.equals("nurse") || profile.equals("doctor")){
+            actionBar.setTitle(name+ "'s Medications");
+            TextView YourMedications = findViewById(R.id.your_medications);
+            YourMedications.setText(name+ "'s Medications");
         }
 
         List<List<String>> patient_medications = new ArrayList<>();
