@@ -64,6 +64,7 @@ public class Measuring extends AppCompatActivity {
     private ArrayList<Integer> ecgData = new ArrayList<>(); // List to store ECG data
     private ArrayList<Double> rr_intervals = new ArrayList<>(); // List to store ECG data
     private ArrayList<Double> rr_position = new ArrayList<>(); // List to store ECG data
+    private ArrayList<Double> rr_normalized = new ArrayList<>(); // List to store ECG data
 
 
     private static String[] PERMISSIONS_STORAGE = {
@@ -124,7 +125,7 @@ public class Measuring extends AppCompatActivity {
 
         // Configure the ECG chart
         configureChart(ecgChart);
-        detectAF();
+
     }
 
     private void configureChart(LineChart chart) {
@@ -143,15 +144,14 @@ public class Measuring extends AppCompatActivity {
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawLabels(false);
-
+        xAxis.setDrawAxisLine(false);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
         leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
-        leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
         chart.getAxisRight().setEnabled(false);
         leftAxis.setDrawLabels(false);
+        leftAxis.setDrawAxisLine(false);
 
         Legend legend = chart.getLegend();
         legend.setEnabled(false);
@@ -207,7 +207,6 @@ public class Measuring extends AppCompatActivity {
 
     private void pairDevice(BluetoothDevice device) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Para Android 12+, é necessário solicitar permissão para emparelhamento
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_ADVERTISE}, 2);
                 return;
@@ -232,7 +231,7 @@ public class Measuring extends AppCompatActivity {
             if (selectedDevice != null) {
                 biolib = new BioLib(this, mHandler);
                 biolib.Connect(selectedDevice.getAddress(), 30);
-                textHR.setText("Connecting to " + selectedDevice.getName() + "...");
+                textHR.setText("Connecting to VitalJacket...");
 
                 // Schedule disconnection after 60 seconds
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -243,6 +242,8 @@ public class Measuring extends AppCompatActivity {
                     }
                 }, 60000); // 60 seconds in milliseconds
 
+                Toast.makeText(this,"Measurement complete!",Toast.LENGTH_LONG);
+
             } else {
                 textHR.setText("Selected device is null.");
             }
@@ -252,9 +253,40 @@ public class Measuring extends AppCompatActivity {
         }
     }
 
+    private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
+        return minOut + ((x - minIn) * (maxOut - minOut)) / (maxIn - minIn);
+    }
+
+    private float mapToTime(float x, float sampleRate) {
+        // sampleRate é a taxa de amostragem em Hz (ex: 500 Hz)
+        // x é o índice do ponto de dados no array
+        // O tempo será em segundos, pois o valor de X pode ser o índice de amostras.
+
+        // O tempo total em segundos pode ser obtido multiplicando o índice pelo tempo por amostra (1/sampleRate)
+        return x / sampleRate;
+    }
+
 
     private void updateChart(LineChart chart, ArrayList<Entry> data) {
 
+        float minIn = 0f;    // Mínimo de índice (X) - Não altere isso
+        float maxIn = 230f;   // Máximo de índice (X) - Ajuste conforme o número máximo de pontos
+        float minOut = -1.15f; // Mínimo de mV (Y)
+        float maxOut = 1.15f;  // Máximo de mV (Y)
+
+        ArrayList<Entry> mappedData = new ArrayList<>();
+        float timeOffset = 0f;  // Variável para o tempo real (em segundos)
+
+        for (Entry entry : data) {
+            // Mapear o valor de X para o tempo real (em segundos ou amostra)
+            float mappedX = mapToTime(entry.getX(), 500);  // 500 é a taxa de amostragem
+
+            // Mapear o valor de Y (ECG) para mV
+            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
+
+            // Adicionar o ponto mapeado ao gráfico
+            mappedData.add(new Entry(mappedX, mappedY));
+        }
         LineDataSet dataSet = new LineDataSet(data, "ECG Data");
         int color = ContextCompat.getColor(this, R.color.hartpink);
         dataSet.setColor(color);
@@ -290,7 +322,7 @@ public class Measuring extends AppCompatActivity {
 
             switch (msg.what) {
                 case BioLib.STATE_CONNECTED:
-                    activity.textHR.setText("Connected to " + activity.selectedDevice.getName());
+                    activity.textHR.setText("Connected to VitalJacket");
                     break;
 
                 case BioLib.UNABLE_TO_CONNECT_DEVICE:
@@ -319,14 +351,11 @@ public class Measuring extends AppCompatActivity {
                 case BioLib.MESSAGE_PEAK_DETECTION:
                     BioLib.QRS qrs = (BioLib.QRS) msg.obj;
 
-                    ArrayList<Double> rr_intervals = new ArrayList<>();
-                    rr_intervals.add((double) qrs.rr);
-
-                    ArrayList<Double> rr_position = new ArrayList<>();
-                    rr_position.add((double) qrs.position);
-
-
+                    // Adicione aos arrays globais
+                    activity.rr_intervals.add((double) qrs.rr);
+                    activity.rr_position.add((double) qrs.position);
                     break;
+
 
                 case BioLib.MESSAGE_ECG_STREAM:
                     try {
@@ -367,9 +396,10 @@ public class Measuring extends AppCompatActivity {
         try {
             dbHelper.createDatabase();
             dbHelper.openDatabase();
-            int AF_presence = detectAF();
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            int AF_presence = detectAF(timestamp);
             // Export data to file
-            exportDataToFile(AF_presence);
+            exportDataToFile(AF_presence,timestamp);
 
 
             // Clear the data
@@ -385,14 +415,14 @@ public class Measuring extends AppCompatActivity {
         }
     }
 
-    private void exportDataToFile(int AF_presence) {
+    private void exportDataToFile(int AF_presence, String timestamp) {
 
         File directory = getFilesDir();
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
+
         String filename = "patient_data_" + timestamp + ".txt";
 
         File file = new File(directory, filename);
@@ -404,18 +434,15 @@ public class Measuring extends AppCompatActivity {
             SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
             String patient = sharedPref.getString("patient", "");
 
-            dbHelper.insertFile(file.getAbsolutePath(), patient, AF_presence, this);
+            dbHelper.insertFile(filename, patient, AF_presence, this);
         } catch (IOException e) {
             Toast.makeText(this, "Error exporting data: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
 
-    private int detectAF() {
-        // Evita erros num array vazio
-        if (rr_intervals.isEmpty()) {
-            return 0;
-        }
+    private int detectAF(String timestamp) {
+
 
         double total = 0;
         for (double rr : rr_intervals) {
@@ -423,12 +450,12 @@ public class Measuring extends AppCompatActivity {
         }
 
         double mean = total / rr_intervals.size();
+        rr_normalized.clear();
 
-        ArrayList<Double> rr_normalized = new ArrayList<>();
         ArrayList<Double> af_detection = new ArrayList<>();
         double rr_mean;
 
-        // Normalização com a média dos intervalos rr
+        // Normalização e preenchimento de af_detection
         for (double rr : rr_intervals) {
             rr_mean = rr / mean;
             rr_normalized.add(rr_mean);
@@ -440,61 +467,60 @@ public class Measuring extends AppCompatActivity {
             }
         }
 
-        double alpha = 0.1; //para garantir uma filtragem suave
+        double alpha = 0.1;
         ArrayList<Double> smooth_af_detection = new ArrayList<>();
         smooth_af_detection.add(af_detection.get(0));
-        ArrayList<Entry> AF_detection = new ArrayList<>();
-        for (int i = 1; i < af_detection.size(); i++) {
-            AF_detection.add(new Entry(rr_position.get(i).floatValue(), smooth_af_detection.get(i).floatValue()));
-        }
 
-        // Low-pass filter
-        int countAboveThreshold = 0; //
+        ArrayList<Entry> AF_detection = new ArrayList<>();
+        int countAboveThreshold = 0;
         int AF = 0;
-        double threshold = 0.8; // O limite para detecção
-        int requiredCount = 10; // Número necessário de valores acima do limite
+        double threshold = 0.8;
+        int requiredCount = 10;
 
         for (int j = 1; j < af_detection.size(); j++) {
             double smoothedValue = alpha * af_detection.get(j) + (1 - alpha) * smooth_af_detection.get(j - 1);
             smooth_af_detection.add(smoothedValue);
 
-            // Verificar se o valor suavizado é maior que o limite
             if (smoothedValue > threshold) {
                 countAboveThreshold++;
             }
 
-            // Se pelo menos 10 valores forem encontrados, definir af como true e sair do loop
             if (countAboveThreshold >= requiredCount) {
                 AF = 1;
                 break;
             }
         }
 
+        for (int i = 1; i < rr_position.size() && i < smooth_af_detection.size(); i++) {
+            AF_detection.add(new Entry(rr_position.get(i).floatValue(), smooth_af_detection.get(i).floatValue()));
+        }
+
+
+
+        // Salvamento do arquivo de detecção AF
         File directory = getFilesDir();
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
         String filename_AF = "patient_data_" + timestamp + "_AFdetection.txt";
 
         File file_AF = new File(directory, filename_AF);
+
         try (FileWriter writer = new FileWriter(file_AF)) {
-            for (Double value : smooth_af_detection) {
-                writer.write(value + " ");
+            for (Entry entry : AF_detection) {
+                String line = entry.getX() + " " + entry.getY() + "\n";
+                writer.write(line);
             }
+
         } catch (IOException e) {
+            Toast.makeText(this, "Error saving AF detection file: " + e.getMessage(), Toast.LENGTH_LONG).show();
             throw new RuntimeException(e);
         }
 
-
-
-        // Info para dar plot
-
-
         return AF;
-
     }
+
     @Override
     protected void onDestroy() {
         if (biolib != null) {

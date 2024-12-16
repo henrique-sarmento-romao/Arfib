@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arfib.Professional.HomeDoctor;
+import com.example.arfib.Professional.HomeNurse;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -22,17 +25,28 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
+        String profile = sharedPref.getString("profile", "patient");
 
-        /*if(isLoggedIn){
-            startActivity(new Intent(MainActivity.this, Login.class));
-        }*/
+        if(isLoggedIn){
+            switch (profile) {
+                case "patient":
+                    startActivity(new Intent(this, HomePatient.class));
+                    break;
+                case "doctor":
+                    startActivity(new Intent(this, HomeDoctor.class));
+                    break;
+                case "nurse":
+                    startActivity(new Intent(this, HomeNurse.class));
+                    break;
+            }
+        }
 
         Button patient_button = findViewById(R.id.patient_button);
         patient_button.setOnClickListener(v -> {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("profile", "patient");
             editor.apply();
-            startActivity(new Intent(MainActivity.this, Login.class));
+            startActivity(new Intent(v.getContext(), Login.class));
         });
 
         Button doctor_but = findViewById(R.id.doctor_button);
@@ -40,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("profile", "doctor");
             editor.apply();
-            startActivity(new Intent(MainActivity.this, Login.class));
+            startActivity(new Intent(v.getContext(), Login.class));
         });
 
         Button nurse_but = findViewById(R.id.nurse_button);
@@ -48,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("profile", "nurse");
             editor.apply();
-            startActivity(new Intent(MainActivity.this, Login.class));
+            startActivity(new Intent(v.getContext(), Login.class));
         });
 
         Button register = findViewById(R.id.register_button);
         register.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Register.class);
+            Intent intent = new Intent(v.getContext(), Register.class);
             startActivity(intent);
         });
     }

@@ -89,13 +89,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.close();
     }
 
-    public void insertFile(String filepath, String patient, Integer AF_presence, Context context) {
+    public void insertFile(String filename, String patient, Integer AF_presence, Context context) {
         SQLiteDatabase db = null;
         try {
             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put("file", filepath);
+            values.put("file", filename);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss.SSSSSS", Locale.getDefault());
             String formattedDate = dateFormat.format(new Date()); // Data e hora atual formatada
@@ -107,11 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("patient", patient);
 
             long result = db.insert("Measurement", null, values);
-            if (result == -1) {
-                Toast.makeText(context, "Failed to insert file metadata", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(context, "File metadata inserted successfully!", Toast.LENGTH_LONG).show();
-            }
+
         } catch (Exception e) {
             Toast.makeText(context, "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {

@@ -172,8 +172,8 @@ public class Detailed extends AppCompatActivity {
         configureChart(ecgChart);
         ArrayList<Entry> data = readTxtFile(path);
         String af_path = deriveAFDetectionFilePath(path);
-        ArrayList<Entry> dataaf = readTxtFile(af_path);
-        updateChart(ecgChart, data,dataaf);
+        ArrayList<Entry> data_af = readAFDataFromPath(af_path);
+        updateChart(ecgChart, data,data_af);
 
     }
     private String deriveAFDetectionFilePath(String originalPath) {
@@ -203,13 +203,16 @@ public class Detailed extends AppCompatActivity {
 
         chart.setVisibleXRangeMaximum(1000);  // Limita a visualização a 1000 pontos no eixo X
         chart.setVisibleXRangeMinimum(1);
+        chart.setPinchZoom(false);
+        chart.setScaleXEnabled(true);
+        chart.setScaleYEnabled(true);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
         leftAxis.setDrawGridLines(false);
-        //leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
-        //leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
-        leftAxis.setDrawLabels(false); // Remove os rótulos numéricos
+        leftAxis.setAxisMinimum(-0.8f); // Mínimo fixo
+        leftAxis.setAxisMaximum(0.8f);  // Máximo fixo
+        leftAxis.setDrawLabels(false);
         leftAxis.setDrawAxisLine(false);
 
         chart.getAxisRight().setEnabled(false);
@@ -228,22 +231,14 @@ public class Detailed extends AppCompatActivity {
         ArrayList<Entry> mappedAF = new ArrayList<>();
 
         for (Entry entry : data) {
-            float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
 
             // Map Y (ECG) to mV
             float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
 
-            mappedData.add(new Entry(mappedX, mappedY));
+            mappedData.add(new Entry(entry.getX(), mappedY));
         }
 
-        for (Entry entry : AF_data) {
-            float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
 
-            // Map Y (ECG) to mV
-            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
-
-            mappedAF.add(new Entry(mappedX, mappedY));
-        }
 
         LineDataSet dataSetECG = new LineDataSet(mappedData, "ECG Data");
         int color = ContextCompat.getColor(this, R.color.hartpink);
@@ -253,7 +248,7 @@ public class Detailed extends AppCompatActivity {
         dataSetECG.setDrawValues(false);
         dataSetECG.setMode(LineDataSet.Mode.LINEAR);
 
-        LineDataSet dataSetaf = new LineDataSet(mappedAF, "ECG Data");
+        LineDataSet dataSetaf = new LineDataSet(AF_data, "ECG Data");
         int color_2 = ContextCompat.getColor(this, R.color.atrial);
         dataSetaf.setColor(color_2);
         dataSetaf.setLineWidth(2f);
@@ -276,6 +271,50 @@ public class Detailed extends AppCompatActivity {
 
         return x / sampleRate;
     }
+
+    private ArrayList<Entry> readAFDataFromPath(String filePath) {
+        ArrayList<Entry> afData = new ArrayList<>();
+        File file = new File(getFilesDir()+ File.separator + filePath);
+
+        if (!file.exists()) {
+             return afData;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            int lineNumber = 0;
+
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+                line = line.trim();
+
+                // Ignora linhas vazias
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                String[] values = line.split("\\s+"); // Divide por espaços (um ou mais)
+
+                if (values.length == 2) { // Valida que a linha tem exatamente duas colunas
+                    try {
+                        float x = Float.parseFloat(values[0]); // Coluna 1
+                        float y = Float.parseFloat(values[1]); // Coluna 2
+                        afData.add(new Entry(x, y)); // Adiciona ponto à lista
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(this, "Erro ao converter valores na linha " + lineNumber + ": " + line, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Linha com formato inesperado (" + lineNumber + "): " + line, Toast.LENGTH_LONG).show();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao ler o arquivo: " + filePath, Toast.LENGTH_LONG).show();
+        }
+
+        return afData;
+    }
+
 
     private ArrayList<Entry> readTxtFile(String filePath) {
 
@@ -307,6 +346,9 @@ public class Detailed extends AppCompatActivity {
 
         return data;
     }
+
+
+
 
 
 

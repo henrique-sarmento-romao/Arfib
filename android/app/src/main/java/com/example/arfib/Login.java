@@ -24,16 +24,12 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginlayout); // Ensure this points to a valid layout file
+        setContentView(R.layout.loginlayout);
         getSupportActionBar().hide();
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String profile = sharedPref.getString("profile", "patient");
         boolean isLoggedIn = sharedPref.getBoolean("is_logged_in", false);
-
-        SharedPreferences.Editor editor1 = sharedPref.edit();
-        editor1.remove("patient");
-        editor1.apply();
+        String profile = sharedPref.getString("profile", "patient");
 
         if(isLoggedIn){
             switch (profile) {
@@ -87,13 +83,13 @@ public class Login extends AppCompatActivity {
                                     editor = sharedPref.edit();
                                     editor.putString("patient", username);
                                     editor.apply();
-                                    startActivity(new Intent(Login.this, HomePatient.class));
+                                    startActivity(new Intent(this, HomePatient.class));
                                     break;
                                 case "doctor":
-                                    startActivity(new Intent(Login.this, HomeDoctor.class));
+                                    startActivity(new Intent(this, HomeDoctor.class));
                                     break;
                                 case "nurse":
-                                    startActivity(new Intent(Login.this, HomeNurse.class));
+                                    startActivity(new Intent(this, HomeNurse.class));
                                     break;
                             }
                         } else {
@@ -106,7 +102,6 @@ public class Login extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 return true; // Event handled
             }
             return false; // Let system handle other actions
