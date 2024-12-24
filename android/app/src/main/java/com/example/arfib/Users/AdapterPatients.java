@@ -15,24 +15,24 @@ import com.example.arfib.R;
 
 import java.util.List;
 
-public class PatientList extends RecyclerView.Adapter<PatientList.MyViewHolder>{
+public class AdapterPatients extends RecyclerView.Adapter<AdapterPatients.MyViewHolder>{
 private final List<List<String>> patientList;
 private final Context context;
 
-public PatientList(Context context, List<List<String>> patientList) {
+public AdapterPatients(Context context, List<List<String>> patientList) {
     this.context = context;
     this.patientList = patientList;
 }
 
 @Override
-public PatientList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+public AdapterPatients.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext())
             .inflate(R.layout.recycler_list_patient, parent, false);
-    return new PatientList.MyViewHolder(view);
+    return new AdapterPatients.MyViewHolder(view);
 }
 
 @Override
-public void onBindViewHolder(PatientList.MyViewHolder holder, int position) {
+public void onBindViewHolder(AdapterPatients.MyViewHolder holder, int position) {
     List<String> patient = patientList.get(position);
 
     String username = patient.get(0);

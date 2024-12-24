@@ -97,7 +97,7 @@ public class HomeDoctor extends AppCompatActivity {
         PatientListView.setVerticalScrollBarEnabled(false);
         PatientListView.setHorizontalScrollBarEnabled(false);
 
-        PatientList patientListAdapter = new PatientList(this, patient_list);
+        AdapterPatients patientListAdapter = new AdapterPatients(this, patient_list);
         PatientListView.setAdapter(patientListAdapter);
 
 
