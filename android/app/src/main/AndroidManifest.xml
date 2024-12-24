@@ -37,20 +37,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HomePatient">
-        </activity>
         <activity android:name=".Login">
-        </activity>
-        <activity android:name=".Notifications">
         </activity>
         <activity android:name=".Register">
         </activity>
+        <activity android:name=".Notifications">
+        </activity>
 
-        <activity android:name=".Blog.Details">
+        <activity android:name=".Users.HomePatient">
         </activity>
-        <activity android:name=".Blog.Home">
+        <activity android:name=".Users.HomeDoctor">
         </activity>
-        <activity android:name=".Blog.AddNew">
+        <activity android:name=".Users.HomeNurse">
+        </activity>
+        <activity android:name=".Users.PatientList">
         </activity>
 
         <activity android:name=".Measurements.Log">
@@ -77,18 +77,18 @@
         <activity android:name=".Medications.Log">
         </activity>
 
-        <activity android:name=".Professional.HomeDoctor">
-        </activity>
-        <activity android:name=".Professional.HomeNurse">
-        </activity>
-        <activity android:name=".Professional.PatientList">
-        </activity>
-
         <activity android:name=".Symptoms.Home">
         </activity>
         <activity android:name=".Symptoms.Details">
         </activity>
         <activity android:name=".Symptoms.Log">
+        </activity>
+
+        <activity android:name=".Blog.Details">
+        </activity>
+        <activity android:name=".Blog.Home">
+        </activity>
+        <activity android:name=".Blog.AddNew">
         </activity>
 
     </application>

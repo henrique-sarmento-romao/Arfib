@@ -35,7 +35,7 @@ public class ListDayMedication extends RecyclerView.Adapter<ListDayMedication.My
     @Override
     public ListDayMedication.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.daymedicationbutton, parent, false);
+                .inflate(R.layout.recycler_list_day_medication, parent, false);
         return new ListDayMedication.MyViewHolder(view);
     }
 

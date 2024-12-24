@@ -24,7 +24,7 @@ public class Log extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationlog);
+        setContentView(R.layout.medication_log);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Log Medication");

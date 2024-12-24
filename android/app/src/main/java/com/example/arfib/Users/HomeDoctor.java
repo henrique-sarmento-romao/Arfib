@@ -1,4 +1,4 @@
-package com.example.arfib.Professional;
+package com.example.arfib.Users;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,15 +21,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeNurse extends AppCompatActivity {
+public class HomeDoctor extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepagenurse);
+        setContentView(R.layout.home_doctor);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Nurse Home");
+        actionBar.setTitle("Doctor Home");
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String username = sharedPref.getString("username", "");
@@ -40,7 +40,7 @@ public class HomeNurse extends AppCompatActivity {
             editor.remove("username"); // Remove the username
             editor.remove("is_logged_in"); // Remove the is_logged_in flag
             editor.apply();
-            Intent backMainActivity = new Intent(HomeNurse.this, MainActivity.class);
+            Intent backMainActivity = new Intent(HomeDoctor.this, MainActivity.class);
             startActivity(backMainActivity);
         });
 
@@ -62,14 +62,14 @@ public class HomeNurse extends AppCompatActivity {
         String name = nameCursor.getString(0);
 
         TextView welcome = findViewById(R.id.welcome);
-        welcome.setText("👋 Welcome, Nurse "+name+"!");
+        welcome.setText("👋 Welcome, Doctor "+name+"!");
 
 
         List<List<String>> patient_list = new ArrayList<>();
         Cursor patientListCursor = dbHelper.getReadableDatabase().rawQuery(
                 "SELECT * FROM Patient " +
                         "JOIN User USING(username) " +
-                        "WHERE nurse = ? ",
+                        "WHERE doctor = ? ",
                 new String[]{username}
         );
         if (patientListCursor.moveToFirst()) {
@@ -99,6 +99,7 @@ public class HomeNurse extends AppCompatActivity {
 
         PatientList patientListAdapter = new PatientList(this, patient_list);
         PatientListView.setAdapter(patientListAdapter);
+
 
     }
 }

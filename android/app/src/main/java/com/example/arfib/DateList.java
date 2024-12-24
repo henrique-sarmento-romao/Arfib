@@ -1,28 +1,16 @@
 package com.example.arfib;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.arfib.Measurements.Detailed;
-import com.example.arfib.Medications.Home;
-import com.example.arfib.Notifications;
-import com.example.arfib.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -44,7 +32,7 @@ public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
     @Override
     public DateList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.datebutton, parent, false);
+                .inflate(R.layout.recycler_list_date, parent, false);
         return new com.example.arfib.DateList.MyViewHolder(view);
     }
 

@@ -2,9 +2,6 @@ package com.example.arfib.Medications;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +26,7 @@ public class PatientMedicationList extends RecyclerView.Adapter<PatientMedicatio
     @Override
     public PatientMedicationList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.medication_in_list, parent, false);
+                .inflate(R.layout.recycler_list_medication, parent, false);
         return new PatientMedicationList.MyViewHolder(view);
     }
 

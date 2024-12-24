@@ -12,19 +12,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.arfib.HomePatient;
-import com.example.arfib.Measurements.Home;
-import com.example.arfib.Measurements.Log;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 
 public class AddNew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationaddnew);
+        setContentView(R.layout.medication_addnew);
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String profile = sharedPref.getString("profile", "");

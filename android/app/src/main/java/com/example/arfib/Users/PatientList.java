@@ -1,22 +1,16 @@
-package com.example.arfib.Professional;
+package com.example.arfib.Users;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.HomePatient;
-import com.example.arfib.Medications.Details;
-import com.example.arfib.Medications.PatientMedicationList;
 import com.example.arfib.R;
 
 import java.util.List;
@@ -33,7 +27,7 @@ public PatientList(Context context, List<List<String>> patientList) {
 @Override
 public PatientList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.list_patient, parent, false);
+            .inflate(R.layout.recycler_list_patient, parent, false);
     return new PatientList.MyViewHolder(view);
 }
 

@@ -17,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.HomePatient;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;

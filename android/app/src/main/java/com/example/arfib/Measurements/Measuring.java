@@ -83,7 +83,7 @@ public class Measuring extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.measurementmeasuring);
+        setContentView(R.layout.measurement_measuring);
 
         // UI Components
         textHR = findViewById(R.id.textViewHR_2);

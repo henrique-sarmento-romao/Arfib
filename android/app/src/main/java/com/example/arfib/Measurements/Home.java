@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,10 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 
-import com.example.arfib.HomePatient;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 
 import android.database.Cursor;
@@ -55,7 +54,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.measurementhome);
+        setContentView(R.layout.measurement_home);
 
         SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String patient = sharedPref.getString("patient", "");

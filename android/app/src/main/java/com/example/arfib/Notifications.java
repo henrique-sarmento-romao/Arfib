@@ -3,18 +3,15 @@ package com.example.arfib;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.arfib.Measurements.Log;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
+import com.example.arfib.Users.HomePatient;
 
 public class Notifications extends AppCompatActivity {
     @Override

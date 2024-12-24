@@ -1,7 +1,5 @@
 package com.example.arfib.Measurements;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +15,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.HomePatient;
-import com.example.arfib.Notifications;
 import com.example.arfib.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -28,7 +23,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyViewHolder> {
     private DatabaseHelper dbHelper;
@@ -58,7 +51,7 @@ public class MeasurementList extends RecyclerView.Adapter<MeasurementList.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.measurement_in_list, parent, false);
+                .inflate(R.layout.recycler_list_measurement, parent, false);
         return new MyViewHolder(view);
     }
 

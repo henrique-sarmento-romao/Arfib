@@ -11,7 +11,7 @@ public class Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepagedoctor);
+        setContentView(R.layout.home_doctor);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Blog Post");

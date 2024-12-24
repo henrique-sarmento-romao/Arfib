@@ -2,9 +2,6 @@ package com.example.arfib.Symptoms;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Medications.Log;
 import com.example.arfib.R;
 
 import java.util.HashMap;
@@ -32,7 +28,7 @@ public class DaySymptomList  extends RecyclerView.Adapter<DaySymptomList.MyViewH
     @Override
     public DaySymptomList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.symptom_in_list, parent, false);
+                .inflate(R.layout.recycler_list_symptom_log, parent, false);
         return new DaySymptomList.MyViewHolder(view);
     }
 

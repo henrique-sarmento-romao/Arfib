@@ -3,7 +3,6 @@ package com.example.arfib.Measurements;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.HomePatient;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -53,7 +52,7 @@ public class Detailed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.measurementdetailed);
+        setContentView(R.layout.measurement_details);
 
         ecgChart = findViewById(R.id.chartECG_detailed);
 

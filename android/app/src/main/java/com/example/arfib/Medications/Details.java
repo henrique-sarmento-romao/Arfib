@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.HomePatient;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationdetails);
+        setContentView(R.layout.medication_details);
 
         Intent previousIntent = getIntent();
         String med_name = previousIntent.getStringExtra("med_name");

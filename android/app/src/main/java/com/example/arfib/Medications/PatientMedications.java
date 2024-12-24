@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.HomePatient;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class PatientMedications extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationlist);
+        setContentView(R.layout.medication_list);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Your Medications");

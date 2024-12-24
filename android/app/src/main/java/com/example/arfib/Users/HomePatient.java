@@ -1,4 +1,4 @@
-package com.example.arfib;
+package com.example.arfib.Users;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,11 +22,12 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arfib.Measurements.Home;
+import com.example.arfib.DatabaseHelper;
+import com.example.arfib.MainActivity;
 import com.example.arfib.Measurements.Log;
 import com.example.arfib.Medications.ListDayMedication;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Notifications;
+import com.example.arfib.R;
 import com.example.arfib.Symptoms.Details;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -53,7 +54,7 @@ public class HomePatient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepagepatient);
+        setContentView(R.layout.home_patient);
         getSupportActionBar().setIcon(R.drawable.ic_menu_icon);
         getSupportActionBar().setTitle("Home");
 

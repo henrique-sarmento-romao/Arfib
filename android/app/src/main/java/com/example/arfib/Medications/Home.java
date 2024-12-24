@@ -18,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
 import com.example.arfib.DateList;
-import com.example.arfib.HomePatient;
-import com.example.arfib.Measurements.Log;
+import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
-import com.example.arfib.Professional.HomeDoctor;
-import com.example.arfib.Professional.HomeNurse;
+import com.example.arfib.Users.HomeDoctor;
+import com.example.arfib.Users.HomeNurse;
 import com.example.arfib.R;
 
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicationhome);
+        setContentView(R.layout.medication_home);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Medications");
