@@ -261,7 +261,7 @@ public class Home extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        MeasurementList adapter = new MeasurementList(this, dataList, patient);
+        AdapterMeasurements adapter = new AdapterMeasurements(this, dataList, patient);
         recyclerView.setAdapter(adapter);
     }
 

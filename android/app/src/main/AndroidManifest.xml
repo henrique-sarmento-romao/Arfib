@@ -55,11 +55,7 @@
 
         <activity android:name=".Measurements.Log">
         </activity>
-        <activity android:name=".Measurements.AvailableDevices">
-        </activity>
-        <activity android:name=".Measurements.BluetoothActivity">
-        </activity>
-        <activity android:name=".Measurements.Detailed">
+        <activity android:name=".Measurements.Details">
         </activity>
         <activity android:name=".Measurements.Home">
         </activity>
@@ -72,7 +68,7 @@
         </activity>
         <activity android:name=".Medications.Home">
         </activity>
-        <activity android:name=".Medications.PatientMedications">
+        <activity android:name=".Medications.MedicationList">
         </activity>
         <activity android:name=".Medications.Log">
         </activity>

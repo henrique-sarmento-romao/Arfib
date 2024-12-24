@@ -16,24 +16,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AllSymptomsList extends RecyclerView.Adapter<AllSymptomsList.MyViewHolder> {
+public class AdapterAllSymptoms extends RecyclerView.Adapter<AdapterAllSymptoms.MyViewHolder> {
     private final List<String> symptomList;
     private final Context context;
 
-    public AllSymptomsList(Context context, List<String> symptomList) {
+    public AdapterAllSymptoms(Context context, List<String> symptomList) {
         this.context = context;
         this.symptomList = symptomList;
     }
 
     @Override
-    public AllSymptomsList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterAllSymptoms.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_symptom, parent, false);
-        return new AllSymptomsList.MyViewHolder(view);
+        return new AdapterAllSymptoms.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AllSymptomsList.MyViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterAllSymptoms.MyViewHolder holder, int position) {
         String symptom = symptomList.get(position);
 
         Map<String, String> symptomMap = new HashMap<>();

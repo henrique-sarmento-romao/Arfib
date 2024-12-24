@@ -23,24 +23,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ListDayMedication extends RecyclerView.Adapter<ListDayMedication.MyViewHolder> {
+public class AdapterDayMedications extends RecyclerView.Adapter<AdapterDayMedications.MyViewHolder> {
     private final List<List<String>> dayMedications;
     private final Context context;
 
-    public ListDayMedication(Context context, List<List<String>> dayMedications) {
+    public AdapterDayMedications(Context context, List<List<String>> dayMedications) {
         this.context = context;
         this.dayMedications = dayMedications;
     }
 
     @Override
-    public ListDayMedication.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterDayMedications.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_day_medication, parent, false);
-        return new ListDayMedication.MyViewHolder(view);
+        return new AdapterDayMedications.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ListDayMedication.MyViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterDayMedications.MyViewHolder holder, int position) {
         List<String> medication = dayMedications.get(position);
 
         String med_name = medication.get(0);

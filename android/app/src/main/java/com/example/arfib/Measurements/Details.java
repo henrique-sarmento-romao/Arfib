@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Detailed extends AppCompatActivity {
+public class Details extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private LineChart ecgChart;
@@ -108,13 +108,13 @@ public class Detailed extends AppCompatActivity {
 
         ImageButton notificationsButton = findViewById(R.id.notificationsButton);
         notificationsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Detailed.this, Notifications.class);
+            Intent intent = new Intent(Details.this, Notifications.class);
             startActivity(intent);
         });
 
         ImageButton logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Detailed.this, Log.class);
+            Intent intent = new Intent(Details.this, Log.class);
             startActivity(intent);
         });
 

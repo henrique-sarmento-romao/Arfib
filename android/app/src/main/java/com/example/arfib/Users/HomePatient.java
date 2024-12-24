@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arfib.DatabaseHelper;
 import com.example.arfib.MainActivity;
 import com.example.arfib.Measurements.Log;
-import com.example.arfib.Medications.ListDayMedication;
+import com.example.arfib.Medications.AdapterDayMedications;
 import com.example.arfib.Notifications;
 import com.example.arfib.R;
 import com.example.arfib.Symptoms.Details;
@@ -302,7 +302,7 @@ public class HomePatient extends AppCompatActivity {
         dayMedicationView.setVerticalScrollBarEnabled(false);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
-        ListDayMedication dayMedicationAdapter = new ListDayMedication(this, day_medications);
+        AdapterDayMedications dayMedicationAdapter = new AdapterDayMedications(this, day_medications);
         dayMedicationView.setAdapter(dayMedicationAdapter);
 
         // ----------------------

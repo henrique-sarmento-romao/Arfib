@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.DateList;
+import com.example.arfib.AdapterDates;
 import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.Users.HomeDoctor;
@@ -76,7 +76,7 @@ public class Home extends AppCompatActivity {
 
         TextView YourMedications = findViewById(R.id.your_medications);
         YourMedications.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), PatientMedications.class);
+            Intent intent = new Intent(v.getContext(), MedicationList.class);
             startActivity(intent);
         });
 
@@ -136,7 +136,7 @@ public class Home extends AppCompatActivity {
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
 
-        DateList adapter = new DateList(this, dateList, patient, viewDate);
+        AdapterDates adapter = new AdapterDates(this, dateList, patient, viewDate);
         recyclerView.setAdapter(adapter);
 
         int selectedPosition = -1; // Default to -1 if no match is found
@@ -198,7 +198,7 @@ public class Home extends AppCompatActivity {
         dayMedicationView.setVerticalScrollBarEnabled(false);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
-        ListDayMedication dayMedicationAdapter = new ListDayMedication(this, day_medications);
+        AdapterDayMedications dayMedicationAdapter = new AdapterDayMedications(this, day_medications);
         dayMedicationView.setAdapter(dayMedicationAdapter);
 
         List<List<String>> patient_medications = new ArrayList<>();
@@ -232,7 +232,7 @@ public class Home extends AppCompatActivity {
         patientMedicationView.setVerticalScrollBarEnabled(false);
         patientMedicationView.setHorizontalScrollBarEnabled(false);
 
-        PatientMedicationList patientMedicationAdapter = new PatientMedicationList(this, patient_medications);
+        AdapterPatientMedications patientMedicationAdapter = new AdapterPatientMedications(this, patient_medications);
         patientMedicationView.setAdapter(patientMedicationAdapter);
 
     }

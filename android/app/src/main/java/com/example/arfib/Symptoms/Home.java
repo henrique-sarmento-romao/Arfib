@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.arfib.DatabaseHelper;
-import com.example.arfib.DateList;
+import com.example.arfib.AdapterDates;
 import com.example.arfib.Users.HomePatient;
 import com.example.arfib.Notifications;
 import com.example.arfib.Users.HomeDoctor;
@@ -152,7 +152,7 @@ public class Home extends AppCompatActivity {
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
 
-        DateList adapter = new DateList(this, dateList, patient, viewDate);
+        AdapterDates adapter = new AdapterDates(this, dateList, patient, viewDate);
         recyclerView.setAdapter(adapter);
 
         int selectedPosition = -1; // Default to -1 if no match is found
@@ -190,7 +190,7 @@ public class Home extends AppCompatActivity {
         allSymptomsView.setVerticalScrollBarEnabled(false);
         allSymptomsView.setHorizontalScrollBarEnabled(false);
 
-        AllSymptomsList allSymptomsAdapter = new AllSymptomsList(this, all_symptoms);
+        AdapterAllSymptoms allSymptomsAdapter = new AdapterAllSymptoms(this, all_symptoms);
         allSymptomsView.setAdapter(allSymptomsAdapter);
 
 
@@ -253,7 +253,7 @@ public class Home extends AppCompatActivity {
         dayMedicationView.setVerticalScrollBarEnabled(false);
         dayMedicationView.setHorizontalScrollBarEnabled(false);
 
-        DaySymptomList dayMedicationAdapter = new DaySymptomList(this, day_symptoms);
+        AdapterDaySymptoms dayMedicationAdapter = new AdapterDaySymptoms(this, day_symptoms);
         dayMedicationView.setAdapter(dayMedicationAdapter);
     }
 

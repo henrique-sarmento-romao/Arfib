@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientMedications extends AppCompatActivity {
+public class MedicationList extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class PatientMedications extends AppCompatActivity {
         patientMedicationView.setVerticalScrollBarEnabled(false);
         patientMedicationView.setHorizontalScrollBarEnabled(false);
 
-        PatientMedicationList patientMedicationAdapter = new PatientMedicationList(this, patient_medications);
+        AdapterPatientMedications patientMedicationAdapter = new AdapterPatientMedications(this, patient_medications);
         patientMedicationView.setAdapter(patientMedicationAdapter);
     }
 }

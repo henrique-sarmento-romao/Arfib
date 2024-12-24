@@ -15,14 +15,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
+public class AdapterDates extends RecyclerView.Adapter<AdapterDates.MyViewHolder> {
 
     private final String username;
     private final String selectedDate;
     private final List<List<String>> dateList;
     private final Context context;
 
-    public DateList(Context context, List<List<String>> dateList, String username, String selectedDate) {
+    public AdapterDates(Context context, List<List<String>> dateList, String username, String selectedDate) {
         this.context = context;
         this.dateList = dateList;
         this.selectedDate = selectedDate;
@@ -30,14 +30,14 @@ public class DateList extends RecyclerView.Adapter<DateList.MyViewHolder> {
     }
 
     @Override
-    public DateList.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterDates.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_date, parent, false);
-        return new com.example.arfib.DateList.MyViewHolder(view);
+        return new AdapterDates.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DateList.MyViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterDates.MyViewHolder holder, int position) {
 
         List<String> date_time = dateList.get(position);
 
