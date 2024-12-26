@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
+        // Set up navigation buttons
         Button patient_button = findViewById(R.id.patient_button);
         patient_button.setOnClickListener(v -> {
             SharedPreferences.Editor editor = sharedPref.edit();

@@ -52,21 +52,25 @@ public class Measuring extends AppCompatActivity {
     private BioLib biolib;
     private TextView  textHR;
 
+    private static final int REQUEST_ENABLE_BT = 1;
+    private static final String TARGET_DEVICE_MAC = "00:23:FE:00:0B:50"; // VitalJacket MAC address
+
+
     private byte[][] ecg = new byte[0][0]; // Initialized as an empty array
-    private int nBytes = 0;
     private LineChart ecgChart;
     private DatabaseHelper dbHelper;
 
 
-    private static final int REQUEST_ENABLE_BT = 1;
-    private static final String TARGET_DEVICE_MAC = "00:23:FE:00:0B:50"; // Replace with your device MAC address
+
     private ArrayList<Integer> hrValues = new ArrayList<>(); // List to store HR values
     private ArrayList<Integer> ecgData = new ArrayList<>(); // List to store ECG data
-    private ArrayList<Double> rr_intervals = new ArrayList<>(); // List to store ECG data
-    private ArrayList<Double> rr_position = new ArrayList<>(); // List to store ECG data
-    private ArrayList<Double> rr_normalized = new ArrayList<>(); // List to store ECG data
 
+    // Lists for AF detection algortihm
+    private ArrayList<Double> rr_intervals = new ArrayList<>();
+    private ArrayList<Double> rr_position = new ArrayList<>();
+    private ArrayList<Double> rr_normalized = new ArrayList<>();
 
+    // Permissions
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -88,7 +92,7 @@ public class Measuring extends AppCompatActivity {
         // UI Components
         textHR = findViewById(R.id.textViewHR_2);
         ecgChart = findViewById(R.id.chartECG_2);
-        checkPermissions();
+
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -99,7 +103,10 @@ public class Measuring extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.electroyellow));
         }
 
+        // Check application permissions
+        checkPermissions();
 
+        // Access Bluetooth
         try {
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (bluetoothAdapter == null) {
@@ -108,11 +115,6 @@ public class Measuring extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "An error occurred while accessing Bluetooth: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        if (bluetoothAdapter == null) {
-            textHR.setText("Bluetooth not supported on this device.");
-            return;
         }
 
         if (!bluetoothAdapter.isEnabled()) {
@@ -128,34 +130,10 @@ public class Measuring extends AppCompatActivity {
 
     }
 
-    private void configureChart(LineChart chart) {
-        chart.getDescription().setEnabled(false);
-        chart.setExtraOffsets(10, 10, 10, 10);
-        chart.setDrawGridBackground(false);
-        chart.setTouchEnabled(true);
-        chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
-        chart.setPinchZoom(true);
-        chart.setVisibleXRangeMaximum(1000); // number of points
-        chart.setDragDecelerationEnabled(true);
 
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextColor(Color.BLACK);
-        xAxis.setDrawGridLines(false);
-        xAxis.setDrawLabels(false);
-        xAxis.setDrawAxisLine(false);
-
-        YAxis leftAxis = chart.getAxisLeft();
-        leftAxis.setTextColor(Color.BLACK);
-        leftAxis.setDrawGridLines(false);
-        chart.getAxisRight().setEnabled(false);
-        leftAxis.setDrawLabels(false);
-        leftAxis.setDrawAxisLine(false);
-
-        Legend legend = chart.getLegend();
-        legend.setEnabled(false);
-    }
+    // ---
+    // Application permissions and Bluetooth
+    // ---
 
     private void checkPermissions() {
         int permission1 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -178,6 +156,7 @@ public class Measuring extends AppCompatActivity {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         boolean devicePaired = false;
 
+        // Pairing with Vital Jacket
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
                 if (device.getAddress().equals(TARGET_DEVICE_MAC)) {
@@ -189,13 +168,12 @@ public class Measuring extends AppCompatActivity {
         }
 
         if (!devicePaired) {
-            // Dispositivo não emparelhado
             textHR.setText("Device not paired. Attempting to pair...");
             selectedDevice = bluetoothAdapter.getRemoteDevice(TARGET_DEVICE_MAC);
             if (selectedDevice != null) {
                 pairDevice(selectedDevice);
             } else {
-                textHR.setText("Device with MAC address " + TARGET_DEVICE_MAC + " not found.");
+                textHR.setText("Vital Jacket not found.");
             }
         } else if (selectedDevice != null) {
             textHR.setText("Selected device: " + selectedDevice.getName());
@@ -206,6 +184,7 @@ public class Measuring extends AppCompatActivity {
     }
 
     private void pairDevice(BluetoothDevice device) {
+        // Pairs with a new device
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_ADVERTISE}, 2);
@@ -227,13 +206,15 @@ public class Measuring extends AppCompatActivity {
     }
 
     private void connectToDevice() {
+        // Connection with Vital Jacket using the Biolib library
         try {
             if (selectedDevice != null) {
                 biolib = new BioLib(this, mHandler);
-                biolib.Connect(selectedDevice.getAddress(), 30);
+                biolib.Connect(selectedDevice.getAddress(), 30); // 30 QRS to calculate a heart rate
                 textHR.setText("Connecting to VitalJacket...");
 
-                // Schedule disconnection after 60 seconds
+                // Forcing that each measurement takes 60 seconds
+
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     try {
                         biolib.Disconnect();
@@ -253,63 +234,22 @@ public class Measuring extends AppCompatActivity {
         }
     }
 
-    private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
-        return minOut + ((x - minIn) * (maxOut - minOut)) / (maxIn - minIn);
-    }
-
-    private float mapToTime(float x, float sampleRate) {
-        // sampleRate é a taxa de amostragem em Hz (ex: 500 Hz)
-        // x é o índice do ponto de dados no array
-        // O tempo será em segundos, pois o valor de X pode ser o índice de amostras.
-
-        // O tempo total em segundos pode ser obtido multiplicando o índice pelo tempo por amostra (1/sampleRate)
-        return x / sampleRate;
-    }
 
 
-    private void updateChart(LineChart chart, ArrayList<Entry> data) {
 
-        float minIn = 0f;    // Mínimo de índice (X) - Não altere isso
-        float maxIn = 230f;   // Máximo de índice (X) - Ajuste conforme o número máximo de pontos
-        float minOut = -1.15f; // Mínimo de mV (Y)
-        float maxOut = 1.15f;  // Máximo de mV (Y)
-
-        ArrayList<Entry> mappedData = new ArrayList<>();
-        float timeOffset = 0f;  // Variável para o tempo real (em segundos)
-
-        for (Entry entry : data) {
-            // Mapear o valor de X para o tempo real (em segundos ou amostra)
-            float mappedX = mapToTime(entry.getX(), 500);  // 500 é a taxa de amostragem
-
-            // Mapear o valor de Y (ECG) para mV
-            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
-
-            // Adicionar o ponto mapeado ao gráfico
-            mappedData.add(new Entry(mappedX, mappedY));
-        }
-        LineDataSet dataSet = new LineDataSet(data, "ECG Data");
-        int color = ContextCompat.getColor(this, R.color.hartpink);
-        dataSet.setColor(color);
-        dataSet.setLineWidth(2f);
-        dataSet.setDrawCircles(false);
-        dataSet.setDrawValues(false);
-        dataSet.setMode(LineDataSet.Mode.LINEAR);
-
-        LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
-        chart.invalidate();
-    }
-
+    // -----
+    // Vital Jacket Handler
+    // ---
+    // Adjusts to all possible responses/messages from the devices
 
     private final MyHandler mHandler = new MyHandler(this);
-
 
     private class MyHandler extends Handler {
         private final WeakReference<com.example.arfib.Measurements.Measuring> activityReference;
 
         // Constructor receives a reference to the Activity
         MyHandler(com.example.arfib.Measurements.Measuring activity) {
-            super(Looper.getMainLooper()); // Explicitly associate with the main Looper
+            super(Looper.getMainLooper());
             activityReference = new WeakReference<>(activity);
         }
 
@@ -331,29 +271,33 @@ public class Measuring extends AppCompatActivity {
 
                 case BioLib.MESSAGE_DISCONNECT_TO_DEVICE:
                     activity.textHR.setText("Device disconnected.");
+
+                    // Processes the received ECG data as soon as the device is disconnected
+                    // and forces exit of the activity
                     activity.processData();
                     Intent intent = new Intent(Measuring.this, Log.class);
                     startActivity(intent);
 
-
                     break;
 
                 case BioLib.MESSAGE_DATA_UPDATED:
+
+                    // Everytime a new HR is measured, updates the correspondant TextView
                     BioLib.Output out = (BioLib.Output) msg.obj;
                     activity.textHR.setText("HR: " + out.pulse + " bpm");
                     if (out.pulse > 0) {
                         activity.hrValues.add(out.pulse);
                     }
 
-
                     break;
 
                 case BioLib.MESSAGE_PEAK_DETECTION:
                     BioLib.QRS qrs = (BioLib.QRS) msg.obj;
 
-                    // Adicione aos arrays globais
+                    // Adds the information to the global lists, to allow further processing
                     activity.rr_intervals.add((double) qrs.rr);
-                    activity.rr_position.add((double) qrs.position);
+                    activity.rr_position.add((double) qrs.position); // position of each peak
+
                     break;
 
 
@@ -361,18 +305,20 @@ public class Measuring extends AppCompatActivity {
                     try {
                         if (msg.obj != null && msg.obj instanceof byte[][]) {
                             activity.ecg = (byte[][]) msg.obj;
-                            int nLeads = activity.ecg.length;
                             int nBytes = activity.ecg[0].length;
 
                             ArrayList<Entry> ecgEntries = new ArrayList<>();
-                            for (int i = 0; i < Math.min(nBytes, 500); i++) { // Limite de 300 pontos
-                                int value = activity.ecg[0][i] & 0xFF;
-                                ecgEntries.add(new Entry(i, value));
-                            }
 
+                            // Updated the ecgData variable to further store the measurement
                             for (int i = 0; i < nBytes; i++) {
                                 int value = activity.ecg[0][i] & 0xFF;
                                 activity.ecgData.add(value);
+                            }
+
+                            // Updates ecgEntries, to update the plot in real time
+                            for (int i = 0; i < Math.min(nBytes, 500); i++) {
+                                int value = activity.ecg[0][i] & 0xFF;
+                                ecgEntries.add(new Entry(i, value));
                             }
 
                             activity.updateChart(activity.ecgChart, ecgEntries);
@@ -383,8 +329,6 @@ public class Measuring extends AppCompatActivity {
                         activity.textHR.setText("Error: " + ex.getMessage());
                     }
                     break;
-
-
                 default:
                     super.handleMessage(msg);
             }
@@ -392,22 +336,28 @@ public class Measuring extends AppCompatActivity {
     }
 
     private void processData() {
+
+        // After measuring, it stores the ECG data in a txt file and processes
+        // to evaluate AF presence
+
         dbHelper = new DatabaseHelper(this);
         try {
             dbHelper.createDatabase();
             dbHelper.openDatabase();
-            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            String timestamp = String.valueOf(System.currentTimeMillis()); // to create unique filenames
             int AF_presence = detectAF(timestamp);
-            // Export data to file
+
+            // Export data to txt file
             exportDataToFile(AF_presence,timestamp);
 
 
-            // Clear the data
-            textHR.setText("Data collection complete. HR samples: " + hrValues.size() + ", ECG samples: " + ecgData.size());
+            // Clear the data after processing
             rr_intervals.clear();
             rr_position.clear();
             hrValues.clear();
             ecgData.clear();
+
         } catch (IOException e) {
             throw new RuntimeException("Error initializing database", e);
         } catch (Exception e) {
@@ -422,15 +372,18 @@ public class Measuring extends AppCompatActivity {
             directory.mkdirs();
         }
 
-
+        // Creates a unique filename
         String filename = "patient_data_" + timestamp + ".txt";
 
         File file = new File(directory, filename);
         try (FileWriter writer = new FileWriter(file)) {
+
+            // Writes the ECG data on the txt file
             for (Integer value : ecgData) {
                 writer.write(value + " ");
             }
 
+            // Inserts the measurement information in the database
             SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
             String patient = sharedPref.getString("patient", "");
 
@@ -442,24 +395,27 @@ public class Measuring extends AppCompatActivity {
 
 
     private int detectAF(String timestamp) {
+        // Atrial Fibrillation detection algorithm
 
-
+        // 1. Normalize the rr interval values by their mean
+        rr_normalized.clear();
         double total = 0;
         for (double rr : rr_intervals) {
             total += rr;
         }
 
         double mean = total / rr_intervals.size();
-        rr_normalized.clear();
 
         ArrayList<Double> af_detection = new ArrayList<>();
         double rr_mean;
 
-        // Normalização e preenchimento de af_detection
+
         for (double rr : rr_intervals) {
+           // Normalize data
             rr_mean = rr / mean;
             rr_normalized.add(rr_mean);
 
+            // 2. Evaluate deviations of over 20% of the mean and targets them as AF
             if (Math.abs(1 - rr_mean) > 0.2) {
                 af_detection.add(1.0);
             } else {
@@ -467,6 +423,7 @@ public class Measuring extends AppCompatActivity {
             }
         }
 
+        // 3. Apply a low-pass filter to remove artifacts or outliers
         double alpha = 0.1;
         ArrayList<Double> smooth_af_detection = new ArrayList<>();
         smooth_af_detection.add(af_detection.get(0));
@@ -485,28 +442,31 @@ public class Measuring extends AppCompatActivity {
                 countAboveThreshold++;
             }
 
+            // 4. Associate the measurement with AF if over 10 rr intervals present AF
             if (countAboveThreshold >= requiredCount) {
                 AF = 1;
                 break;
             }
         }
 
+        // Adds the results to AF_detection to further store it in a txt file
         for (int i = 1; i < rr_position.size() && i < smooth_af_detection.size(); i++) {
             AF_detection.add(new Entry(rr_position.get(i).floatValue(), smooth_af_detection.get(i).floatValue()));
         }
 
 
-
-        // Salvamento do arquivo de detecção AF
+        //
         File directory = getFilesDir();
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
+        // Stores with the same timestamp as the ECG file
         String filename_AF = "patient_data_" + timestamp + "_AFdetection.txt";
 
         File file_AF = new File(directory, filename_AF);
 
+        // Writes the AF detection values on the txt file
         try (FileWriter writer = new FileWriter(file_AF)) {
             for (Entry entry : AF_detection) {
                 String line = entry.getX() + " " + entry.getY() + "\n";
@@ -532,5 +492,77 @@ public class Measuring extends AppCompatActivity {
         }
         super.onDestroy();
     }
+
+    // ---
+    // Chart specifications
+    // ---
+
+    private void configureChart(LineChart chart) {
+        chart.getDescription().setEnabled(false);
+        chart.setExtraOffsets(10, 10, 10, 10);
+        chart.setDrawGridBackground(false);
+        chart.setTouchEnabled(true);
+        chart.setDragEnabled(true);
+        chart.setScaleEnabled(true);
+        chart.setPinchZoom(true);
+        chart.setVisibleXRangeMaximum(1000);
+        chart.setDragDecelerationEnabled(true);
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawLabels(false);
+        xAxis.setDrawAxisLine(false);
+
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setTextColor(Color.BLACK);
+        leftAxis.setDrawGridLines(false);
+        chart.getAxisRight().setEnabled(false);
+        leftAxis.setDrawLabels(false);
+        leftAxis.setDrawAxisLine(false);
+
+        Legend legend = chart.getLegend();
+        legend.setEnabled(false);
+    }
+
+    private void updateChart(LineChart chart, ArrayList<Entry> data) {
+
+        float minIn = 0f;
+        float maxIn = 230f;
+        float minOut = -1.15f; // mV minimum
+        float maxOut = 1.15f;  // mv maximum
+
+        ArrayList<Entry> mappedData = new ArrayList<>();
+        float timeOffset = 0f;
+
+        for (Entry entry : data) {
+            float mappedX = mapToTime(entry.getX(), 500);
+            float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
+            mappedData.add(new Entry(mappedX, mappedY));
+        }
+
+
+        LineDataSet dataSet = new LineDataSet(data, "ECG Data");
+        int color = ContextCompat.getColor(this, R.color.hartpink);
+        dataSet.setColor(color);
+        dataSet.setLineWidth(2f);
+        dataSet.setDrawCircles(false);
+        dataSet.setDrawValues(false);
+        dataSet.setMode(LineDataSet.Mode.LINEAR);
+
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+        chart.invalidate();
+    }
+
+    private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
+        return minOut + ((x - minIn) * (maxOut - minOut)) / (maxIn - minIn);
+    }
+
+    private float mapToTime(float x, float sampleRate) {
+        return x / sampleRate;
+    }
+
 
 }

@@ -35,6 +35,7 @@ public class Log extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.electroyellow));
         }
 
+        // Set up navigation buttons
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
             Intent intent;
@@ -48,15 +49,16 @@ public class Log extends AppCompatActivity {
             startActivity(intent);
         });
 
+
         ImageButton notificationsButton = findViewById(R.id.notificationsButton);
         notificationsButton.setOnClickListener(v -> {
             Intent intent = new Intent(Log.this, Notifications.class);
             startActivity(intent);
         });
 
+        //Log new Measurement button
         ImageButton logButton = findViewById(R.id.logButton);
         logButton.setOnClickListener(v -> {
-            //Intent intent = new Intent(Log.this, Measuring.class);
             Intent intent = new Intent(Log.this, Measuring.class);
             startActivity(intent);
         });

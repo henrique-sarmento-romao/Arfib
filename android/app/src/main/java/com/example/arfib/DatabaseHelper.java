@@ -90,24 +90,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertFile(String filename, String patient, Integer AF_presence, Context context) {
+        // Inserts a new measurement in the database
         SQLiteDatabase db = null;
         try {
             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put("file", filename);
+            // Stores current data and time to associate with the measurement
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss.SSSSSS", Locale.getDefault());
-            String formattedDate = dateFormat.format(new Date()); // Data e hora atual formatada
-            String formattedTime = timeFormat.format(new Date()); // Data e hora atual formatada
+            String formattedDate = dateFormat.format(new Date());
+            String formattedTime = timeFormat.format(new Date());
 
+            values.put("file", filename);
             values.put("date", formattedDate);
             values.put("time", formattedTime);
-            values.put("AF_presence", AF_presence); // Sempre insere como 0
+            values.put("AF_presence", AF_presence);
             values.put("patient", patient);
 
             long result = db.insert("Measurement", null, values);
+            if (result == -1) {
+                // Error on data input
+                Toast.makeText(context, "Error inserting on the database.", Toast.LENGTH_LONG).show();
 
+            }
         } catch (Exception e) {
             Toast.makeText(context, "Error inserting file metadata: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {

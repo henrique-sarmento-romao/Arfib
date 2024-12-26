@@ -24,9 +24,8 @@ public class Register extends AppCompatActivity {
         });
 
 
-        getSupportActionBar().setTitle("Register");  // Set empty title
+        getSupportActionBar().setTitle("Register");
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
     }

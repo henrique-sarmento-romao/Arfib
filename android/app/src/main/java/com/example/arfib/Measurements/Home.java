@@ -169,8 +169,9 @@ public class Home extends AppCompatActivity {
         LineChart AfTimeline = findViewById(R.id.AF_Timeline);
         AfTimeline.setData(new LineData(dataSet));
 
-        AfTimeline.setExtraLeftOffset(16f); // Adjust padding for the left
-        AfTimeline.setExtraRightOffset(16f); // Adjust padding for the right
+        // Adjust Padding
+        AfTimeline.setExtraLeftOffset(16f);
+        AfTimeline.setExtraRightOffset(16f);
 
         // Format X-axis with dates
         XAxis xAxis = AfTimeline.getXAxis();
@@ -195,14 +196,14 @@ public class Home extends AppCompatActivity {
         xAxis.setLabelRotationAngle(0);
         xAxis.setTextColor(R.color.atrial);
         xAxis.setAvoidFirstLastClipping(true);
-        xAxis.setSpaceMax(4f); // Add extra space to prevent last label from being clipped
+        xAxis.setSpaceMax(4f);
         xAxis.setDrawGridLines(false);
 
         YAxis leftAxis = AfTimeline.getAxisLeft();
-        leftAxis.setDrawGridLines(true); // Ensure horizontal grid lines are drawn
-        leftAxis.enableGridDashedLine(30f, 20f, 0f); // Dash pattern: 10px line, 5px space
-        leftAxis.setAxisMinimum(0f); // Ensure axis starts at 1
-        leftAxis.setAxisMaximum(1f); // Ensure axis ends at 4
+        leftAxis.setDrawGridLines(true);
+        leftAxis.enableGridDashedLine(30f, 20f, 0f);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(1f);
         leftAxis.setLabelCount(2, true);
         leftAxis.setTextColor(R.color.atrial);
 

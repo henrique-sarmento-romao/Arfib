@@ -42,6 +42,7 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
     private String path;
 
 
+    // Constructor to initialize adapter with context, data list, and patient
     public AdapterMeasurements(Context context, List<List<String>> dataList, String patient) {
         this.context = context;
         this.dataList = dataList;
@@ -50,31 +51,32 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Inflate the layout for each item in the RecyclerView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_measurement, parent, false);
         return new MyViewHolder(view);
     }
 
-
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        // Get data for the current position
         List<String> data = dataList.get(position);
-        String date, time;
-        date = data.get(0);
-        time = data.get(1);
+        String date = data.get(0);
+        String time = data.get(1);
 
-
-
+        // Query the database for the file path of the measurement
         dbHelper = new DatabaseHelper(context);
-        Cursor cursor = dbHelper.getReadableDatabase().rawQuery("SELECT * FROM Measurement WHERE patient='" + patient + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC", null);
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
+                "SELECT * FROM Measurement WHERE patient='" + patient + "' AND date='" + date + "' AND time='" + time + "' ORDER BY time DESC",
+                null
+        );
 
         if (cursor.moveToFirst()) {
             path = cursor.getString(cursor.getColumnIndex("file"));
         }
         cursor.close();
 
-        // Formatar a data e hora
+        // Format date and time
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat outputFormatterDate = new SimpleDateFormat("MMM dd yyyy");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss.SSSSSS");
@@ -94,9 +96,9 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         }
         holder.date_time.setText(date_time);
 
-        // Atualizar a presença de AF (Fibrilação Atrial)
-        String AF_presence, has_AF_message;
-        AF_presence = data.get(2);
+        // Update AF (Atrial Fibrillation) status
+        String AF_presence = data.get(2);
+        String has_AF_message;
         if (AF_presence.equals("yes")) {
             has_AF_message = "AF Detected";
         } else if (AF_presence.equals("no")) {
@@ -106,26 +108,32 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         }
         holder.AF_presence.setText(has_AF_message);
 
-        ArrayList<Entry> chartData = readTxtFile(path); // Lê o arquivo de dados
+        // Read the ECG data and update the chart
+        ArrayList<Entry> chartData = readTxtFile(path);
         configureChart(holder.chart);
-        updateChart(holder.chart, chartData); // Atualiza o gráfico com os dados
+        updateChart(holder.chart, chartData);
 
-        // Configurar o clique do gráfico para navegar até a tela detalhada
+        // Set a click listener for detailed view
         holder.goToDetailed(patient, date, time);
     }
 
+    // Maps output to mV
     private float mapToMV(float x, float minIn, float maxIn, float minOut, float maxOut) {
-        return minOut + ((x - minIn) * (maxOut - minOut)) / (maxIn - minIn);
+        return minOut + ((x - minIn) * (maxOut - minIn)) / (maxIn - minIn);
     }
 
+    // Maps input to time
     private float mapToTime(float x, float sampleRate) {
-
         return x / sampleRate;
     }
+
+    // Reads the data file and converts it into a list of entries for the chart
     private ArrayList<Entry> readTxtFile(String filePath) {
         ArrayList<Entry> data = new ArrayList<>();
         File file = new File(context.getFilesDir() + File.separator + filePath);
 
+
+        // Reads the ECG .txt file
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -151,24 +159,20 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         return data;
     }
 
-    // Método para atualizar o gráfico
+    // Updates the chart with mapped data
     private void updateChart(LineChart chart, ArrayList<Entry> data) {
-        // Aqui você pode mapear os dados se necessário e configurar o gráfico
         float minIn = 0f;
-        float maxIn = 230f;   // Maximum of bit
-        float minOut = -1.15f; // Min in mV (Y)
-        float maxOut = 1.15f;  // Max in mV (Y)
+        float maxIn = 230f;
+        float minOut = -1.15f;
+        float maxOut = 1.15f;
 
         ArrayList<Entry> mappedData = new ArrayList<>();
-
         for (Entry entry : data) {
-            float mappedX = mapToTime(entry.getX(), 500);  // sample rate=500
-
-            // Map Y (ECG) to mV
+            float mappedX = mapToTime(entry.getX(), 500); // Sample rate is 500
             float mappedY = mapToMV(entry.getY(), minIn, maxIn, minOut, maxOut);
-
             mappedData.add(new Entry(mappedX, mappedY));
         }
+
         LineDataSet dataSet = new LineDataSet(mappedData, "ECG Data");
         dataSet.setColor(ContextCompat.getColor(context, R.color.hartpink));
         dataSet.setLineWidth(2f);
@@ -178,10 +182,10 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
 
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
-        chart.invalidate(); // Atualiza o gráfico
+        chart.invalidate(); // Refresh the chart
     }
 
-    // Método para configurar o gráfico
+    // Configures the chart appearance
     private void configureChart(LineChart chart) {
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(10, 10, 10, 10);
@@ -190,8 +194,7 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
         chart.setPinchZoom(true);
-        chart.setVisibleXRangeMaximum(1000); // Limita a visualização a 1000 pontos
-        chart.setDragDecelerationEnabled(true);
+        chart.setVisibleXRangeMaximum(1000);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -203,8 +206,6 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setTextColor(Color.BLACK);
         leftAxis.setDrawGridLines(false);
-        //leftAxis.setAxisMinimum(-1.15f); // Mínimo fixo
-        //leftAxis.setAxisMaximum(1.15f);  // Máximo fixo
         leftAxis.setDrawLabels(false);
         leftAxis.setDrawAxisLine(false);
 
@@ -214,7 +215,6 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
         legend.setEnabled(false);
     }
 
-
     @Override
     public int getItemCount() {
         return dataList.size();
@@ -222,8 +222,8 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView date_time, AF_presence;
-        Button actionButton;
         private LineChart chart;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             date_time = itemView.findViewById(R.id.date_time);
@@ -231,18 +231,14 @@ public class AdapterMeasurements extends RecyclerView.Adapter<AdapterMeasurement
             chart = itemView.findViewById(R.id.chartECG_detailed);
         }
 
-
-
-
-        // Method to set the date and handle the button click
+        // Handles click events to navigate to detailed view
         public void goToDetailed(String patient, String date, String time) {
             chart.setOnClickListener(v -> {
-                // Create an Intent to open the Detailed activity
                 Intent intent = new Intent(v.getContext(), Details.class);
                 intent.putExtra("patient", patient);
                 intent.putExtra("date", date);
-                intent.putExtra("time", time); // Pass the date as an extra
-                v.getContext().startActivity(intent);  // Start the activity
+                intent.putExtra("time", time);
+                v.getContext().startActivity(intent);
             });
         }
     }
