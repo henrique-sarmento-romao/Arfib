@@ -415,8 +415,8 @@ public class Measuring extends AppCompatActivity {
             rr_mean = rr / mean;
             rr_normalized.add(rr_mean);
 
-            // 2. Evaluate deviations of over 20% of the mean and targets them as AF
-            if (Math.abs(1 - rr_mean) > 0.2) {
+            // 2. Evaluate deviations of over 11,25% of the mean and targets them as AF
+            if (Math.abs(1 - rr_mean) > 0.1125) {
                 af_detection.add(1.0);
             } else {
                 af_detection.add(0.0);
@@ -424,14 +424,14 @@ public class Measuring extends AppCompatActivity {
         }
 
         // 3. Apply a low-pass filter to remove artifacts or outliers
-        double alpha = 0.1;
+        double alpha = 0.3;
         ArrayList<Double> smooth_af_detection = new ArrayList<>();
         smooth_af_detection.add(af_detection.get(0));
 
         ArrayList<Entry> AF_detection = new ArrayList<>();
         int countAboveThreshold = 0;
         int AF = 0;
-        double threshold = 0.8;
+        double threshold = 0.44;
         int requiredCount = 10;
 
         for (int j = 1; j < af_detection.size(); j++) {
